@@ -1,12 +1,12 @@
 ---
 name: cht-full-skill
 description: 全栈交付方法论（研发全流程技能）。把模糊需求变成已合并、已部署、已验证的生产代码：六问逼出真需求 → 可执行 spec → 计划分解 → TDD 逐任务实现 → 分级代码评审 → 真实环境 QA → 发布门禁。内含 CEO / 产品经理 / 架构师 / 设计师 / 工程师 / 评审 / QA / 发布 八个角色视角，以及并行 worktree 与复盘记忆。Use when 用户要做需求梳理、写规格、出技术方案、拆任务、开发功能、修 bug、做代码评审、QA 测试、发版上线、写 skill，或说"帮我把这个做出来""这个功能怎么做""review 一下""测试一下""上线"。适用于 TDD、子代理开发、调试、重构、多代理并行、遗留代码维护等场景。
-version: "0.0.1"
+version: "0.0.2"
 license: MIT
 homepage: https://github.com/cuohuatang/cht-full-skill
 ---
 
-# cht-full-skill · V0.0.1
+# cht-full-skill · V0.0.2
 
 > 一句话：**它不是工具箱，是一支工程团队的工作流。** 一个想法进来，一个已验证的 PR 出去。
 
@@ -32,6 +32,8 @@ homepage: https://github.com/cuohuatang/cht-full-skill
 - 要做 code review、上线前检查、发版、部署、写 PR
 - 要 QA 测试（网页 / API / CLI / 定时任务 / webhook）
 - 要写或改一个 agent skill
+- 要做**数据库 / SQL 相关工作**（建表、改 schema、写查询、优化索引、做迁移、用 ORM）——直接 `/cht-sql` 一键路由到对应引擎技能
+- 要用到**通用工程实践**（TDD、API 设计、后端架构、安全审查、Git 流程、错误处理、ADR、契约优先、MCP 服务、深度调研）——见下方"嫁接技能库"
 
 ---
 
@@ -122,8 +124,49 @@ Think → Spec → Plan → Build → Review → Test → Ship → Reflect
 | `references/09-parallel.md` | worktree 隔离、并行代理分派、合并纪律 | 多任务并行 |
 | `references/10-memory.md` | ledger、learnings、复盘、跨会话记忆 | 阶段 7 / 长任务 |
 | `references/11-writing-skills.md` | 用 TDD 写 skill、防臃肿五阶梯 | 写 skill 时 |
+| `references/12-archify.md` | 架构图类型与 `cht-arch` 用法（archify 引擎） | 要画系统/时序/ER/数据流图时 |
+| `references/13-sql-db.md` | **SQL/数据库总参考**：方言→技能路由、迁移/ORM/引擎决策矩阵 | 所有数据库/SQL 工作时先看 |
 
 产出物模板在 `assets/templates/`：`SPEC.md`、`PLAN.md`、`REVIEW.md`、`QA-REPORT.md`、`RETRO.md`、`LEDGER.md`、`ROLE-BRIEF.md`。
+
+---
+
+## 嫁接技能库（来自 ECC · MIT）
+
+> 从 [affaan-m/ECC](https://github.com/affaan-m/ECC)（29 万★，MIT）筛出**最通用、最常用**的 18 个技能嫁接进来，不搬那几百个细分领域/小众框架的。
+> 每个技能保持原样（含 `metadata.origin: ECC`），按路径直接读取即可，不重复造轮子。
+
+### 数据库 / SQL 族（重点做全）
+
+| 技能路径 | 一句话作用 | 什么时候读 |
+|---|---|---|
+| `skills/postgres-patterns/SKILL.md` | PostgreSQL 生产级 schema / 查询 / 索引 / 事务 / 复制 | 用 Postgres 设计表、优化查询、调事务 |
+| `skills/mysql-patterns/SKILL.md` | MySQL / MariaDB 生产级 schema / 索引 / 事务 / 连接池 | 用 MySQL/MariaDB 时 |
+| `skills/database-migrations/SKILL.md` | 安全可逆的数据库迁移：expand-contract、零停机改名、并发建索引、批量回填 | 任何改 schema、做迁移、加列加索引时 |
+| `skills/prisma-patterns/SKILL.md` | Prisma ORM（TS 后端）：schema、查询优化、事务、分页、陷阱 | Node/TS 用 Prisma 时 |
+| `skills/mybatis-patterns/SKILL.md` | MyBatis / MyBatis-Spring：mapper、XML/注解 SQL、动态 SQL、批处理 | Java MyBatis 持久层时 |
+| `skills/jpa-patterns/SKILL.md` | JPA/Hibernate：实体、关系、查询优化、审计、连接池 | Spring Boot JPA 时 |
+| `skills/clickhouse-io/SKILL.md` | ClickHouse 分析型查询优化、数据工程最佳实践 | 做 OLAP / 海量分析查询时 |
+
+**一键入口**：`/cht-sql` —— 说清方言（PG/MySQL/ClickHouse）和任务（建表/迁移/查询/ORM），它直接路由到上面对应技能。
+
+### 通用工程族（常用）
+
+| 技能路径 | 一句话作用 | 什么时候读 |
+|---|---|---|
+| `skills/tdd-workflow/SKILL.md` | 红→绿→重构 TDD 工作流，单测/集成/E2E 80%+ 覆盖 | 写功能、修 bug、重构、要求先写失败测试时 |
+| `skills/api-design/SKILL.md` | REST 设计：命名、状态码、分页、过滤、错误、版本、限流 | 设计或评审 REST 接口时 |
+| `skills/backend-patterns/SKILL.md` | 后端架构、API、DB 优化（Node/Express/Next API） | 搭后端、做服务端架构时 |
+| `skills/security-review/SKILL.md` | 加鉴权、处理用户输入、密钥、端点、支付等安全审查 | 碰鉴权/输入/密钥/敏感功能时 |
+| `skills/coding-standards/SKILL.md` | 跨项目命名、可读性、不可变、代码质量基线 | 定规范、做代码质量评审时 |
+| `skills/error-handling/SKILL.md` | TS/Python/Go 健壮错误处理：typed errors、重试、熔断 | 设计错误模型、重试/熔断时 |
+| `skills/architecture-decision-records/SKILL.md` | 用编号 ADR 记录架构决策（上下文/备选/后果） | 要留架构决策记录时 |
+| `skills/git-workflow/SKILL.md` | 分支策略、提交规范、保持历史整洁、merge vs rebase | 整理提交、定分支策略时 |
+| `skills/contract-first/SKILL.md` | 用一份权威机器可校验契约（OpenAPI/AsyncAPI/Protobuf）对齐前后端 | 服务间/前后端协同开发时 |
+| `skills/mcp-server-patterns/SKILL.md` | 构建 MCP server 的模式与陷阱 | 写 MCP 工具/服务时 |
+| `skills/deep-research/SKILL.md` | 用多源网络做带引用的深度调研报告 | 要调研、写带出处报告时 |
+
+> ECC 技能之间本来就互相交叉引用（如 mybatis 引用 database-migrations、postgres、mysql、security-review），本库整族搬入，引用链不断。
 
 ---
 
@@ -191,9 +234,10 @@ Agent  ：/cht-ship                ← PR + 发布说明 + 回滚路径
 
 ## 来源与许可
 
-MIT。衍生自两个 MIT 项目，方法论归属原作者：
+MIT。本仓库由三套 MIT 项目合成，方法论归属原作者：
 
 - [garrytan/gstack](https://github.com/garrytan/gstack) — Garry Tan，YC。角色制工程流水线。
 - [obra/superpowers](https://github.com/obra/superpowers) — Jesse Vincent。可组合 skill 的研发方法论。
+- [affaan-m/ECC](https://github.com/affaan-m/ECC) — 29 万★ 代理工具链增强框架。从中精选 18 个通用技能嫁接（见"嫁接技能库"）。
 
-本仓库为两者的**方法论合并与重写**，不含上游的 bun 编译工具链与浏览器二进制；纯 Markdown + POSIX shell，任何支持 skill 的 agent 都能用。详见 `NOTICE.md`。
+本仓库为三者的**方法论合并、嫁接与重写**，不含上游的 bun 编译工具链、浏览器二进制或细分领域技能；纯 Markdown + POSIX shell，任何支持 skill 的 agent 都能用。详见 `NOTICE.md`。

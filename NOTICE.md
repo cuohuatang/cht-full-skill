@@ -1,6 +1,6 @@
 # NOTICE · 来源与衍生说明
 
-本仓库（`cht-full-skill`）是两份 MIT 许可方法论作品的**合并与重写**。此处说明来源、
+本仓库（`cht-full-skill`）是**三份** MIT 许可方法论作品的**合并、嫁接与重写**。此处说明来源、
 保留了什么、去掉了什么，以及为什么。
 
 ## 上游
@@ -63,6 +63,34 @@
 - 视觉伴侣（visual companion）与其 telemetry
 - 上游 skill 之间的 `superpowers:` 命名空间引用（本仓库改为单文件内索引，避免跨 skill 依赖）
 
+### 3. ECC（嫁接来源）
+
+- 仓库：https://github.com/affaan-m/ECC
+- 作者：affaan-m 及社区（29 万★）
+- 许可：MIT
+- 定位：代理工具链增强框架，内含 300+ skills / 90+ commands。本仓库**只精选其中最通用、最常用的 18 个**嫁接，不搬其余细分领域/小众框架技能。
+
+**本仓库嫁接的 18 个技能**（原样保留，含 `metadata.origin: ECC`）
+
+| 类别 | 技能 |
+|---|---|
+| 数据库 / SQL（重点） | `postgres-patterns`、`mysql-patterns`、`database-migrations`、`prisma-patterns`、`mybatis-patterns`、`jpa-patterns`、`clickhouse-io` |
+| 通用工程 | `tdd-workflow`、`api-design`、`backend-patterns`、`security-review`、`coding-standards`、`error-handling`、`architecture-decision-records`、`git-workflow`、`contract-first`、`mcp-server-patterns`、`deep-research` |
+
+**嫁接方式**
+
+- 技能文件原样放入 `skills/<name>/SKILL.md`，不在本仓库内改写其内容。
+- `references/13-sql-db.md` 作为 SQL/数据库的总路由与决策矩阵，`commands/cht-sql.md` 作为一键入口。
+- `SKILL.md` 的「嫁接技能库」段列出全部 18 个技能的路径与适用场景。
+
+**未采用的部分**
+
+- ECC 其余 290+ 个细分领域技能（医疗、金融、homelab、各小众语言框架等）
+- ECC 的 install/插件/钩子体系、npm 分发、`.mcp.json` 等运行时集成
+- 品牌名 "Everything Claude Code / ECC" 不在本仓库使用，仅作为来源标注
+
+原因：保持本仓库"精简、通用、纯 Markdown、任何 agent 可用"的定位，避免把数百个窄领域技能灌入造成上下文膨胀。
+
 ## 本仓库新增的部分
 
 以下内容不属于任何上游，为本仓库原创整理：
@@ -76,14 +104,15 @@
 
 ## 许可合规
 
-两份上游均为 MIT。MIT 要求保留版权声明与许可声明，本仓库在 `LICENSE` 文件末尾
-完整保留了两份原始版权声明。衍生作品同样以 MIT 发布。
+三份上游均为 MIT。MIT 要求保留版权声明与许可声明，本仓库在 `LICENSE` 文件末尾
+完整保留了原始版权声明。嫁接的 ECC 技能文件内亦保留其 `metadata.origin: ECC` 标注。
+衍生作品同样以 MIT 发布。
 
 如果上游作者认为此处署名或引用方式需要调整，请开 issue，会立即修改。
 
 ## 引用建议
 
 ```
-cht-full-skill (MIT) — 方法论合并自 garrytan/gstack 与 obra/superpowers
+cht-full-skill (MIT) — 方法论合并自 garrytan/gstack、obra/superpowers，并嫁接 affaan-m/ECC 的 18 个通用技能
 https://github.com/cuohuatang/cht-full-skill
 ```

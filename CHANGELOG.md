@@ -2,6 +2,34 @@
 
 本仓库遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## V0.0.2 — 2026-10-30（未发布，本地已就绪）
+
+从 [affaan-m/ECC](https://github.com/affaan-m/ECC)（MIT，29 万★）**精选 18 个最通用技能嫁接**，不搬其余 290+ 细分领域技能，避免上下文膨胀。
+
+### 嫁接 · 数据库 / SQL 族（重点做全）
+
+- `postgres-patterns`、`mysql-patterns`、`database-migrations`、`prisma-patterns`、
+  `mybatis-patterns`、`jpa-patterns`、`clickhouse-io`
+
+### 嫁接 · 通用工程族
+
+- `tdd-workflow`、`api-design`、`backend-patterns`、`security-review`、`coding-standards`、
+  `error-handling`、`architecture-decision-records`、`git-workflow`、`contract-first`、
+  `mcp-server-patterns`、`deep-research`
+
+### 新增桥梁
+
+- `references/13-sql-db.md`：SQL/数据库总路由与方言→技能决策矩阵
+- `commands/cht-sql.md`：数据库/SQL 一键入口命令
+- `SKILL.md` 新增「嫁接技能库」段，列出 18 个技能路径与适用场景
+- `NOTICE.md` 补 ECC 来源与未采用说明
+
+### 设计决定
+
+- **为什么只挑 18 个**：ECC 300+ 技能中大量是医疗/金融/homelab/小众语言框架，对通用开发无意义。
+  只搬跨项目通用的数据库与工程实践，并把数据库族整族搬入以打通交叉引用。
+- **为什么原样保留**：ECC 技能自带 `metadata.origin: ECC`，本仓库不改写其内容，仅做路由与决策包装。
+
 ## V0.0.1 — 2026-10-29
 
 首个公开发布。合并 **gstack** 的角色制工程流水线与 **superpowers** 的研发纪律，重写为单一入口的轻量 skill。

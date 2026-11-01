@@ -68,28 +68,38 @@
 - 仓库：https://github.com/affaan-m/ECC
 - 作者：affaan-m 及社区（29 万★）
 - 许可：MIT
-- 定位：代理工具链增强框架，内含 300+ skills / 90+ commands。本仓库**只精选其中最通用、最常用的 18 个**嫁接，不搬其余细分领域/小众框架技能。
+- 定位：代理工具链增强框架，内含 314 skills / 98 commands。**本仓库按"程序 / 代码开发 / IT 技术"筛出全部相关技能嫁接，共 234 个**，剔除医疗、金融、法律、科研、创意媒体、物流制造等非技术领域的约 80 个。
 
-**本仓库嫁接的 18 个技能**（原样保留，含 `metadata.origin: ECC`）
+**本仓库嫁接的 234 个代码/IT 技能（按 8 大类，原样保留）**
 
-| 类别 | 技能 |
-|---|---|
-| 数据库 / SQL（重点） | `postgres-patterns`、`mysql-patterns`、`database-migrations`、`prisma-patterns`、`mybatis-patterns`、`jpa-patterns`、`clickhouse-io` |
-| 通用工程 | `tdd-workflow`、`api-design`、`backend-patterns`、`security-review`、`coding-standards`、`error-handling`、`architecture-decision-records`、`git-workflow`、`contract-first`、`mcp-server-patterns`、`deep-research` |
+| 大类 | 数量 | 代表 |
+|---|---|---|
+| 语言·运行时 | 36 | `python-patterns`、`rust-patterns`、`golang-patterns`、`typescript-patterns`、`java-coding-standards`、`cpp-testing` |
+| 前端·移动 | 19 | `react-patterns`、`vue-patterns`、`angular-developer`、`nextjs-turbopack`、`swiftui-patterns`、`android-clean-architecture` |
+| 后端·框架 | 22 | `django-patterns`、`fastapi-patterns`、`nestjs-patterns`、`laravel-patterns`、`rails-patterns`、`springboot-patterns`、`quarkus-patterns` |
+| 数据库·ORM | 8 | `postgres-patterns`、`mysql-patterns`、`clickhouse-io`、`redis-patterns`、`prisma-patterns`、`jpa-patterns`、`mybatis-patterns`、`database-migrations` |
+| 基础设施·运维 | 19 | `docker-patterns`、`kubernetes-patterns`、`deployment-patterns`、`homelab-*`、`cisco-ios-patterns`、`network-*` |
+| AI·智能体·ML | 51 | `agent-*`、`mcp-server-patterns`、`llm-*`、`pytorch-patterns`、`recsys-pipeline-architect`、`unified-memory` |
+| 测试·质量·安全 | 23 | `tdd-workflow`、`e2e-testing`、`security-review`、`security-scan`、`codehealth-mcp`、`production-audit` |
+| 工程实践·流程 | 56 | `api-design`、`git-workflow`、`architecture-decision-records`、`contract-first`、`coding-standards`、`error-handling`、`deep-research` |
+
+完整 234 条带说明的目录见 `references/14-ecc-code-skills.md`。
 
 **嫁接方式**
 
 - 技能文件原样放入 `skills/<name>/SKILL.md`，不在本仓库内改写其内容。
+- 无 `metadata` 块的技能统一补 `metadata.origin: ECC`；上游已标 `origin: community` 的保留原样溯源。
 - `references/13-sql-db.md` 作为 SQL/数据库的总路由与决策矩阵，`commands/cht-sql.md` 作为一键入口。
-- `SKILL.md` 的「嫁接技能库」段列出全部 18 个技能的路径与适用场景。
+- `references/14-ecc-code-skills.md` 为 234 个技能的完整分类目录，`commands/cht-ecc.md` 为关键词检索路由命令。
+- `SKILL.md` 的「嫁接技能库」段汇总全部 234 个技能的路径与适用场景。
 
 **未采用的部分**
 
-- ECC 其余 290+ 个细分领域技能（医疗、金融、homelab、各小众语言框架等）
+- ECC 中非技术领域的约 80 个技能（医疗/EMR/PHI、金融/交易/结算、法律/合规、科研数据库、创意媒体/视频、营销/SEO、物流/制造、语言翻译、OSINT 等）
 - ECC 的 install/插件/钩子体系、npm 分发、`.mcp.json` 等运行时集成
 - 品牌名 "Everything Claude Code / ECC" 不在本仓库使用，仅作为来源标注
 
-原因：保持本仓库"精简、通用、纯 Markdown、任何 agent 可用"的定位，避免把数百个窄领域技能灌入造成上下文膨胀。
+原因：保持本仓库"代码/IT 向、通用、纯 Markdown、任何 agent 可用"的定位，不灌入与软件开发无关的领域技能。
 
 ## 本仓库新增的部分
 
@@ -113,6 +123,6 @@
 ## 引用建议
 
 ```
-cht-full-skill (MIT) — 方法论合并自 garrytan/gstack、obra/superpowers，并嫁接 affaan-m/ECC 的 18 个通用技能
+cht-full-skill (MIT) — 方法论合并自 garrytan/gstack、obra/superpowers，并嫁接 affaan-m/ECC 的 234 个代码/IT 技能
 https://github.com/cuohuatang/cht-full-skill
 ```

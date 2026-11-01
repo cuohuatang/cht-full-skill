@@ -2,6 +2,27 @@
 
 本仓库遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## V0.0.3 — 2026-11-01（未发布，本地已就绪）
+
+按用户要求，从 [affaan-m/ECC](https://github.com/affaan-m/ECC)（MIT，29 万★）**按"程序 / 代码开发 / IT 技术"筛出全部相关技能嫁接**，共 **234 个**（剔除医疗、金融、法律、科研、创意媒体、物流制造等非技术领域的约 80 个）。
+
+### 嫁接 · 代码/IT 技能（234 个，8 大类）
+
+- **语言·运行时（36）**：python / rust / golang / typescript / java / kotlin / swift / csharp / cpp / perl / dart / flutter / fsharp / nodejs / bun / dotnet 等
+- **前端·移动（19）**：react / vue / angular / nextjs / nuxt / vite / swiftui / android / ios / compose-multiplatform / react-native 等
+- **后端·框架（22）**：django / fastapi / nestjs / laravel / rails / springboot / quarkus / api-* / backend / hexagonal 等
+- **数据库·ORM（8）**：postgres / mysql / clickhouse / redis / prisma / jpa / mybatis / database-migrations
+- **基础设施·运维（19）**：docker / kubernetes / deployment / homelab-* / cisco-ios / netmiko / network-* / canary / flox 等
+- **AI·智能体·ML（51）**：agent-* / mcp-server-patterns / llm-* / pytorch / recsys / deepseek / unified-memory 等
+- **测试·质量·安全（23）**：tdd-workflow / e2e-testing / security-review / security-scan / codehealth-mcp / production-audit 等
+- **工程实践·流程（56）**：api-design / git-workflow / architecture-decision-records / contract-first / coding-standards / error-handling / deep-research 等
+
+### 新增
+
+- `references/14-ecc-code-skills.md`：234 个技能完整分类目录（8 大类，每条带一句话说明）
+- `commands/cht-ecc.md`：按关键词检索并路由到对应 ECC 技能的命令
+- 主 `SKILL.md` "嫁接技能库"段重写，指向完整目录；版本升至 0.0.3
+
 ## V0.0.2 — 2026-10-30（未发布，本地已就绪）
 
 从 [affaan-m/ECC](https://github.com/affaan-m/ECC)（MIT，29 万★）**精选 18 个最通用技能嫁接**，不搬其余 290+ 细分领域技能，避免上下文膨胀。

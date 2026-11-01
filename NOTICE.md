@@ -122,6 +122,23 @@
 
 原因：示例与构建脚本不进入"画一张图"的运行时路径，搬运只会让仓库臃肿；要看效果去上游图库 https://cathrynlavery.github.io/diagram-design/ 。
 
+### 5. grill-me / grilling（嫁接来源 · 决策护栏）
+
+- 仓库：https://github.com/mattpocock/skills
+- 作者：Matt Pocock
+- 许可：MIT
+- 定位：把"用户触发 → 连续盘问 → 逼出共识 → 才动手"做成一套访谈协议。`grill-me` 是用户触发的**入口**（上游设 `disable-model-invocation: true`，agent 不会自己偷偷调），`grilling` 是真正的**盘问引擎**（设计树 + frontier + 轮次访谈，每轮给推荐答案、等用户拍板）。
+- **本仓库把两者一并嫁接入 `skills/grill-me/` 与 `skills/grilling/`**（各含 SKILL.md + agents/openai.yaml；grill-me 另含 docs.md 上游说明）。新增 `references/16-grill-me.md` 与 `commands/cht-grill.md`，作为 cht-full-skill 的"防 AI 擅自做主"决策护栏。
+
+**嫁接方式**
+
+- 入口与引擎原样放入 `skills/`，`grill-me` 内部 `Call the Skill tool with "grilling"`，二者同装才可用。
+- 与 cht-full-skill 的"三条铁律"第一条（无 spec 不写计划）对齐：动手前先盘问逼共识。
+
+**未采用的部分**
+
+- 其余 grilling 家族技能（`grill-with-docs` / `wayfinder` 等）未搬运，避免与 cht-full-skill 已有流程重叠。
+
 ## 本仓库新增的部分
 
 以下内容不属于任何上游，为本仓库原创整理：
@@ -135,7 +152,7 @@
 
 ## 许可合规
 
-四份上游均为 MIT。MIT 要求保留版权声明与许可声明，本仓库在 `LICENSE` 文件末尾
+五份上游均为 MIT。MIT 要求保留版权声明与许可声明，本仓库在 `LICENSE` 文件末尾
 完整保留了原始版权声明。嫁接的 ECC 技能文件内亦保留其 `metadata.origin: ECC` 标注。
 衍生作品同样以 MIT 发布。
 
@@ -144,6 +161,6 @@
 ## 引用建议
 
 ```
-cht-full-skill (MIT) — 方法论合并自 garrytan/gstack、obra/superpowers，并嫁接 affaan-m/ECC 的 234 个代码/IT 技能与 cathrynlavery/diagram-design 可视化引擎
+cht-full-skill (MIT) — 方法论合并自 garrytan/gstack、obra/superpowers，并嫁接 affaan-m/ECC 的 234 个代码/IT 技能、cathrynlavery/diagram-design 可视化引擎，以及 mattpocock/skills 的 grill-me / grilling 决策护栏
 https://github.com/cuohuatang/cht-full-skill
 ```

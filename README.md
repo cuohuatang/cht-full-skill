@@ -1,9 +1,9 @@
-# cht-full-skill · V0.0.4
+# cht-full-skill · V0.0.5
 
 > 把 gstack 的**角色制工程流水线**、superpowers 的**研发纪律**，以及 archify、ECC（234 个代码/IT 技能）、diagram-design（45 种品牌图型）**合成一个 skill**。
 > 一个想法进来，一个已验证的 PR 出去；要画图、要查技术栈、要品牌级配图，一个仓库全包。
 
-[![version](https://img.shields.io/badge/version-0.0.4-blue.svg)](VERSION)
+[![version](https://img.shields.io/badge/version-0.0.5-blue.svg)](VERSION)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![skill](https://img.shields.io/badge/format-agent--skill-8A2BE2.svg)](SKILL.md)
 
@@ -29,7 +29,7 @@ Think → Spec → Plan → Build → Review → Test → Ship → Reflect
 | 弱项 | 依赖 bun 编译的二进制与浏览器包，重；命令 30+ 个，记不住 | 角色视角弱，容易变成"一个人埋头写" |
 | 本仓库做法 | 取**骨架与角色** | 取**纪律与执行细则** |
 
-结果：**11 个主命令 + 234 个代码/IT 技能 + 双绘图引擎（archify / diagram-design），13 道门禁，0 运行时依赖**。纯 Markdown + POSIX shell。
+结果：**11 个主命令 + 234 个代码/IT 技能 + 双绘图引擎（archify / diagram-design）+ grill 决策护栏（grill-me / grilling），13 道门禁，0 运行时依赖**。纯 Markdown + POSIX shell。
 
 ## 安装
 
@@ -69,6 +69,7 @@ bash scripts/verify.sh
 | `/cht-ecc <技术>` | 检索 | "用 React 怎么做""给 K8s 加个 deployment" —— 在 234 个代码/IT 技能里找 |
 | `/cht-arch` | 画图 | 画**结构正确**的架构/序列/ER/数据流图（archify，先校验再画） |
 | `/cht-diagram` | 画图 | 画**品牌级、好看**的架构/流程/甘特/象限/雷达图（diagram-design，45 种） |
+| `/cht-grill` | 决策护栏 | "grill me / 先确认再动手"——动手前连续盘问、逼出共识，防 AI 擅自做主（grill-me / grilling） |
 
 ## 项目里会产生什么
 
@@ -106,6 +107,7 @@ docs/cht/
 | [obra/superpowers](https://github.com/obra/superpowers)（MIT） | 研发纪律与执行细则 | 门禁、TDD、调试、完成前验证 |
 | [affaan-m/ECC](https://github.com/affaan-m/ECC)（MIT，29 万★） | 代理工具链增强框架 | 按"代码/IT"筛出 **234 个技能**嫁接入 `skills/`，`/cht-ecc` 检索 |
 | [cathrynlavery/diagram-design](https://github.com/cathrynlavery/diagram-design)（MIT，6.3 万★） | 编辑式品牌可视化 | 完整引擎嫁接入 `diagram-design/`，`/cht-diagram` 入口 |
+| [mattpocock/skills](https://github.com/mattpocock/skills)（MIT） | 决策护栏（grill-me / grilling） | 嫁接入 `skills/grill-me` + `skills/grilling`，`/cht-grill` 入口，防 AI 擅自做主 |
 
 - **不包含**上游代码、bun 编译产物、浏览器二进制、hooks 脚本、ECC 非技术领域技能、diagram-design 示例 HTML 与开发期构建脚本。
 - **包含**四套的方法论结构，重新组织为单一流水线，并改写为中文可执行清单。

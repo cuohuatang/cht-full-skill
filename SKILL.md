@@ -1,12 +1,12 @@
 ---
 name: cht-full-skill
 description: 全栈交付方法论（研发全流程技能）。把模糊需求变成已合并、已部署、已验证的生产代码：六问逼出真需求 → 可执行 spec → 计划分解 → TDD 逐任务实现 → 分级代码评审 → 真实环境 QA → 发布门禁。内含 CEO / 产品经理 / 架构师 / 设计师 / 工程师 / 评审 / QA / 发布 八个角色视角，以及并行 worktree 与复盘记忆。Use when 用户要做需求梳理、写规格、出技术方案、拆任务、开发功能、修 bug、做代码评审、QA 测试、发版上线、写 skill，或说"帮我把这个做出来""这个功能怎么做""review 一下""测试一下""上线"。适用于 TDD、子代理开发、调试、重构、多代理并行、遗留代码维护等场景。
-version: "0.0.4"
+version: "0.0.5"
 license: MIT
 homepage: https://github.com/cuohuatang/cht-full-skill
 ---
 
-# cht-full-skill · V0.0.4
+# cht-full-skill · V0.0.5
 
 > 一句话：**它不是工具箱，是一支工程团队的工作流。** 一个想法进来，一个已验证的 PR 出去。
 
@@ -35,6 +35,7 @@ homepage: https://github.com/cuohuatang/cht-full-skill
 - 要做**数据库 / SQL 相关工作**（建表、改 schema、写查询、优化索引、做迁移、用 ORM）——直接 `/cht-sql` 一键路由到对应引擎技能
 - 要用到**某种语言 / 框架 / 基础设施 / 测试 / 安全 / AI 智能体**等具体技术——见下方"嫁接技能库"（234 个代码/IT 技能，或 `/cht-ecc <关键词>` 检索）
 - 要**画出版级、有品牌一致性的图**（架构图 / 流程图 / 时序图 / 甘特图 / 象限图 / 雷达图 / 重画 Mermaid·drawio·Excalidraw / 导出 PNG·SVG）——`/cht-diagram`，引擎见 `references/15-diagram-design.md`
+- 要**在动手前先被盘问、逼出真实需求、防止 agent 擅自做主**（"grill me / 先确认再动手 / 别急着做先问我"）——`/cht-grill`，引擎见 `references/16-grill-me.md`
 
 ---
 
@@ -129,6 +130,7 @@ Think → Spec → Plan → Build → Review → Test → Ship → Reflect
 | `references/13-sql-db.md` | **SQL/数据库总参考**：方言→技能路由、迁移/ORM/引擎决策矩阵 | 所有数据库/SQL 工作时先看 |
 | `references/14-ecc-code-skills.md` | **ECC 代码/IT 技能完整目录**：234 个技能分 8 大类，每条带一句话说明 | 要用某具体技术、检索该读哪个技能时 |
 | `references/15-diagram-design.md` | **diagram-design 可视化引擎**：45 种品牌级图型、与 archify 的分工、文件地图、反模式 | 要画"好看+品牌一致"的图、重画/导出时 |
+| `references/16-grill-me.md` | **grill-me / grilling 决策护栏**：防 AI 擅自做主、动手前盘问逼共识，与三条铁律的关系 | 用户说"grill me / 先确认再动手"、需求模糊时 |
 
 产出物模板在 `assets/templates/`：`SPEC.md`、`PLAN.md`、`REVIEW.md`、`QA-REPORT.md`、`RETRO.md`、`LEDGER.md`、`ROLE-BRIEF.md`。
 
@@ -183,6 +185,22 @@ Think → Spec → Plan → Build → Review → Test → Ship → Reflect
 
 - diagram-design 引擎完整嫁接入 `diagram-design/`：主 `SKILL.md` + `references/`(43 篇：风格指南、品牌入驻、6 原语、29 个图型规范、导入/导出/动画/布局预算) + `assets/` 模板 + `scripts/`(导入抽取/导出/SVG/PNG/自检)。示例 HTML 未搬运（纯展示，避免臃肿；要看效果去上游图库）。
 - 选型与调用细节见 `references/15-diagram-design.md` 与 `commands/cht-diagram.md`。
+
+---
+
+## 决策护栏：grill-me / grilling（防 AI 擅自做主 · V0.0.5 新增）
+
+> 从 [mattpocock/skills](https://github.com/mattpocock/skills)（Matt Pocock，MIT）**嫁接 `grill-me`（用户触发入口）+ `grilling`（盘问引擎）**，解决"AI 稀里糊涂就下决定、擅自改东西"的问题。
+
+| 技能 | 入口命令 | 取向 | 一句话 |
+|---|---|---|---|
+| **grill-me**（入口） | `/cht-grill` | 用户触发，逼出真实需求 | "先盘问，再动手" |
+| **grilling**（引擎） | （由 grill-me 调用） | 设计树 + frontier + 轮次访谈 | "每轮给推荐答案，你拍板才推进" |
+
+- 完整嫁接入 `skills/grill-me/`（SKILL.md + agents/openai.yaml + docs.md）与 `skills/grilling/`（SKILL.md + agents/openai.yaml），`grill-me` 内部 `Call the Skill tool with "grilling"`，二者同装才可用。
+- `grill-me` 上游设 `disable-model-invocation: true`：**agent 不会自己偷偷调**，必须由你或本流程显式触发——这正好把"擅自做主"关进笼子。
+- 它是"三条铁律"第一条（无 spec 不写计划）在动手前的具象化：与阶段 0 `/cht-spec --discover` 同源，一个偏连续访谈逼共识、一个偏落 SPEC 文档。
+- 调用与协议细节见 `references/16-grill-me.md` 与 `commands/cht-grill.md`。
 
 ---
 
@@ -250,11 +268,12 @@ Agent  ：/cht-ship                ← PR + 发布说明 + 回滚路径
 
 ## 来源与许可
 
-MIT。本仓库由四套 MIT 项目合成，方法论归属原作者：
+MIT。本仓库由五套 MIT 项目合成，方法论归属原作者：
 
 - [garrytan/gstack](https://github.com/garrytan/gstack) — Garry Tan，YC。角色制工程流水线。
 - [obra/superpowers](https://github.com/obra/superpowers) — Jesse Vincent。可组合 skill 的研发方法论。
 - [affaan-m/ECC](https://github.com/affaan-m/ECC) — 29 万★ 代理工具链增强框架。按"代码/IT"筛出 **234 个技能**嫁接（见"嫁接技能库"与 `references/14-ecc-code-skills.md`）。
 - [cathrynlavery/diagram-design](https://github.com/cathrynlavery/diagram-design) — 6.3 万★ 编辑式品牌可视化技能。完整嫁接其引擎到 `diagram-design/`（45 种图型、品牌入驻、导入/导出），见"可视化引擎库"与 `references/15-diagram-design.md`。
+- [mattpocock/skills](https://github.com/mattpocock/skills) — Matt Pocock。嫁接 `grill-me`（用户触发入口）+ `grilling`（盘问引擎）到 `skills/`，作为"防 AI 擅自做主"的决策护栏，见"决策护栏"段与 `references/16-grill-me.md`。
 
-本仓库为四者的**方法论合并、嫁接与重写**，不含上游的 bun 编译工具链、浏览器二进制、医疗/金融/法律/科研/创意等非技术领域的细分技能，也不含 diagram-design 的示例 HTML 与开发期构建脚本；纯 Markdown + POSIX shell，任何支持 skill 的 agent 都能用。详见 `NOTICE.md`。
+本仓库为五者的**方法论合并、嫁接与重写**，不含上游的 bun 编译工具链、浏览器二进制、医疗/金融/法律/科研/创意等非技术领域的细分技能，也不含 diagram-design 的示例 HTML 与开发期构建脚本；纯 Markdown + POSIX shell，任何支持 skill 的 agent 都能用。详见 `NOTICE.md`。

@@ -2,7 +2,19 @@
 
 本仓库遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
-## V0.0.4 — 2026-11-01（未发布，本地已就绪）
+## V0.0.5 — 2026-11-01（已推送 GitHub）
+
+嫁接 **grill-me + grilling** 决策护栏（[mattpocock/skills](https://github.com/mattpocock/skills)，MIT），专门治"AI 稀里糊涂就下决定、擅自改东西"。
+
+- 完整嫁接 `skills/grill-me/`（入口 SKILL.md + `agents/openai.yaml` + `docs.md`）与 `skills/grilling/`（盘问引擎 SKILL.md + `agents/openai.yaml`）；`grill-me` 内部 `Call the Skill tool with "grilling"`，两者同装才可用
+- `grill-me` 上游设 `disable-model-invocation: true`：agent 不会自己偷偷调用，必须由用户或流程显式触发——把"擅自做主"关进笼子
+- 新增 `references/16-grill-me.md`（引擎说明、grilling 访谈协议、与三条铁律的关系、反模式对照）
+- 新增 `commands/cht-grill.md`（动手前连续盘问、逼出共识的一键入口）
+- 主 `SKILL.md` 新增"决策护栏"段、参考索引加 16、加载条件加 grill、来源加 grill-me 为第五套；NOTICE / README 同步
+
+> 注：`grilling` 是真正的"盘问"逻辑（设计树 + frontier + 轮次访谈），`grill-me` 是它的用户触发入口。单装 `grill-me` 会变成死链，故二者一并嫁入。
+
+## V0.0.4 — 2026-11-01（已推送 GitHub）
 
 嫁接 **diagram-design** 编辑式品牌可视化引擎（[cathrynlavery/diagram-design](https://github.com/cathrynlavery/diagram-design)，MIT，6.3 万★），与 archify 形成"结构正确 vs 审美品牌"双引擎。
 

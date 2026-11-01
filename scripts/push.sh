@@ -37,7 +37,7 @@ echo "HTTP $HTTP"
 echo "== 2. 推送 main =="
 cd "$SRC"
 git remote remove origin 2>/dev/null || true
-git remote add origin "https://oauth2:${GITHUB_TOKEN}@github.com/${REPO_SLUG}.git"
+git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${REPO_SLUG}.git"
 git push -u origin main
 
 echo "== 3. 打 tag v${VERSION} =="

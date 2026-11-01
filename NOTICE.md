@@ -1,6 +1,6 @@
 # NOTICE · 来源与衍生说明
 
-本仓库（`cht-full-skill`）是**三份** MIT 许可方法论作品的**合并、嫁接与重写**。此处说明来源、
+本仓库（`cht-full-skill`）是**四份** MIT 许可方法论作品的**合并、嫁接与重写**。此处说明来源、
 保留了什么、去掉了什么，以及为什么。
 
 ## 上游
@@ -101,6 +101,27 @@
 
 原因：保持本仓库"代码/IT 向、通用、纯 Markdown、任何 agent 可用"的定位，不灌入与软件开发无关的领域技能。
 
+### 4. diagram-design（嫁接来源 · 可视化引擎）
+
+- 仓库：https://github.com/cathrynlavery/diagram-design
+- 作者：Cathryn Lavery（LittleMight，6.3 万★）
+- 许可：MIT
+- 定位：编辑式品牌可视化 Agent Skill，45 种图型，把"设计品味"写成可执行规则（1 个强调色、1px 细线、4px 网格、零阴影），并支持品牌入驻、drawio/Mermaid/Excalidraw 导入重画、SVG/PNG 导出。
+- **本仓库完整嫁接其引擎到 `diagram-design/`**：主 `SKILL.md`(v2.6) + `references/`(43 篇：style-guide / onboarding / profiles / semantic-patterns / primitives-core + 4 原语 / output-spec / layout-budget / animation / import-drawio·mermaid·excalidraw / export / 29 个 type-*) + `assets/` 模板(浅/深/完整/终端) + `scripts/`(self_check / drawio·mermaid·excalidraw_extract / export_svg / export_png / verify-geometry / verify-motion)。
+- 新增 `references/15-diagram-design.md`（引擎总览、与 archify 分工、文件地图、反模式）；新增 `commands/cht-diagram.md`（一句话入口）。
+
+**嫁接方式**
+
+- 引擎文件原样放入 `diagram-design/`，相对路径（`references/`、`assets/`）完好，内部交叉引用不断。
+- 与 archify 形成"结构正确 vs 审美品牌"双绘图引擎，见 `SKILL.md`「可视化引擎库」段。
+
+**未采用的部分**
+
+- diagram-design 的 100+ 个示例 HTML（`assets/example-*.html`，纯展示产物）
+- 上游根目录的开发期构建脚本（`scripts/build-icons.py`、`lint-skin.py`、`fix-mojibake.py`）
+
+原因：示例与构建脚本不进入"画一张图"的运行时路径，搬运只会让仓库臃肿；要看效果去上游图库 https://cathrynlavery.github.io/diagram-design/ 。
+
 ## 本仓库新增的部分
 
 以下内容不属于任何上游，为本仓库原创整理：
@@ -114,7 +135,7 @@
 
 ## 许可合规
 
-三份上游均为 MIT。MIT 要求保留版权声明与许可声明，本仓库在 `LICENSE` 文件末尾
+四份上游均为 MIT。MIT 要求保留版权声明与许可声明，本仓库在 `LICENSE` 文件末尾
 完整保留了原始版权声明。嫁接的 ECC 技能文件内亦保留其 `metadata.origin: ECC` 标注。
 衍生作品同样以 MIT 发布。
 
@@ -123,6 +144,6 @@
 ## 引用建议
 
 ```
-cht-full-skill (MIT) — 方法论合并自 garrytan/gstack、obra/superpowers，并嫁接 affaan-m/ECC 的 234 个代码/IT 技能
+cht-full-skill (MIT) — 方法论合并自 garrytan/gstack、obra/superpowers，并嫁接 affaan-m/ECC 的 234 个代码/IT 技能与 cathrynlavery/diagram-design 可视化引擎
 https://github.com/cuohuatang/cht-full-skill
 ```

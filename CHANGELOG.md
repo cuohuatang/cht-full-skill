@@ -2,8 +2,18 @@
 
 本仓库遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
-## V0.0.3 — 2026-11-01（未发布，本地已就绪）
+## V0.0.4 — 2026-11-01（未发布，本地已就绪）
 
+嫁接 **diagram-design** 编辑式品牌可视化引擎（[cathrynlavery/diagram-design](https://github.com/cathrynlavery/diagram-design)，MIT，6.3 万★），与 archify 形成"结构正确 vs 审美品牌"双引擎。
+
+- 完整嫁接引擎到 `diagram-design/`：`SKILL.md`(v2.6) + `references/`(43 篇：style-guide / onboarding / profiles / semantic-patterns / primitives-core + 4 原语 / output-spec / layout-budget / animation / 3 个 import / export / 29 个图型 type-*) + `assets/` 模板(浅/深/完整/终端) + `scripts/`(self_check / 3 个抽取 / export_svg / export_png / verify-geometry / verify-motion)
+- 新增 `references/15-diagram-design.md`（引擎说明、与 archify 分工、文件地图、反模式速记）
+- 新增 `commands/cht-diagram.md`（一句话入口，四旋钮、品牌入驻、导入/导出路由）
+- 主 `SKILL.md` 新增"可视化引擎库"段、参考索引加 15、来源加 diagram-design 为第四套；NOTICE 同步
+
+> 注：diagram-design 的 100+ 个示例 HTML（纯展示）与开发期构建脚本未搬运，避免臃肿；要看效果去上游图库 https://cathrynlavery.github.io/diagram-design/ 。
+
+## V0.0.3 — 2026-11-01（未发布，本地已就绪）
 按用户要求，从 [affaan-m/ECC](https://github.com/affaan-m/ECC)（MIT，29 万★）**按"程序 / 代码开发 / IT 技术"筛出全部相关技能嫁接**，共 **234 个**（剔除医疗、金融、法律、科研、创意媒体、物流制造等非技术领域的约 80 个）。
 
 ### 嫁接 · 代码/IT 技能（234 个，8 大类）

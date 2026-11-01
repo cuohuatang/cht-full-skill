@@ -1,9 +1,9 @@
-# cht-full-skill · V0.0.1
+# cht-full-skill · V0.0.4
 
-> 把 gstack 的**角色制工程流水线**和 superpowers 的**研发纪律**合成一个 skill。
-> 一个想法进来，一个已验证的 PR 出去。
+> 把 gstack 的**角色制工程流水线**、superpowers 的**研发纪律**，以及 archify、ECC（234 个代码/IT 技能）、diagram-design（45 种品牌图型）**合成一个 skill**。
+> 一个想法进来，一个已验证的 PR 出去；要画图、要查技术栈、要品牌级配图，一个仓库全包。
 
-[![version](https://img.shields.io/badge/version-0.0.1-blue.svg)](VERSION)
+[![version](https://img.shields.io/badge/version-0.0.4-blue.svg)](VERSION)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![skill](https://img.shields.io/badge/format-agent--skill-8A2BE2.svg)](SKILL.md)
 
@@ -29,7 +29,7 @@ Think → Spec → Plan → Build → Review → Test → Ship → Reflect
 | 弱项 | 依赖 bun 编译的二进制与浏览器包，重；命令 30+ 个，记不住 | 角色视角弱，容易变成"一个人埋头写" |
 | 本仓库做法 | 取**骨架与角色** | 取**纪律与执行细则** |
 
-结果：**8 个命令，13 道门禁，0 依赖**。纯 Markdown + POSIX shell。
+结果：**11 个主命令 + 234 个代码/IT 技能 + 双绘图引擎（archify / diagram-design），13 道门禁，0 运行时依赖**。纯 Markdown + POSIX shell。
 
 ## 安装
 
@@ -65,6 +65,10 @@ bash scripts/verify.sh
 | `/cht-status` | 任意 | "现在到哪一步了" |
 | `/cht-roles` | 任意 | 八个视角各看一遍 |
 | `/cht-retro` | Reflect | 复盘并把判断沉淀下来 |
+| `/cht-sql` | 数据库 | "给 orders 加 user_id 索引，零停机" —— SQL/ORM 一键路由 |
+| `/cht-ecc <技术>` | 检索 | "用 React 怎么做""给 K8s 加个 deployment" —— 在 234 个代码/IT 技能里找 |
+| `/cht-arch` | 画图 | 画**结构正确**的架构/序列/ER/数据流图（archify，先校验再画） |
+| `/cht-diagram` | 画图 | 画**品牌级、好看**的架构/流程/甘特/象限/雷达图（diagram-design，45 种） |
 
 ## 项目里会产生什么
 
@@ -94,12 +98,17 @@ docs/cht/
 
 ## 与上游的关系
 
-本仓库是 [garrytan/gstack](https://github.com/garrytan/gstack)（MIT，Garry Tan / YC）与
-[obra/superpowers](https://github.com/obra/superpowers)（MIT，Jesse Vincent）的**方法论合并与重写**。
+本仓库是四套 MIT 项目的**方法论合并、嫁接与重写**，署名与许可全文见 [NOTICE.md](NOTICE.md)：
 
-- **不包含**上游代码、bun 编译产物、浏览器二进制、hooks 脚本。
-- **包含**两者的方法论结构，重新组织为单一流水线，并改写为中文可执行清单。
-- 上游署名与许可全文见 [NOTICE.md](NOTICE.md)。
+| 来源 | 作用 | 在本仓库的位置 |
+|---|---|---|
+| [garrytan/gstack](https://github.com/garrytan/gstack)（MIT） | 角色制工程流水线 | 流水线骨架与八角色 |
+| [obra/superpowers](https://github.com/obra/superpowers)（MIT） | 研发纪律与执行细则 | 门禁、TDD、调试、完成前验证 |
+| [affaan-m/ECC](https://github.com/affaan-m/ECC)（MIT，29 万★） | 代理工具链增强框架 | 按"代码/IT"筛出 **234 个技能**嫁接入 `skills/`，`/cht-ecc` 检索 |
+| [cathrynlavery/diagram-design](https://github.com/cathrynlavery/diagram-design)（MIT，6.3 万★） | 编辑式品牌可视化 | 完整引擎嫁接入 `diagram-design/`，`/cht-diagram` 入口 |
+
+- **不包含**上游代码、bun 编译产物、浏览器二进制、hooks 脚本、ECC 非技术领域技能、diagram-design 示例 HTML 与开发期构建脚本。
+- **包含**四套的方法论结构，重新组织为单一流水线，并改写为中文可执行清单。
 
 如果你想要完整的 gstack（含 `/browse`、`/qa` 真实浏览器驱动、`/cso` 安全审计等工具链），直接装上游；本仓库是"轻量、可移植、方法论优先"的路线。
 

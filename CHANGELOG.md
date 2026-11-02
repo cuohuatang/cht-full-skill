@@ -2,6 +2,19 @@
 
 本仓库遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## V0.0.6 — 2026-11-02（已推送 GitHub）
+
+吸收 **ub-mode** 的工程纪律（[unclebob/ub-mode](https://github.com/unclebob/ub-mode)，★★★★ 6.4k，Robert C. Martin / "Uncle Bob"）。**关键合规决定：ub-mode 未声明许可证、默认版权所有，本仓库不复制其文件，改为原创重述并署名致敬**；同伴门禁工具（crapper/dryer/mutator，0BSD）仅作外链指针，不在仓库内分发。
+
+- 本次只补 cht-full-skill **真正缺的两块**：① 三道**量化质量门**（CRAP<10 / 重复度<0.8 / 变异测试 0 存活）作为推荐基线；② **攻击前提**式根因排查法。三段式（Work→Right→Practice）、TDD、留痕提交等与既有 gstack/superpowers 纪律不重复造轮子。
+- 新增 `references/18-engineering-discipline.md`（三段式 + 量化门 + 与三条铁律关系 + 反模式；开头明示灵感来源与"未复制原文"）
+- 新增 `commands/cht-ub.md`（工程纪律一键入口）
+- `references/06-qa.md` 新增 §5.1「可选量化质量门」作为收尾基线
+- 主 `SKILL.md` 新增"工程纪律"段、参考索引加 18、加载条件加 ub、来源加 ub-mode 为**署名影响**（非 MIT）
+- README / NOTICE / VERSION 同步至 0.0.6
+
+> 注：若未来要"原样内置" ub-mode，需向 Uncle Bob 申请许可或等其补 license；在此之前一律走"重述 + 署名"路线，避免污染 MIT 合规底盘。
+
 ## V0.0.5 — 2026-11-01（已推送 GitHub）
 
 嫁接 **grill-me + grilling** 决策护栏（[mattpocock/skills](https://github.com/mattpocock/skills)，MIT），专门治"AI 稀里糊涂就下决定、擅自改东西"。

@@ -1,6 +1,6 @@
 # NOTICE · 来源与衍生说明
 
-本仓库（`cht-full-skill`）是**四份** MIT 许可方法论作品的**合并、嫁接与重写**。此处说明来源、
+本仓库（`cht-full-skill`）是**五份** MIT 许可方法论作品的**合并、嫁接与重写**，外加一处**署名影响（ub-mode）**。此处说明来源、
 保留了什么、去掉了什么，以及为什么。
 
 ## 上游
@@ -139,6 +139,22 @@
 
 - 其余 grilling 家族技能（`grill-with-docs` / `wayfinder` 等）未搬运，避免与 cht-full-skill 已有流程重叠。
 
+### 6. ub-mode（影响来源 · 非 MIT，未获再分发授权）
+
+- 仓库：https://github.com/unclebob/ub-mode
+- 作者：Robert C. Martin（"Uncle Bob"，《代码整洁之道》作者，★★★★ 6.4k，2026-10 发布）
+- 许可：**未声明（None）→ 默认版权所有**
+- 定位：给 AI 编码 Agent 的"工程纪律"技能文件——三段式工作法（Make it Work → Make it Right → Practice）+ 三个确定性质量门（CRAP<10 / 重复度<0.8 / 变异测试 0 存活）；附带三个 0BSD 门禁工具 crapper / dryer / mutator（语言特定的预编译度量二进制，支持 Clojure/Java/Go/TS/Rust/Python）与 uml-viewer。
+
+**本仓库的采用方式（重述 + 署名，不复制文件）**
+
+- **未复制** ub-mode 的 `SKILL.md` / `README.md`（无许可，复制即侵权）。其思想属 clean-code 通识，本仓库在 `references/18-engineering-discipline.md` 中**原创重述**其纪律，并在开头明示"灵感来源 + 未获再分发授权 + 未复制文件"。
+- 三道量化门阈值（CRAP<10 / 重复度<0.8 / 变异 0 存活）作为"推荐质量基线"引入 `references/06-qa.md §5.1`，不依附原文件。
+- 新增命令 `/cht-ub`（`commands/cht-ub.md`）作为工程纪律一键入口。
+- 同伴门禁工具（0BSD）**仅作外链指针**，不在本仓库内分发——它们需要对应语言的运行环境与预编译二进制，违背本仓库"纯 Markdown + POSIX shell、0 运行时依赖"的定位。
+
+**为什么不直接内置**：无许可证意味着默认版权所有，未经作者许可不得复制/修改/再分发。若要"原样内置"，唯一合规路径是向 Uncle Bob 申请许可或等其补 license；在此之前一律走"重述 + 署名"路线，保护本仓库的 MIT 合规底盘。
+
 ## 本仓库新增的部分
 
 以下内容不属于任何上游，为本仓库原创整理：
@@ -152,7 +168,7 @@
 
 ## 许可合规
 
-五份上游均为 MIT。MIT 要求保留版权声明与许可声明，本仓库在 `LICENSE` 文件末尾
+五份上游均为 MIT（ub-mode 为署名影响、非 MIT、未复制其文件，不在此列）。MIT 要求保留版权声明与许可声明，本仓库在 `LICENSE` 文件末尾
 完整保留了原始版权声明。嫁接的 ECC 技能文件内亦保留其 `metadata.origin: ECC` 标注。
 衍生作品同样以 MIT 发布。
 
@@ -161,6 +177,6 @@
 ## 引用建议
 
 ```
-cht-full-skill (MIT) — 方法论合并自 garrytan/gstack、obra/superpowers，并嫁接 affaan-m/ECC 的 234 个代码/IT 技能、cathrynlavery/diagram-design 可视化引擎，以及 mattpocock/skills 的 grill-me / grilling 决策护栏
+cht-full-skill (MIT) — 方法论合并自 garrytan/gstack、obra/superpowers，并嫁接 affaan-m/ECC 的 234 个代码/IT 技能、cathrynlavery/diagram-design 可视化引擎、mattpocock/skills 的 grill-me / grilling 决策护栏；工程纪律受 unclebob/ub-mode 启发（未获再分发授权，仅作方法引用、原创重述并署名）
 https://github.com/cuohuatang/cht-full-skill
 ```

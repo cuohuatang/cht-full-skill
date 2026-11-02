@@ -1,9 +1,9 @@
-# cht-full-skill · V0.0.5
+# cht-full-skill · V0.0.6
 
 > 把 gstack 的**角色制工程流水线**、superpowers 的**研发纪律**，以及 archify、ECC（234 个代码/IT 技能）、diagram-design（45 种品牌图型）**合成一个 skill**。
 > 一个想法进来，一个已验证的 PR 出去；要画图、要查技术栈、要品牌级配图，一个仓库全包。
 
-[![version](https://img.shields.io/badge/version-0.0.5-blue.svg)](VERSION)
+[![version](https://img.shields.io/badge/version-0.0.6-blue.svg)](VERSION)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![skill](https://img.shields.io/badge/format-agent--skill-8A2BE2.svg)](SKILL.md)
 
@@ -29,7 +29,7 @@ Think → Spec → Plan → Build → Review → Test → Ship → Reflect
 | 弱项 | 依赖 bun 编译的二进制与浏览器包，重；命令 30+ 个，记不住 | 角色视角弱，容易变成"一个人埋头写" |
 | 本仓库做法 | 取**骨架与角色** | 取**纪律与执行细则** |
 
-结果：**11 个主命令 + 234 个代码/IT 技能 + 双绘图引擎（archify / diagram-design）+ grill 决策护栏（grill-me / grilling），13 道门禁，0 运行时依赖**。纯 Markdown + POSIX shell。
+结果：**16 个命令 + 234 个代码/IT 技能 + 双绘图引擎（archify / diagram-design）+ grill 决策护栏 + ub-mode 工程纪律基线，13 道门禁，0 运行时依赖**。纯 Markdown + POSIX shell。
 
 ## 安装
 
@@ -70,6 +70,7 @@ bash scripts/verify.sh
 | `/cht-arch` | 画图 | 画**结构正确**的架构/序列/ER/数据流图（archify，先校验再画） |
 | `/cht-diagram` | 画图 | 画**品牌级、好看**的架构/流程/甘特/象限/雷达图（diagram-design，45 种） |
 | `/cht-grill` | 决策护栏 | "grill me / 先确认再动手"——动手前连续盘问、逼出共识，防 AI 擅自做主（grill-me / grilling） |
+| `/cht-ub` | 工程纪律 | "工程纪律 / 量化门禁 / ub-mode"——三段式工作法 + 量化质量门（CRAP<10 / 重复度<0.8 / 变异 0 存活），受 Uncle Bob 的 ub-mode 启发（原创重述） |
 
 ## 项目里会产生什么
 
@@ -99,7 +100,7 @@ docs/cht/
 
 ## 与上游的关系
 
-本仓库是四套 MIT 项目的**方法论合并、嫁接与重写**，署名与许可全文见 [NOTICE.md](NOTICE.md)：
+本仓库是五套 MIT 项目的**方法论合并、嫁接与重写**（外加一处署名影响 ub-mode，见上表），署名与许可全文见 [NOTICE.md](NOTICE.md)：
 
 | 来源 | 作用 | 在本仓库的位置 |
 |---|---|---|
@@ -108,6 +109,8 @@ docs/cht/
 | [affaan-m/ECC](https://github.com/affaan-m/ECC)（MIT，29 万★） | 代理工具链增强框架 | 按"代码/IT"筛出 **234 个技能**嫁接入 `skills/`，`/cht-ecc` 检索 |
 | [cathrynlavery/diagram-design](https://github.com/cathrynlavery/diagram-design)（MIT，6.3 万★） | 编辑式品牌可视化 | 完整引擎嫁接入 `diagram-design/`，`/cht-diagram` 入口 |
 | [mattpocock/skills](https://github.com/mattpocock/skills)（MIT） | 决策护栏（grill-me / grilling） | 嫁接入 `skills/grill-me` + `skills/grilling`，`/cht-grill` 入口，防 AI 擅自做主 |
+
+**影响来源（非 MIT，未获再分发授权，仅作方法引用）**：[unclebob/ub-mode](https://github.com/unclebob/ub-mode)（★★★★ 6.4k，未声明许可证）——其"三段式工作法 + 量化质量门"启发了 `references/18-engineering-discipline.md` 与 `/cht-ub`，内容为**原创重述并署名**，未复制其文件；门禁工具 crapper/dryer/mutator（0BSD）仅作外链指针。
 
 - **不包含**上游代码、bun 编译产物、浏览器二进制、hooks 脚本、ECC 非技术领域技能、diagram-design 示例 HTML 与开发期构建脚本。
 - **包含**四套的方法论结构，重新组织为单一流水线，并改写为中文可执行清单。

@@ -2,6 +2,19 @@
 
 本仓库遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## V0.0.7 — 2026-11-03（待推送 GitHub）
+
+嫁接 **skill-creator** 造技能引擎（[anthropics/skills → skill-creator](https://github.com/anthropics/skills/tree/main/skills/skill-creator)，**Anthropic PBC，Apache-2.0**，约 18.7 万★）。**这是补全上次"本周涨星 Top5"遗漏的第 3 项**。
+
+- **完整嫁接**其引擎到 `skills/skill-creator/`：`SKILL.md`(33KB 方法论) + `references/schemas.md` + `scripts/`(打包/校验/评测) + `agents/`(评分/对比/归因) + `eval-viewer/`(评审页) + `LICENSE.txt`(Apache-2.0，**保留**)
+- 新增 `references/22-skill-creator.md`（引擎说明、文件地图、宿主相关坑：描述调优依赖 `claude -p`、并行评测依赖子 Agent）
+- 新增 `commands/cht-make-skill.md`（造技能一键入口）
+- 主 `SKILL.md` 新增"造技能引擎"段、参考索引加 22、加载条件加"造技能"、来源加 skill-creator 为**第六套（首个 Apache-2.0）**
+- README / NOTICE / VERSION 同步至 0.0.7
+- **许可处理**：本仓库主许可仍为 MIT，但 `skills/skill-creator/` 为 Apache-2.0——保留其 `LICENSE.txt`、改文件须标注、再分发须附许可证；NOTICE 单列该来源
+
+> 注：skill-creator 的并行评测 / 盲测 A/B 需要宿主能派子 Agent，描述调优（`improve_description.py`）依赖 `claude -p`（Claude Code 专属）；其他宿主降级使用，已在文档中诚实标注。
+
 ## V0.0.6 — 2026-11-02（已推送 GitHub）
 
 吸收 **ub-mode** 的工程纪律（[unclebob/ub-mode](https://github.com/unclebob/ub-mode)，★★★★ 6.4k，Robert C. Martin / "Uncle Bob"）。**关键合规决定：ub-mode 未声明许可证、默认版权所有，本仓库不复制其文件，改为原创重述并署名致敬**；同伴门禁工具（crapper/dryer/mutator，0BSD）仅作外链指针，不在仓库内分发。

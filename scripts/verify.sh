@@ -36,7 +36,7 @@ if [ -f "$DIR/SKILL.md" ]; then
   MISSING=0
   while IFS= read -r ref; do
     [ -f "$DIR/$ref" ] || { bad "SKILL.md 引用了不存在的文件：$ref"; MISSING=1; }
-  done < <(grep -oE 'references/[a-z0-9-]+\.md' "$DIR/SKILL.md" | sort -u)
+  done < <(grep -oE '(^|[^[:alnum:]/])(references/[a-z0-9-]+\.md)' "$DIR/SKILL.md" | sed -E 's/^.//' | sort -u)
   [ "$MISSING" = "0" ] && ok "references 引用完整"
 fi
 

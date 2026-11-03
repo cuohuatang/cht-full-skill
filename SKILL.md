@@ -1,12 +1,12 @@
 ---
 name: cht-full-skill
 description: 全栈交付方法论（研发全流程技能）。把模糊需求变成已合并、已部署、已验证的生产代码：六问逼出真需求 → 可执行 spec → 计划分解 → TDD 逐任务实现 → 分级代码评审 → 真实环境 QA → 发布门禁。内含 CEO / 产品经理 / 架构师 / 设计师 / 工程师 / 评审 / QA / 发布 八个角色视角，以及并行 worktree 与复盘记忆。Use when 用户要做需求梳理、写规格、出技术方案、拆任务、开发功能、修 bug、做代码评审、QA 测试、发版上线、写 skill，或说"帮我把这个做出来""这个功能怎么做""review 一下""测试一下""上线"。适用于 TDD、子代理开发、调试、重构、多代理并行、遗留代码维护等场景。
-version: "0.0.6"
+version: "0.0.7"
 license: MIT
 homepage: https://github.com/cuohuatang/cht-full-skill
 ---
 
-# cht-full-skill · V0.0.6
+# cht-full-skill · V0.0.7
 
 > 一句话：**它不是工具箱，是一支工程团队的工作流。** 一个想法进来，一个已验证的 PR 出去。
 
@@ -31,7 +31,7 @@ homepage: https://github.com/cuohuatang/cht-full-skill
 - 要修 bug、查线上异常、解释"为什么这个测试挂了"
 - 要做 code review、上线前检查、发版、部署、写 PR
 - 要 QA 测试（网页 / API / CLI / 定时任务 / webhook）
-- 要写或改一个 agent skill
+- 要**从零造一个 skill、改进已有 skill、用评测给 skill 打分、或优化 skill 描述触发率**（"造技能 / 帮我做个 skill / 优化这个 skill"）——`/cht-make-skill`，引擎见 `references/22-skill-creator.md`
 - 要做**数据库 / SQL 相关工作**（建表、改 schema、写查询、优化索引、做迁移、用 ORM）——直接 `/cht-sql` 一键路由到对应引擎技能
 - 要用到**某种语言 / 框架 / 基础设施 / 测试 / 安全 / AI 智能体**等具体技术——见下方"嫁接技能库"（234 个代码/IT 技能，或 `/cht-ecc <关键词>` 检索）
 - 要**画出版级、有品牌一致性的图**（架构图 / 流程图 / 时序图 / 甘特图 / 象限图 / 雷达图 / 重画 Mermaid·drawio·Excalidraw / 导出 PNG·SVG）——`/cht-diagram`，引擎见 `references/15-diagram-design.md`
@@ -133,6 +133,7 @@ Think → Spec → Plan → Build → Review → Test → Ship → Reflect
 | `references/15-diagram-design.md` | **diagram-design 可视化引擎**：45 种品牌级图型、与 archify 的分工、文件地图、反模式 | 要画"好看+品牌一致"的图、重画/导出时 |
 | `references/16-grill-me.md` | **grill-me / grilling 决策护栏**：防 AI 擅自做主、动手前盘问逼共识，与三条铁律的关系 | 用户说"grill me / 先确认再动手"、需求模糊时 |
 | `references/18-engineering-discipline.md` | **工程纪律（ub-mode 启发）**：三段式工作法、攻击前提、先减后加、三道量化门（CRAP<10 / 重复度<0.8 / 变异 0 存活）作为推荐基线 | 要强制工程纪律、量化验收、根因排查时 |
+| `references/22-skill-creator.md` | **造技能引擎（Anthropic skill-creator，Apache-2.0）**：从零造 skill / 改进 / 评测打分 / 描述调优，文件地图与宿主相关坑 | 用户说"造技能 / 帮我做个 skill / 优化这个 skill"时 |
 
 产出物模板在 `assets/templates/`：`SPEC.md`、`PLAN.md`、`REVIEW.md`、`QA-REPORT.md`、`RETRO.md`、`LEDGER.md`、`ROLE-BRIEF.md`。
 
@@ -221,6 +222,23 @@ Think → Spec → Plan → Build → Review → Test → Ship → Reflect
 
 ---
 
+## 造技能引擎：skill-creator（Anthropic 官方 · V0.0.7 新增 · Apache-2.0）
+
+> 从 [anthropics/skills → skill-creator](https://github.com/anthropics/skills/tree/main/skills/skill-creator)（Anthropic PBC，**Apache-2.0**，约 18.7 万★）**完整嫁接**其造技能引擎到 `skills/skill-creator/`——解决"AI 总是反复粘贴同一段指令"的问题：把可复用的流程沉淀成规范 skill。
+
+| 维度 | 取向 | 一句话 |
+|---|---|---|
+| **从零造 skill** | 想清做什么 → 写 SKILL.md → 用测试 prompt 对比"有/无 skill" → 按反馈迭代 | "流程变技能" |
+| **评测打分** | 盲测 A/B、聚合通过率/耗时/token、生成可交互评审页 | "它到底有没有用" |
+| **描述调优** | 20 条 query 反复打磨 `description` 触发率（**Claude Code 专属**，其他宿主手动写） | "该触发时触发" |
+
+- 完整引擎已嫁入 `skills/skill-creator/`：`SKILL.md`(33KB 方法论) + 评测 schema + `scripts/`(打包/校验/评测) + `agents/`(评分/对比/归因) + `eval-viewer/`(评审页) + `LICENSE.txt`(Apache-2.0，**必须保留**)。
+- **Apache-2.0 与仓库其余 MIT 来源不同**：保留其 `LICENSE.txt`、改文件须标改动、再分发须附许可证——`NOTICE.md` 已单列该来源。
+- 它和阶段 0 `/cht-spec --discover`、阶段 7 复盘写 learnings 同源，只是对象从"产品需求"变成"可复用技能"；cht 本身是技能仓库，内置此引擎等于**能自我增殖**。
+- 调用与文件地图见 `references/22-skill-creator.md` 与命令 `/cht-make-skill`。
+
+---
+
 ## 反模式清单（看到自己这样，立刻停）
 
 | 反模式 | 为什么致命 | 正确做法 |
@@ -285,14 +303,15 @@ Agent  ：/cht-ship                ← PR + 发布说明 + 回滚路径
 
 ## 来源与许可
 
-MIT。本仓库由五套 MIT 项目合成，方法论归属原作者：
+本仓库由**五套 MIT 项目 + 一套 Apache-2.0 引擎**合成，方法论归属原作者：
 
 - [garrytan/gstack](https://github.com/garrytan/gstack) — Garry Tan，YC。角色制工程流水线。
 - [obra/superpowers](https://github.com/obra/superpowers) — Jesse Vincent。可组合 skill 的研发方法论。
 - [affaan-m/ECC](https://github.com/affaan-m/ECC) — 29 万★ 代理工具链增强框架。按"代码/IT"筛出 **234 个技能**嫁接（见"嫁接技能库"与 `references/14-ecc-code-skills.md`）。
 - [cathrynlavery/diagram-design](https://github.com/cathrynlavery/diagram-design) — 6.3 万★ 编辑式品牌可视化技能。完整嫁接其引擎到 `diagram-design/`（45 种图型、品牌入驻、导入/导出），见"可视化引擎库"与 `references/15-diagram-design.md`。
 - [mattpocock/skills](https://github.com/mattpocock/skills) — Matt Pocock。嫁接 `grill-me`（用户触发入口）+ `grilling`（盘问引擎）到 `skills/`，作为"防 AI 擅自做主"的决策护栏，见"决策护栏"段与 `references/16-grill-me.md`。
+- [anthropics/skills → skill-creator](https://github.com/anthropics/skills/tree/main/skills/skill-creator) — **Anthropic PBC，Apache-2.0**，约 18.7 万★。完整嫁接其"造技能"引擎到 `skills/skill-creator/`（SKILL.md + scripts + agents + eval-viewer + LICENSE.txt），作为 `/cht-make-skill` 引擎，见"造技能引擎"段与 `references/22-skill-creator.md`。
 
 > **影响来源（非 MIT，未获再分发授权，仅作方法引用）**：Robert C. Martin 的 [`ub-mode`](https://github.com/unclebob/ub-mode)（★★★★ 6.4k，未声明许可证）。其"三段式工作法 + 量化质量门（CRAP<10 / 重复度<0.8 / 变异测试 0 存活）"启发了 `references/18-engineering-discipline.md` 与 `/cht-ub`；内容为**原创重述并署名**，未复制其 `SKILL.md`。同伴门禁工具 crapper/dryer/mutator（0BSD）仅作外链指针，不在本仓库内分发。
 
-本仓库为五套 MIT 项目的**方法论合并、嫁接与重写**，外加一处**署名的影响（ub-mode）**；不含上游的 bun 编译工具链、浏览器二进制、医疗/金融/法律/科研/创意等非技术领域的细分技能，也不含 diagram-design 的示例 HTML 与开发期构建脚本、ub-mode 的原文文件；纯 Markdown + POSIX shell，任何支持 skill 的 agent 都能用。详见 `NOTICE.md`。
+本仓库为**五套 MIT 项目 + 一套 Apache-2.0（skill-creator）**的**方法论合并、嫁接与重写**，外加一处**署名的影响（ub-mode）**；不含上游的 bun 编译工具链、浏览器二进制、医疗/金融/法律/科研/创意等非技术领域的细分技能，也不含 diagram-design 的示例 HTML 与开发期构建脚本、ub-mode 的原文文件；纯 Markdown + POSIX shell（skill-creator 的评测脚本为 Python，与既有 `scripts/archify_lite.py` 同列，不引入额外运行时），任何支持 skill 的 agent 都能用。详见 `NOTICE.md`。

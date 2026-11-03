@@ -1,6 +1,6 @@
 # NOTICE · 来源与衍生说明
 
-本仓库（`cht-full-skill`）是**五份** MIT 许可方法论作品的**合并、嫁接与重写**，外加一处**署名影响（ub-mode）**。此处说明来源、
+本仓库（`cht-full-skill`）是**五份 MIT + 一份 Apache-2.0** 许可方法论作品的**合并、嫁接与重写**，外加一处**署名影响（ub-mode）**。此处说明来源、
 保留了什么、去掉了什么，以及为什么。
 
 ## 上游
@@ -155,6 +155,24 @@
 
 **为什么不直接内置**：无许可证意味着默认版权所有，未经作者许可不得复制/修改/再分发。若要"原样内置"，唯一合规路径是向 Uncle Bob 申请许可或等其补 license；在此之前一律走"重述 + 署名"路线，保护本仓库的 MIT 合规底盘。
 
+### 7. skill-creator（嫁接来源 · 造技能引擎 · Apache-2.0）
+
+- 仓库：https://github.com/anthropics/skills（路径 `skills/skill-creator`）
+- 作者：Anthropic PBC（约 18.7 万★）
+- 许可：**Apache-2.0**
+- 定位：Anthropic 官方的"造技能"技能——把反复粘贴的指令沉淀成可复用、可版本化、可跨 agent 分发的 skill；支持从零造 skill、改进已有 skill、用评测给 skill 打分、优化 `description` 触发率。
+- **本仓库完整嫁接其引擎到 `skills/skill-creator/`**：`SKILL.md`(33KB 方法论) + `references/schemas.md` + `scripts/`(打包/校验/评测) + `agents/`(评分/对比/归因) + `eval-viewer/`(评审页) + **`LICENSE.txt`(Apache-2.0，保留)**。新增 `references/22-skill-creator.md` 与 `commands/cht-make-skill.md`。
+
+**嫁接方式**
+
+- 引擎文件原样放入 `skills/skill-creator/`，相对路径（`references/`、`scripts/`、`agents/`、`eval-viewer/`）完好，内部交叉引用不断。
+- 与 cht-full-skill 同源：cht 本身是技能仓库，内置造技能引擎等于"能自我增殖"——把每次嫁接的流程反向沉淀成规范 skill。
+
+**未采用 / 需注意**
+
+- 描述调优（`scripts/improve_description.py`）依赖宿主的 `claude -p` 命令行（Claude Code 专属），其他宿主跳过这步、手动写 `description`；并行评测 / 盲测 A/B 需要宿主能派子 Agent。
+- **Apache-2.0 与仓库其余 MIT 来源不同**：保留其 `LICENSE.txt`、对原文件的修改须标注、再分发须附许可证。本仓库主许可仍为 MIT，凡含 skill-creator 的部分以 Apache-2.0 为准。
+
 ## 本仓库新增的部分
 
 以下内容不属于任何上游，为本仓库原创整理：
@@ -168,15 +186,14 @@
 
 ## 许可合规
 
-五份上游均为 MIT（ub-mode 为署名影响、非 MIT、未复制其文件，不在此列）。MIT 要求保留版权声明与许可声明，本仓库在 `LICENSE` 文件末尾
-完整保留了原始版权声明。嫁接的 ECC 技能文件内亦保留其 `metadata.origin: ECC` 标注。
-衍生作品同样以 MIT 发布。
+六份上游中**五份为 MIT、一份为 Apache-2.0**（skill-creator）；ub-mode 为署名影响、非 MIT、未复制其文件，不在此列。MIT 要求保留版权声明与许可声明，本仓库在 `LICENSE` 文件末尾完整保留了原始版权声明；**Apache-2.0 要求保留 skill-creator 的 `LICENSE.txt` 与任何 NOTICE、对原文件的修改须标注、再分发须附许可证**，该 `LICENSE.txt` 已随 `skills/skill-creator/` 一并带入。嫁接的 ECC 技能文件内亦保留其 `metadata.origin: ECC` 标注。
+衍生作品主许可以 MIT 发布。
 
 如果上游作者认为此处署名或引用方式需要调整，请开 issue，会立即修改。
 
 ## 引用建议
 
 ```
-cht-full-skill (MIT) — 方法论合并自 garrytan/gstack、obra/superpowers，并嫁接 affaan-m/ECC 的 234 个代码/IT 技能、cathrynlavery/diagram-design 可视化引擎、mattpocock/skills 的 grill-me / grilling 决策护栏；工程纪律受 unclebob/ub-mode 启发（未获再分发授权，仅作方法引用、原创重述并署名）
+cht-full-skill (MIT，含 Apache-2.0 组件 skill-creator) — 方法论合并自 garrytan/gstack、obra/superpowers，并嫁接 affaan-m/ECC 的 234 个代码/IT 技能、cathrynlavery/diagram-design 可视化引擎、mattpocock/skills 的 grill-me / grilling 决策护栏、anthropics/skills 的 skill-creator 造技能引擎（Apache-2.0，Anthropic PBC）；工程纪律受 unclebob/ub-mode 启发（未获再分发授权，仅作方法引用、原创重述并署名）
 https://github.com/cuohuatang/cht-full-skill
 ```

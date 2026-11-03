@@ -1,6 +1,6 @@
 # NOTICE · 来源与衍生说明
 
-本仓库（`cht-full-skill`）是**五份 MIT + 一份 Apache-2.0** 许可方法论作品的**合并、嫁接与重写**，外加一处**署名影响（ub-mode）**。此处说明来源、
+本仓库（`cht-full-skill`）是**六份 MIT + 一份 Apache-2.0** 许可方法论作品的**合并、嫁接与重写**，外加一处**署名影响（ub-mode）**。此处说明来源、
 保留了什么、去掉了什么，以及为什么。
 
 ## 上游
@@ -139,7 +139,25 @@
 
 - 其余 grilling 家族技能（`grill-with-docs` / `wayfinder` 等）未搬运，避免与 cht-full-skill 已有流程重叠。
 
-### 6. ub-mode（影响来源 · 非 MIT，未获再分发授权）
+### 6. security-audit（嫁接来源 · 对抗式安全审计）
+
+- 仓库：https://github.com/cloudflare/security-audit-skill
+- 作者：Cloudflare, Inc.（约 5.7 万★）
+- 许可：MIT
+- 定位：Cloudflare 自家漏洞挖掘流程压成的**六阶段、多 Agent、对抗式**安全审计技能——侦察 → 覆盖驱动猎捕 → 候选验证 → 结构化输出 → 独立记录核验 → 目标中立报告。杀手锏是"验证发现的人绝不能是发现它的人"，从根本上消灭"让模型自查代码"类方案的幻觉误报。跑过 145 个仓库。
+- **本仓库整包嫁接其技能到 `skills/security-audit/`**：`SKILL.md`(22KB) + `RECONNAISSANCE.md` + `HUNTING.md`(22KB) + `VALIDATION-AND-REPORTING.md`(17KB) + `ATTACK-CLASSES.md`(15KB) + 10 个领域伴侣（Web/认证、客户端、云与部署、数据隔离、桌面/移动/IPC、内存安全、协议/RPC、资源耗尽、供应链、AI/LLM）+ `report-schema.json`(14KB) + 两个**零依赖** `.cjs` 校验器（仅 Node 内置 `fs`/`path`/`util`，各 28KB/33KB）+ `LICENSE`(Cloudflare MIT，**保留**)。新增 `references/19-security-audit.md` 与 `commands/cht-audit.md`。
+
+**嫁接方式**
+
+- 技能文件原样放入 `skills/security-audit/`，相对路径（`HUNTING.md` 等）完好，内部交叉引用不断。
+- 与 cht-full-skill 的阶段 5 `/cht-qa`（只管功能对不对）互补：补上"安不安全"的对抗式审计能力；并与阶段 0 `/cht-spec --discover`、阶段 7 复盘、V0.0.7 的 skill-creator 形成"造技能 → 审安全 → 才发布"闭环。
+
+**未采用 / 需注意**
+
+- 两个 `.cjs` 校验器借 Node ≥ 18 运行（仅内置模块，零外部依赖），不破坏本仓库"0 运行时依赖"底盘；宿主无 Node 时跳过校验、改人工核对 JSON。
+- **多 Agent 编排**依赖宿主能否派子 Agent；不支持时降级为单 Agent 手动走六阶段。**OS 沙箱门槛**：要拿 `confirmed` 必须能在 OS 强制沙箱里构建/运行目标代码，无沙箱则证据停在 `needs_validation`，绝不假装能确认漏洞。这些已在 `references/19-security-audit.md` 诚实标注。
+
+### 7. ub-mode（影响来源 · 非 MIT，未获再分发授权）
 
 - 仓库：https://github.com/unclebob/ub-mode
 - 作者：Robert C. Martin（"Uncle Bob"，《代码整洁之道》作者，★★★★ 6.4k，2026-10 发布）
@@ -155,7 +173,7 @@
 
 **为什么不直接内置**：无许可证意味着默认版权所有，未经作者许可不得复制/修改/再分发。若要"原样内置"，唯一合规路径是向 Uncle Bob 申请许可或等其补 license；在此之前一律走"重述 + 署名"路线，保护本仓库的 MIT 合规底盘。
 
-### 7. skill-creator（嫁接来源 · 造技能引擎 · Apache-2.0）
+### 8. skill-creator（嫁接来源 · 造技能引擎 · Apache-2.0）
 
 - 仓库：https://github.com/anthropics/skills（路径 `skills/skill-creator`）
 - 作者：Anthropic PBC（约 18.7 万★）
@@ -186,7 +204,7 @@
 
 ## 许可合规
 
-六份上游中**五份为 MIT、一份为 Apache-2.0**（skill-creator）；ub-mode 为署名影响、非 MIT、未复制其文件，不在此列。MIT 要求保留版权声明与许可声明，本仓库在 `LICENSE` 文件末尾完整保留了原始版权声明；**Apache-2.0 要求保留 skill-creator 的 `LICENSE.txt` 与任何 NOTICE、对原文件的修改须标注、再分发须附许可证**，该 `LICENSE.txt` 已随 `skills/skill-creator/` 一并带入。嫁接的 ECC 技能文件内亦保留其 `metadata.origin: ECC` 标注。
+七份上游中**六份为 MIT、一份为 Apache-2.0**（skill-creator）；ub-mode 为署名影响、非 MIT、未复制其文件，不在此列。MIT 要求保留版权声明与许可声明，本仓库在 `LICENSE` 文件末尾完整保留了原始版权声明；**Apache-2.0 要求保留 skill-creator 的 `LICENSE.txt` 与任何 NOTICE、对原文件的修改须标注、再分发须附许可证**，该 `LICENSE.txt` 已随 `skills/skill-creator/` 一并带入。嫁接的 ECC 技能文件内亦保留其 `metadata.origin: ECC` 标注。
 衍生作品主许可以 MIT 发布。
 
 如果上游作者认为此处署名或引用方式需要调整，请开 issue，会立即修改。
@@ -194,6 +212,6 @@
 ## 引用建议
 
 ```
-cht-full-skill (MIT，含 Apache-2.0 组件 skill-creator) — 方法论合并自 garrytan/gstack、obra/superpowers，并嫁接 affaan-m/ECC 的 234 个代码/IT 技能、cathrynlavery/diagram-design 可视化引擎、mattpocock/skills 的 grill-me / grilling 决策护栏、anthropics/skills 的 skill-creator 造技能引擎（Apache-2.0，Anthropic PBC）；工程纪律受 unclebob/ub-mode 启发（未获再分发授权，仅作方法引用、原创重述并署名）
+cht-full-skill (MIT，含 Apache-2.0 组件 skill-creator) — 方法论合并自 garrytan/gstack、obra/superpowers，并嫁接 affaan-m/ECC 的 234 个代码/IT 技能、cathrynlavery/diagram-design 可视化引擎、mattpocock/skills 的 grill-me / grilling 决策护栏、cloudflare/security-audit-skill 的对抗式安全审计技能（MIT，Cloudflare, Inc.）、anthropics/skills 的 skill-creator 造技能引擎（Apache-2.0，Anthropic PBC）；工程纪律受 unclebob/ub-mode 启发（未获再分发授权，仅作方法引用、原创重述并署名）
 https://github.com/cuohuatang/cht-full-skill
 ```

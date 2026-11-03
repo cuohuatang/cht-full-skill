@@ -1,12 +1,12 @@
 ---
 name: cht-full-skill
 description: 全栈交付方法论（研发全流程技能）。把模糊需求变成已合并、已部署、已验证的生产代码：六问逼出真需求 → 可执行 spec → 计划分解 → TDD 逐任务实现 → 分级代码评审 → 真实环境 QA → 发布门禁。内含 CEO / 产品经理 / 架构师 / 设计师 / 工程师 / 评审 / QA / 发布 八个角色视角，以及并行 worktree 与复盘记忆。Use when 用户要做需求梳理、写规格、出技术方案、拆任务、开发功能、修 bug、做代码评审、QA 测试、发版上线、写 skill，或说"帮我把这个做出来""这个功能怎么做""review 一下""测试一下""上线"。适用于 TDD、子代理开发、调试、重构、多代理并行、遗留代码维护等场景。
-version: "0.0.7"
+version: "0.0.8"
 license: MIT
 homepage: https://github.com/cuohuatang/cht-full-skill
 ---
 
-# cht-full-skill · V0.0.7
+# cht-full-skill · V0.0.8
 
 > 一句话：**它不是工具箱，是一支工程团队的工作流。** 一个想法进来，一个已验证的 PR 出去。
 
@@ -37,6 +37,7 @@ homepage: https://github.com/cuohuatang/cht-full-skill
 - 要**画出版级、有品牌一致性的图**（架构图 / 流程图 / 时序图 / 甘特图 / 象限图 / 雷达图 / 重画 Mermaid·drawio·Excalidraw / 导出 PNG·SVG）——`/cht-diagram`，引擎见 `references/15-diagram-design.md`
 - 要**在动手前先被盘问、逼出真实需求、防止 agent 擅自做主**（"grill me / 先确认再动手 / 别急着做先问我"）——`/cht-grill`，引擎见 `references/16-grill-me.md`
 - 要**强制工程纪律、量化质量门、攻击前提式排查**（"工程纪律 / 量化门禁 / ub-mode / 先减后加"）——`/cht-ub`，纪律见 `references/18-engineering-discipline.md`
+- 要**做对抗式安全审计、渗透测试、找漏洞、审一个代码库**（"安全审计 / audit / 找漏洞 / 渗透"）——`/cht-audit`，引擎见 `references/19-security-audit.md`（与 `/cht-make-skill` 的"造技能"形成"造→审→发"闭环）
 
 ---
 
@@ -133,6 +134,7 @@ Think → Spec → Plan → Build → Review → Test → Ship → Reflect
 | `references/15-diagram-design.md` | **diagram-design 可视化引擎**：45 种品牌级图型、与 archify 的分工、文件地图、反模式 | 要画"好看+品牌一致"的图、重画/导出时 |
 | `references/16-grill-me.md` | **grill-me / grilling 决策护栏**：防 AI 擅自做主、动手前盘问逼共识，与三条铁律的关系 | 用户说"grill me / 先确认再动手"、需求模糊时 |
 | `references/18-engineering-discipline.md` | **工程纪律（ub-mode 启发）**：三段式工作法、攻击前提、先减后加、三道量化门（CRAP<10 / 重复度<0.8 / 变异 0 存活）作为推荐基线 | 要强制工程纪律、量化验收、根因排查时 |
+| `references/19-security-audit.md` | **对抗式安全审计（Cloudflare security-audit，MIT）**：六阶段多 Agent 审计、verdict 语义、10 个领域伴侣、两个零依赖 Node 校验器、OS 沙箱门槛、与发布门禁衔接 | 用户说"安全审计 / 找漏洞 / 渗透 / audit"、造完技能要审安全时 |
 | `references/22-skill-creator.md` | **造技能引擎（Anthropic skill-creator，Apache-2.0）**：从零造 skill / 改进 / 评测打分 / 描述调优，文件地图与宿主相关坑 | 用户说"造技能 / 帮我做个 skill / 优化这个 skill"时 |
 
 产出物模板在 `assets/templates/`：`SPEC.md`、`PLAN.md`、`REVIEW.md`、`QA-REPORT.md`、`RETRO.md`、`LEDGER.md`、`ROLE-BRIEF.md`。
@@ -239,6 +241,23 @@ Think → Spec → Plan → Build → Review → Test → Ship → Reflect
 
 ---
 
+## 安全审计：security-audit（Cloudflare 官方 · V0.0.8 新增 · MIT）
+
+> 从 [cloudflare/security-audit-skill](https://github.com/cloudflare/security-audit-skill)（Cloudflare, Inc.，**MIT**，约 5.7 万★）**整包嫁接**其对抗式安全审计技能到 `skills/security-audit/`——补上 cht 一直缺的"安不安全"能力，与阶段 5 `/cht-qa`（只管功能对不对）互补。
+
+| 维度 | 取向 | 一句话 |
+|---|---|---|
+| **六阶段对抗审计** | 侦察 → 覆盖驱动猎捕 → 候选验证 → 结构化输出 → 独立记录核验 → 目标中立报告 | "验证者绝不能是发现者" |
+| **verdict 纪律** | confirmed（有严重度）/ needs_validation（无严重度，仅卡住的假设）/ rejected | "无边界+结果，不算发现" |
+| **零依赖校验器** | 2 个 `.cjs`（仅 Node 内置 `fs`/`path`/`util`）校验 `findings.json` 与覆盖账本 | "产出可机器核验" |
+
+- 完整技能已嫁入 `skills/security-audit/`：`SKILL.md`(22KB) + `RECONNAISSANCE.md` + `HUNTING.md`(22KB) + `VALIDATION-AND-REPORTING.md` + `ATTACK-CLASSES.md` + **10 个领域伴侣** + `report-schema.json` + 2 个零依赖 `.cjs` 校验器 + `LICENSE`(Cloudflare MIT，**保留**)。
+- **三个硬门槛（已在 `references/19-security-audit.md` 诚实标注）**：① 多 Agent 编排依赖宿主能否派子 Agent，不支持则降级为单 Agent 手动走六阶段；② 要拿 `confirmed` 必须 OS 强制沙箱跑目标代码，无沙箱则证据停在 `needs_validation`，**绝不假装能确认漏洞**；③ 两个校验器借 Node ≥ 18 运行，不破坏"0 运行时依赖"底盘。
+- 它和 `references/22-skill-creator.md` 的 **skill-creator** 天然成对：**造技能 → 审安全 → 才发布**。第 13 道发布门禁应接入"0 个高危 `confirmed` / `rejected` 才算可发"。
+- 调用与文件地图见 `references/19-security-audit.md` 与命令 `/cht-audit`。
+
+---
+
 ## 反模式清单（看到自己这样，立刻停）
 
 | 反模式 | 为什么致命 | 正确做法 |
@@ -303,7 +322,7 @@ Agent  ：/cht-ship                ← PR + 发布说明 + 回滚路径
 
 ## 来源与许可
 
-本仓库由**五套 MIT 项目 + 一套 Apache-2.0 引擎**合成，方法论归属原作者：
+本仓库由**六套 MIT 项目 + 一套 Apache-2.0 引擎**合成，方法论归属原作者：
 
 - [garrytan/gstack](https://github.com/garrytan/gstack) — Garry Tan，YC。角色制工程流水线。
 - [obra/superpowers](https://github.com/obra/superpowers) — Jesse Vincent。可组合 skill 的研发方法论。
@@ -311,7 +330,8 @@ Agent  ：/cht-ship                ← PR + 发布说明 + 回滚路径
 - [cathrynlavery/diagram-design](https://github.com/cathrynlavery/diagram-design) — 6.3 万★ 编辑式品牌可视化技能。完整嫁接其引擎到 `diagram-design/`（45 种图型、品牌入驻、导入/导出），见"可视化引擎库"与 `references/15-diagram-design.md`。
 - [mattpocock/skills](https://github.com/mattpocock/skills) — Matt Pocock。嫁接 `grill-me`（用户触发入口）+ `grilling`（盘问引擎）到 `skills/`，作为"防 AI 擅自做主"的决策护栏，见"决策护栏"段与 `references/16-grill-me.md`。
 - [anthropics/skills → skill-creator](https://github.com/anthropics/skills/tree/main/skills/skill-creator) — **Anthropic PBC，Apache-2.0**，约 18.7 万★。完整嫁接其"造技能"引擎到 `skills/skill-creator/`（SKILL.md + scripts + agents + eval-viewer + LICENSE.txt），作为 `/cht-make-skill` 引擎，见"造技能引擎"段与 `references/22-skill-creator.md`。
+- [cloudflare/security-audit-skill](https://github.com/cloudflare/security-audit-skill) — **Cloudflare, Inc.，MIT**，约 5.7 万★。整包嫁接其对抗式安全审计技能到 `skills/security-audit/`（SKILL.md + 6 阶段文档 + ATTACK-CLASSES + 10 个领域伴侣 + report-schema.json + 2 个零依赖 `.cjs` 校验器 + LICENSE），作为 `/cht-audit` 引擎，见"安全审计"段与 `references/19-security-audit.md`。
 
 > **影响来源（非 MIT，未获再分发授权，仅作方法引用）**：Robert C. Martin 的 [`ub-mode`](https://github.com/unclebob/ub-mode)（★★★★ 6.4k，未声明许可证）。其"三段式工作法 + 量化质量门（CRAP<10 / 重复度<0.8 / 变异测试 0 存活）"启发了 `references/18-engineering-discipline.md` 与 `/cht-ub`；内容为**原创重述并署名**，未复制其 `SKILL.md`。同伴门禁工具 crapper/dryer/mutator（0BSD）仅作外链指针，不在本仓库内分发。
 
-本仓库为**五套 MIT 项目 + 一套 Apache-2.0（skill-creator）**的**方法论合并、嫁接与重写**，外加一处**署名的影响（ub-mode）**；不含上游的 bun 编译工具链、浏览器二进制、医疗/金融/法律/科研/创意等非技术领域的细分技能，也不含 diagram-design 的示例 HTML 与开发期构建脚本、ub-mode 的原文文件；纯 Markdown + POSIX shell（skill-creator 的评测脚本为 Python，与既有 `scripts/archify_lite.py` 同列，不引入额外运行时），任何支持 skill 的 agent 都能用。详见 `NOTICE.md`。
+本仓库为**六套 MIT 项目 + 一套 Apache-2.0（skill-creator）**的**方法论合并、嫁接与重写**，外加一处**署名的影响（ub-mode）**；不含上游的 bun 编译工具链、浏览器二进制、医疗/金融/法律/科研/创意等非技术领域的细分技能，也不含 diagram-design 的示例 HTML 与开发期构建脚本、ub-mode 的原文文件；纯 Markdown + POSIX shell（skill-creator 的评测脚本为 Python，与既有 `scripts/archify_lite.py` 同列，不引入额外运行时），任何支持 skill 的 agent 都能用。详见 `NOTICE.md`。

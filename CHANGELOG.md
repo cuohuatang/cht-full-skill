@@ -2,6 +2,18 @@
 
 本仓库遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## V0.0.8 — 2026-11-03（待推送 GitHub）
+
+嫁接 **security-audit** 对抗式安全审计技能（[cloudflare/security-audit-skill](https://github.com/cloudflare/security-audit-skill)，**Cloudflare, Inc.，MIT**，约 5.7 万★）。**这是补全"本周涨星 Top5"方案里第一优先项，与 V0.0.7 的 skill-creator 形成"造技能 → 审安全 → 才发布"闭环。**
+
+- **整包嫁接**其技能到 `skills/security-audit/`：`SKILL.md`(22KB) + `RECONNAISSANCE.md` + `HUNTING.md`(22KB) + `VALIDATION-AND-REPORTING.md`(17KB) + `ATTACK-CLASSES.md`(15KB) + **10 个领域伴侣**（Web/认证、客户端、云与部署、数据隔离、桌面/移动/IPC、内存安全、协议/RPC、资源耗尽、供应链、AI/LLM）+ `report-schema.json`(14KB) + 两个**零依赖** `.cjs` 校验器（仅 Node 内置 `fs`/`path`/`util`，各 28KB/33KB）+ `LICENSE`(Cloudflare MIT，**保留**)
+- 新增 `references/19-security-audit.md`（引擎说明、六阶段、verdict 语义、文件地图、三大硬门槛、与发布门禁衔接、许可）
+- 新增 `commands/cht-audit.md`（全量审计 / 聚焦 review / 只查方法论 三态入口）
+- 主 `SKILL.md` 新增"安全审计"段、参考索引加 19、加载条件加 audit、来源加 security-audit 为**第六套（MIT）**
+- README / NOTICE / VERSION 同步至 0.0.8；上游计数由"五套 MIT"更新为"六套 MIT"
+
+> 注：三个硬门槛已在文档诚实标注——① 多 Agent 编排依赖宿主能否派子 Agent，不支持则降级单 Agent 手动走六阶段；② 要拿 `confirmed` 必须 OS 强制沙箱跑目标代码，无沙箱则证据停在 `needs_validation`，绝不假装能确认漏洞；③ 两个校验器借 Node ≥ 18 运行，不破坏"0 运行时依赖"底盘。
+
 ## V0.0.7 — 2026-11-03（待推送 GitHub）
 
 嫁接 **skill-creator** 造技能引擎（[anthropics/skills → skill-creator](https://github.com/anthropics/skills/tree/main/skills/skill-creator)，**Anthropic PBC，Apache-2.0**，约 18.7 万★）。**这是补全上次"本周涨星 Top5"遗漏的第 3 项**。

@@ -2,6 +2,20 @@
 
 本仓库遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## V0.0.9 — 2026-11-09（待推送 GitHub）
+
+嫁接 **T0 系统检测/自修复技能组**，把上一轮给用户推荐的 5 组能力编排成 cht-full-skill 的统一入口，专治"已开发到 90%、逻辑乱、全插件化的系统"——查不合理逻辑 / 没连通 / 空壳 + 分级自修复。
+
+**诚实标注**：5 组里 **4 组本就在本仓库**（V0.0.3 从 ECC 嫁入的 234 技能自带），本次是**编排**而非复制；真正新增文件只有 1 个 MIT 引擎。
+
+- **新增引擎**：整包嫁入 `skills/theater-detection-audit/`（[DNYoussef/ai-chrome-extension](https://github.com/DNYoussef/ai-chrome-extension/tree/main/.claude/skills/theater-detection-audit)，**MIT**）——`SKILL.md`(17KB，7 类 theater 定义) + `theater-detection-audit-process.dot` + `LICENSE`(MIT，保留)。专治"哪些是壳"：mock / stub / TODO / 被注释掉的真逻辑 / 假错误处理
+- **新增** `references/23-system-doctor.md`：四类问题映射、七步闭环、P0/P1/P2 分级、四层验证门、插件化系统特殊注意点（空实现常是故意的扩展点、事件总线会被误报成断链）
+- **新增** `commands/cht-doctor.md`：统一入口，编排 `workspace-surface-audit` + `automation-audit-ops`（盘点）、`module-regression` + `change-impact`（断链）、`brownfield-retrospective` + `production-audit`（逻辑）、`verification-loop` + `delivery-gate` / `gateguard`（验证）
+- 主 `SKILL.md` 新增"系统体检与自修复"段、参考索引加 23、加载条件加"全面检测/查壳/查断链"、来源加 DNYoussef 为**第七套 MIT**；命令用 `/cht-doctor`（`/cht-audit` 已被安全审计占用）
+- README / NOTICE / VERSION 同步至 0.0.9；上游计数由"六套 MIT"更新为"七套 MIT"
+
+> 注：未嫁 Codebase Health Auditor / Millie Fix / heal-skill 三个外部技能——来自聚合站、仓库级许可未声明，按 ub-mode 一贯纪律只留外链指针、不复制文件；`heal-skill` 修的是 skill 库自身而非业务代码。自动修复只覆盖 P0，P1 逐条给 diff 确认，报价/金额类逻辑不闷头全量自动改。
+
 ## V0.0.8 — 2026-11-03（待推送 GitHub）
 
 嫁接 **security-audit** 对抗式安全审计技能（[cloudflare/security-audit-skill](https://github.com/cloudflare/security-audit-skill)，**Cloudflare, Inc.，MIT**，约 5.7 万★）。**这是补全"本周涨星 Top5"方案里第一优先项，与 V0.0.7 的 skill-creator 形成"造技能 → 审安全 → 才发布"闭环。**

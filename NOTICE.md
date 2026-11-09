@@ -1,6 +1,6 @@
 # NOTICE · 来源与衍生说明
 
-本仓库（`cht-full-skill`）是**六份 MIT + 一份 Apache-2.0** 许可方法论作品的**合并、嫁接与重写**，外加一处**署名影响（ub-mode）**。此处说明来源、
+本仓库（`cht-full-skill`）是**七份 MIT + 一份 Apache-2.0** 许可方法论作品的**合并、嫁接与重写**，外加一处**署名影响（ub-mode）**。此处说明来源、
 保留了什么、去掉了什么，以及为什么。
 
 ## 上游
@@ -191,6 +191,24 @@
 - 描述调优（`scripts/improve_description.py`）依赖宿主的 `claude -p` 命令行（Claude Code 专属），其他宿主跳过这步、手动写 `description`；并行评测 / 盲测 A/B 需要宿主能派子 Agent。
 - **Apache-2.0 与仓库其余 MIT 来源不同**：保留其 `LICENSE.txt`、对原文件的修改须标注、再分发须附许可证。本仓库主许可仍为 MIT，凡含 skill-creator 的部分以 Apache-2.0 为准。
 
+### 9. theater-detection-audit（嫁接来源 · 壳检测引擎）
+
+- 仓库：https://github.com/DNYoussef/ai-chrome-extension/tree/main/.claude/skills/theater-detection-audit
+- 作者：DNYoussef
+- 许可：MIT
+- 定位：检测并消除代码里的"**theater**"——看起来能跑、实际是占位的实现：硬编码 mock 响应、stub 空函数、TODO/FIXME/HACK 标记、被注释掉的生产逻辑、过度简化的错误处理、test-mode 条件分支、可疑常量。两阶段审计法（模式扫描 → 完整上下文分析），并给出生产级补全。
+- **本仓库整包嫁接其引擎到 `skills/theater-detection-audit/`**：`SKILL.md`(17KB) + `theater-detection-audit-process.dot`(流程图) + `LICENSE`(MIT，**保留**)。新增 `references/23-system-doctor.md` 与 `commands/cht-doctor.md`。
+
+**嫁接方式**
+
+- 引擎文件原样放入 `skills/theater-detection-audit/`，相对路径完好，frontmatter 的 `name` / `description` 齐全。
+- 作为 `/cht-doctor` 七步闭环的第 2 步"扫壳"引擎；与仓库既有的盘点 / 断链 / 逻辑 / 验证技能编排成一条"检测 → 分级 → 修复 → 四层验证门"闭环，补上 cht 一直缺的"占位实现检测"能力。
+
+**未采用 / 需注意**
+
+- 该引擎自带"生产级补全"能力，但本闭环**不让 agent 无确认地自动补全**：插件架构里空实现常是故意的扩展点，报价/金额类逻辑自动补全风险极高。修复按 P0/P1/P2 分级，只自动修 P0，P1 逐条给 diff 确认。
+- 三个相关外部技能（Codebase Health Auditor / Millie Fix / heal-skill）来自聚合站、**仓库级许可未声明**，按 ub-mode 一贯纪律**未复制其文件**，仅在 `references/23-system-doctor.md` 留外链指针。其中 `heal-skill` 修的是 skill 库自身而非业务代码，勿误用。
+
 ## 本仓库新增的部分
 
 以下内容不属于任何上游，为本仓库原创整理：
@@ -204,7 +222,7 @@
 
 ## 许可合规
 
-七份上游中**六份为 MIT、一份为 Apache-2.0**（skill-creator）；ub-mode 为署名影响、非 MIT、未复制其文件，不在此列。MIT 要求保留版权声明与许可声明，本仓库在 `LICENSE` 文件末尾完整保留了原始版权声明；**Apache-2.0 要求保留 skill-creator 的 `LICENSE.txt` 与任何 NOTICE、对原文件的修改须标注、再分发须附许可证**，该 `LICENSE.txt` 已随 `skills/skill-creator/` 一并带入。嫁接的 ECC 技能文件内亦保留其 `metadata.origin: ECC` 标注。
+八份上游中**七份为 MIT、一份为 Apache-2.0**（skill-creator）；ub-mode 为署名影响、非 MIT、未复制其文件，不在此列。MIT 要求保留版权声明与许可声明，本仓库在 `LICENSE` 文件末尾完整保留了原始版权声明；**Apache-2.0 要求保留 skill-creator 的 `LICENSE.txt` 与任何 NOTICE、对原文件的修改须标注、再分发须附许可证**，该 `LICENSE.txt` 已随 `skills/skill-creator/` 一并带入。嫁接的 ECC 技能文件内亦保留其 `metadata.origin: ECC` 标注。
 衍生作品主许可以 MIT 发布。
 
 如果上游作者认为此处署名或引用方式需要调整，请开 issue，会立即修改。
@@ -212,6 +230,6 @@
 ## 引用建议
 
 ```
-cht-full-skill (MIT，含 Apache-2.0 组件 skill-creator) — 方法论合并自 garrytan/gstack、obra/superpowers，并嫁接 affaan-m/ECC 的 234 个代码/IT 技能、cathrynlavery/diagram-design 可视化引擎、mattpocock/skills 的 grill-me / grilling 决策护栏、cloudflare/security-audit-skill 的对抗式安全审计技能（MIT，Cloudflare, Inc.）、anthropics/skills 的 skill-creator 造技能引擎（Apache-2.0，Anthropic PBC）；工程纪律受 unclebob/ub-mode 启发（未获再分发授权，仅作方法引用、原创重述并署名）
+cht-full-skill (MIT，含 Apache-2.0 组件 skill-creator) — 方法论合并自 garrytan/gstack、obra/superpowers，并嫁接 affaan-m/ECC 的 234 个代码/IT 技能、cathrynlavery/diagram-design 可视化引擎、mattpocock/skills 的 grill-me / grilling 决策护栏、cloudflare/security-audit-skill 的对抗式安全审计技能（MIT，Cloudflare, Inc.）、DNYoussef/ai-chrome-extension 的 theater-detection-audit 壳检测引擎（MIT）、anthropics/skills 的 skill-creator 造技能引擎（Apache-2.0，Anthropic PBC）；工程纪律受 unclebob/ub-mode 启发（未获再分发授权，仅作方法引用、原创重述并署名）
 https://github.com/cuohuatang/cht-full-skill
 ```

@@ -2,6 +2,22 @@
 
 本仓库遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## V0.0.10 — 2026-11-15（待推送 GitHub）
+
+嫁接 **caveman** 会话输出压缩技能（[JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) v4.1.0，**Julius Brussee，Apache-2.0**，约 12 万★）。
+
+**先纠两个误传**：① 网传"省 65% token"来自它的 proxy/engine 压缩层，**不是这个 skill**——官方 skill 实测默认档仅 **3%**（在噪声内）、ultracave 35%、megacave 9%，且无质量等价声明；② 3.0.0 起全仓库**已从 MIT 转 Apache-2.0**，故按 Apache-2.0 处理（保留 LICENSE + 上游 NOTICE）。
+
+- **整包嫁接三档纯文本技能**：`skills/caveman/`（SKILL.md 4.7KB 九条规则 + README + **LICENSE Apache-2.0** + **上游 NOTICE** + `LICENSE-MIT` 历史文本）、`skills/ultracave/SKILL.md`、`skills/megacave/SKILL.md`。三个 SKILL.md **原样未改**
+- 新增 `references/24-caveman.md`：三档对照、九条规则、7 条破例、**与三条铁律的冲突边界**、实测数据澄清、默认关闭策略、商标说明
+- 新增 `commands/cht-caveman.md`：三档切换 / status / stop 入口
+- **⚠️ 核心冲突已划死**：caveman 压缩会话输出，cht 第 3 条铁律要求"跑命令、贴完整输出"。**冲突时铁律优先**——只压缩会话旁白；命令完整输出 / 测试日志 / 报错栈 / 验证证据 / `docs/cht/` 全部产出物 / 代码 / commit / PR **一律正常散文、一字不动**（这正是上游 7 条「When to break the rules」+ 规则 6 的要求，cht 显式化提高优先级）
+- **默认关闭、显式开启**：上游"加载即常驻"会污染产出物标准，cht 里必须 `/cht-caveman` 才开启
+- **未嫁运行时**：Node `activation-rule.mjs`、60KB Python 压缩引擎、proxy/engine/browse/mcp、Docker、CI 全不搬——只取纯文本规则，守住 0 运行时依赖
+- 主 `SKILL.md` 新增"会话输出压缩"段、参考索引加 24、加载条件加 caveman、来源加为**第二套 Apache-2.0**；README / NOTICE / VERSION 同步至 0.0.10
+
+> 注：商标 "Caveman" 及 logo 为上游商标，Apache-2.0 不授予商标权；本仓库仅作署名性引用，不暗示背书或赞助。
+
 ## V0.0.9 — 2026-11-09（待推送 GitHub）
 
 嫁接 **T0 系统检测/自修复技能组**，把上一轮给用户推荐的 5 组能力编排成 cht-full-skill 的统一入口，专治"已开发到 90%、逻辑乱、全插件化的系统"——查不合理逻辑 / 没连通 / 空壳 + 分级自修复。

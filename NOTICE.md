@@ -1,6 +1,6 @@
 # NOTICE · 来源与衍生说明
 
-本仓库（`cht-full-skill`）是**七份 MIT + 一份 Apache-2.0** 许可方法论作品的**合并、嫁接与重写**，外加一处**署名影响（ub-mode）**。此处说明来源、
+本仓库（`cht-full-skill`）是**七份 MIT + 两份 Apache-2.0** 许可方法论作品的**合并、嫁接与重写**，外加一处**署名影响（ub-mode）**。此处说明来源、
 保留了什么、去掉了什么，以及为什么。
 
 ## 上游
@@ -209,6 +209,31 @@
 - 该引擎自带"生产级补全"能力，但本闭环**不让 agent 无确认地自动补全**：插件架构里空实现常是故意的扩展点，报价/金额类逻辑自动补全风险极高。修复按 P0/P1/P2 分级，只自动修 P0，P1 逐条给 diff 确认。
 - 三个相关外部技能（Codebase Health Auditor / Millie Fix / heal-skill）来自聚合站、**仓库级许可未声明**，按 ub-mode 一贯纪律**未复制其文件**，仅在 `references/23-system-doctor.md` 留外链指针。其中 `heal-skill` 修的是 skill 库自身而非业务代码，勿误用。
 
+### 10. caveman（嫁接来源 · 会话输出压缩 · Apache-2.0）
+
+- 仓库：https://github.com/JuliusBrussee/caveman
+- 作者：Julius Brussee（独立开发者，约 12 万★）
+- 许可：**Apache-2.0**（v4.1.0；3.0.0 起全仓库由 MIT 转 Apache-2.0，见其 `LICENSING.md`）
+- 定位：让 AI 用"聪明穴居人"风格回复——answer first、砍客套与填充词、**技术事实（代码/命令/路径/数字/错误串）逐字保留**。三档：`caveman`（默认）/ `ultracave`（极限）/ `megacave`（文言文）。
+- **本仓库整包嫁接三档纯文本技能**：`skills/caveman/`（SKILL.md 4.7KB + README + **LICENSE** Apache-2.0 全文 + **上游 NOTICE** + `LICENSE-MIT` 历史文本）、`skills/ultracave/SKILL.md`、`skills/megacave/SKILL.md`。新增 `references/24-caveman.md` 与 `commands/cht-caveman.md`。
+
+**嫁接方式**
+
+- 三个 SKILL.md **原样复制、未作任何修改**（Apache-2.0 的"修改须标注"因此不涉及）；`ultracave` / `megacave` 自带 `disable-model-invocation: true`，agent 不会擅自切档。
+- 只取**纯文本规则**，不引入其 Node hook、Python 压缩引擎、proxy / engine / browse / mcp / Docker / CI —— 守住本仓库「0 运行时依赖」。
+- 作为 `/cht-caveman` 引擎，**默认关闭、显式开启**。
+
+**两处必须澄清的事实**
+
+1. **网传"省 65% token"不是这个 skill**：那是 caveman 的 proxy/engine 压缩层。官方 README 写明的 skill 实测（3.1.0 文本、10 条 prompt、单次运行、仅测输出长度）：caveman 默认档 **3%**（在噪声内）、ultracave **35%**、megacave **9%**，且**没有质量等价声明**。本仓库不以省 token 为卖点引入，取的是它的**输出纪律**（与 cht 反模式清单"别写小作文 / 没有证据的断言=撒谎"同源）。
+2. **与三条铁律的冲突已划死边界**：caveman 压缩会话输出，cht 第 3 条铁律要求"跑命令、贴完整输出"。**冲突时铁律优先**——只压缩会话旁白；命令完整输出 / 测试日志 / 报错栈 / 验证证据 / `docs/cht/` 全部产出物 / 代码 / commit / PR **一律正常散文、一字不动**。这本来就是上游 SKILL.md 的 7 条「When to break the rules」+ 规则 6「Payload verbatim」所要求，本仓库只是显式化并提高优先级。
+
+**未采用 / 需注意**
+
+- `skills/activation-rule.mjs`（Node hook）、`skills/caveman-compress/scripts/compress.py`（60KB Python 引擎）、`agents/compile.mjs`、各 `generated/*/pack.json`、`.github/workflows/` 等运行时与构建链路，均**不搬运**。
+- **商标**：上游 `TRADEMARKS.md` 声明 "Caveman" 及 logo 为 Julius Brussee 的商标，Apache-2.0 **不授予商标权**。本仓库仅作**署名性引用**（"嫁接自 JuliusBrussee/caveman"），不用于命名产品、不暗示背书或赞助。
+- **Apache-2.0 合规**：`LICENSE`（Apache-2.0 全文）与**上游 `NOTICE`**（版权行 + 第三方归因）已随 `skills/caveman/` 一并带入，勿删；再分发须附许可证。凡含 caveman 的部分以 Apache-2.0 为准。
+
 ## 本仓库新增的部分
 
 以下内容不属于任何上游，为本仓库原创整理：
@@ -222,7 +247,7 @@
 
 ## 许可合规
 
-八份上游中**七份为 MIT、一份为 Apache-2.0**（skill-creator）；ub-mode 为署名影响、非 MIT、未复制其文件，不在此列。MIT 要求保留版权声明与许可声明，本仓库在 `LICENSE` 文件末尾完整保留了原始版权声明；**Apache-2.0 要求保留 skill-creator 的 `LICENSE.txt` 与任何 NOTICE、对原文件的修改须标注、再分发须附许可证**，该 `LICENSE.txt` 已随 `skills/skill-creator/` 一并带入。嫁接的 ECC 技能文件内亦保留其 `metadata.origin: ECC` 标注。
+九份上游中**七份为 MIT、两份为 Apache-2.0**（skill-creator、caveman）；ub-mode 为署名影响、非 MIT、未复制其文件，不在此列。MIT 要求保留版权声明与许可声明，本仓库在 `LICENSE` 文件末尾完整保留了原始版权声明；**Apache-2.0 要求保留各组件的 LICENSE 与任何 NOTICE、对原文件的修改须标注、再分发须附许可证**——`skills/skill-creator/LICENSE.txt` 与 `skills/caveman/LICENSE` + `skills/caveman/NOTICE` 均已随目录带入，且两个组件的 SKILL.md 均为原样复制、未作修改。嫁接的 ECC 技能文件内亦保留其 `metadata.origin: ECC` 标注。
 衍生作品主许可以 MIT 发布。
 
 如果上游作者认为此处署名或引用方式需要调整，请开 issue，会立即修改。
@@ -230,6 +255,6 @@
 ## 引用建议
 
 ```
-cht-full-skill (MIT，含 Apache-2.0 组件 skill-creator) — 方法论合并自 garrytan/gstack、obra/superpowers，并嫁接 affaan-m/ECC 的 234 个代码/IT 技能、cathrynlavery/diagram-design 可视化引擎、mattpocock/skills 的 grill-me / grilling 决策护栏、cloudflare/security-audit-skill 的对抗式安全审计技能（MIT，Cloudflare, Inc.）、DNYoussef/ai-chrome-extension 的 theater-detection-audit 壳检测引擎（MIT）、anthropics/skills 的 skill-creator 造技能引擎（Apache-2.0，Anthropic PBC）；工程纪律受 unclebob/ub-mode 启发（未获再分发授权，仅作方法引用、原创重述并署名）
+cht-full-skill (MIT，含 Apache-2.0 组件 skill-creator / caveman) — 方法论合并自 garrytan/gstack、obra/superpowers，并嫁接 affaan-m/ECC 的 234 个代码/IT 技能、cathrynlavery/diagram-design 可视化引擎、mattpocock/skills 的 grill-me / grilling 决策护栏、cloudflare/security-audit-skill 的对抗式安全审计技能（MIT，Cloudflare, Inc.）、DNYoussef/ai-chrome-extension 的 theater-detection-audit 壳检测引擎（MIT）、anthropics/skills 的 skill-creator 造技能引擎（Apache-2.0，Anthropic PBC）、JuliusBrussee/caveman 会话输出压缩技能（Apache-2.0，Julius Brussee）；工程纪律受 unclebob/ub-mode 启发（未获再分发授权，仅作方法引用、原创重述并署名）
 https://github.com/cuohuatang/cht-full-skill
 ```

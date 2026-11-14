@@ -1,9 +1,9 @@
-# cht-full-skill · V0.0.9
+# cht-full-skill · V0.0.10
 
-> 把 gstack 的**角色制工程流水线**、superpowers 的**研发纪律**，以及 archify、ECC（234 个代码/IT 技能）、diagram-design（45 种品牌图型）、Cloudflare security-audit（对抗式安全审计）、theater-detection-audit（壳检测）**合成一个 skill**。
-> 一个想法进来，一个已验证的 PR 出去；要画图、要查技术栈、要品牌级配图、要审安全、要给系统做体检，一个仓库全包。
+> 把 gstack 的**角色制工程流水线**、superpowers 的**研发纪律**，以及 archify、ECC（234 个代码/IT 技能）、diagram-design（45 种品牌图型）、Cloudflare security-audit（对抗式安全审计）、theater-detection-audit（壳检测）、caveman（会话输出压缩）**合成一个 skill**。
+> 一个想法进来，一个已验证的 PR 出去；要画图、要查技术栈、要品牌级配图、要审安全、要给系统做体检、要说话简短，一个仓库全包。
 
-[![version](https://img.shields.io/badge/version-0.0.9-blue.svg)](VERSION)
+[![version](https://img.shields.io/badge/version-0.0.10-blue.svg)](VERSION)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![skill](https://img.shields.io/badge/format-agent--skill-8A2BE2.svg)](SKILL.md)
 
@@ -29,7 +29,7 @@ Think → Spec → Plan → Build → Review → Test → Ship → Reflect
 | 弱项 | 依赖 bun 编译的二进制与浏览器包，重；命令 30+ 个，记不住 | 角色视角弱，容易变成"一个人埋头写" |
 | 本仓库做法 | 取**骨架与角色** | 取**纪律与执行细则** |
 
-结果：**19 个命令 + 234 个代码/IT 技能（ECC）+ 双绘图引擎（archify / diagram-design）+ grill 决策护栏 + ub-mode 工程纪律基线 + skill-creator 造技能引擎 + security-audit 对抗式安全审计 + 系统体检/自修复闭环，13 道门禁，0 运行时依赖**。纯 Markdown + POSIX shell（skill-creator 的评测脚本为 Python、security-audit 的两个校验器借 Node 内置模块，与既有 archify_lite.py 同列，均零外部依赖）。
+结果：**20 个命令 + 234 个代码/IT 技能（ECC）+ 双绘图引擎（archify / diagram-design）+ grill 决策护栏 + ub-mode 工程纪律基线 + skill-creator 造技能引擎 + security-audit 对抗式安全审计 + 系统体检/自修复闭环 + caveman 会话输出压缩，13 道门禁，0 运行时依赖**。纯 Markdown + POSIX shell（skill-creator 的评测脚本为 Python、security-audit 的两个校验器借 Node 内置模块，与既有 archify_lite.py 同列，均零外部依赖）。
 
 ## 安装
 
@@ -74,6 +74,7 @@ bash scripts/verify.sh
 | `/cht-make-skill` | 造技能 | "造技能 / 帮我做个 skill / 优化这个 skill"——从零造 skill、改进、评测打分、描述调优（Anthropic skill-creator，Apache-2.0） |
 | `/cht-audit` | 安全审计 | "安全审计 / 找漏洞 / 渗透 / audit"——六阶段对抗式审计、verdict 纪律、两个零依赖 Node 校验器（Cloudflare security-audit，MIT）；与 `/cht-make-skill` 形成"造→审→发"闭环 |
 | `/cht-doctor` | 系统体检 | "全面检测 / 哪些没连通 / 哪些是壳 / 有没有假数据 / 自动修一下"——七步闭环：盘点→扫壳→查断链→判合理→P0/P1/P2 分级→修复→四层验证门（theater-detection-audit 壳检测 + 内置检测技能编排） |
+| `/cht-caveman` | 输出压缩 | "caveman 模式 / 说话简短点 / 少废话"——三档（默认 / ultra / 文言），砍客套但技术事实逐字保留；**默认关闭，只压缩旁白，产出物与验证证据永不压缩** |
 
 ## 项目里会产生什么
 
@@ -103,7 +104,7 @@ docs/cht/
 
 ## 与上游的关系
 
-本仓库是**七套 MIT 项目 + 一套 Apache-2.0 引擎**的**方法论合并、嫁接与重写**（ub-mode 为署名影响、skill-creator 为 Apache-2.0，见上表），署名与许可全文见 [NOTICE.md](NOTICE.md)：
+本仓库是**七套 MIT 项目 + 两套 Apache-2.0 引擎**的**方法论合并、嫁接与重写**（ub-mode 为署名影响、skill-creator 与 caveman 为 Apache-2.0，见上表），署名与许可全文见 [NOTICE.md](NOTICE.md)：
 
 | 来源 | 作用 | 在本仓库的位置 |
 |---|---|---|
@@ -114,6 +115,7 @@ docs/cht/
 | [mattpocock/skills](https://github.com/mattpocock/skills)（MIT） | 决策护栏（grill-me / grilling） | 嫁接入 `skills/grill-me` + `skills/grilling`，`/cht-grill` 入口，防 AI 擅自做主 |
 | [cloudflare/security-audit-skill](https://github.com/cloudflare/security-audit-skill)（MIT，5.7 万★） | 对抗式安全审计 | 整包嫁接入 `skills/security-audit/`（含 LICENSE），`/cht-audit` 入口，与 skill-creator 形成"造→审→发"闭环 |
 | [DNYoussef/ai-chrome-extension → theater-detection-audit](https://github.com/DNYoussef/ai-chrome-extension/tree/main/.claude/skills/theater-detection-audit)（MIT） | 壳检测（占位/假数据/stub） | 整包嫁接入 `skills/theater-detection-audit/`，作为 `/cht-doctor` 七步闭环的"扫壳"引擎 |
+| [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman)（**Apache-2.0**，12 万★） | 会话输出压缩 | 三档嫁接入 `skills/caveman` + `skills/ultracave` + `skills/megacave`（含 LICENSE + 上游 NOTICE），`/cht-caveman` 入口，默认关闭 |
 | [anthropics/skills → skill-creator](https://github.com/anthropics/skills/tree/main/skills/skill-creator)（**Apache-2.0**，18.7 万★） | 造技能引擎 | 完整引擎嫁接入 `skills/skill-creator/`（含 LICENSE.txt），`/cht-make-skill` 入口 |
 
 **影响来源（非 MIT，未获再分发授权，仅作方法引用）**：[unclebob/ub-mode](https://github.com/unclebob/ub-mode)（★★★★ 6.4k，未声明许可证）——其"三段式工作法 + 量化质量门"启发了 `references/18-engineering-discipline.md` 与 `/cht-ub`，内容为**原创重述并署名**，未复制其文件；门禁工具 crapper/dryer/mutator（0BSD）仅作外链指针。
@@ -125,4 +127,4 @@ docs/cht/
 
 ## 许可
 
-主许可 **MIT**，见 [LICENSE](LICENSE)。其中 `skills/skill-creator/` 为 **Apache-2.0**（Anthropic PBC），随目录附带其 `LICENSE.txt`——保留该文件、改动须标注、再分发须附许可证。详见 [NOTICE.md](NOTICE.md)。
+主许可 **MIT**，见 [LICENSE](LICENSE)。其中 `skills/skill-creator/`（Anthropic PBC）与 `skills/caveman/`（Julius Brussee）为 **Apache-2.0**，随目录附带其 `LICENSE.txt` / `LICENSE` 与上游 `NOTICE`——保留这些文件、改动须标注、再分发须附许可证。详见 [NOTICE.md](NOTICE.md)。

@@ -1,12 +1,12 @@
 ---
 name: cht-full-skill
 description: 全栈交付方法论（研发全流程技能）。把模糊需求变成已合并、已部署、已验证的生产代码：六问逼出真需求 → 可执行 spec → 计划分解 → TDD 逐任务实现 → 分级代码评审 → 真实环境 QA → 发布门禁。内含 CEO / 产品经理 / 架构师 / 设计师 / 工程师 / 评审 / QA / 发布 八个角色视角，以及并行 worktree 与复盘记忆。Use when 用户要做需求梳理、写规格、出技术方案、拆任务、开发功能、修 bug、做代码评审、QA 测试、发版上线、写 skill，或说"帮我把这个做出来""这个功能怎么做""review 一下""测试一下""上线"。适用于 TDD、子代理开发、调试、重构、多代理并行、遗留代码维护等场景。
-version: "0.2.0"
+version: "0.3.0"
 license: MIT
 homepage: https://github.com/cuohuatang/cht-full-skill
 ---
 
-# cht-full-skill · V0.2.0
+# cht-full-skill · V0.3.0
 
 > 一句话：**它不是工具箱，是一支工程团队的工作流。** 一个想法进来，一个已验证的 PR 出去。
 
@@ -41,6 +41,7 @@ homepage: https://github.com/cuohuatang/cht-full-skill
 - 要**给一个已开发大半、逻辑较乱的系统做全面体检**（"全面检测 / 哪些没连通 / 哪些是壳 / 有没有假数据 / 自动修一下 / 上线前 hardening"）——`/cht-doctor`，闭环见 `references/23-system-doctor.md`
 - 要**压缩会话输出、砍客套废话**（"caveman 模式 / 说话简短点 / 少废话 / 别写小作文 / be brief"）——`/cht-caveman`，三档与边界见 `references/24-caveman.md`（**默认关闭；只压缩旁白，产出物与验证证据永不压缩**）
 - 要**优化提示词、把场景和用途变成可直接用的 prompt**（"我不会写提示词 / 优化这段提示词 / 写个 prompt / 帮我把需求说清楚 / 这段要不要优化"）——`/cht-prompt`，闸门与双版本见 `references/25-prompt-architect.md`（**阶段 -1 前置关卡：先判断该不该优化，禁止优化的一律原样透传**）
+- 要**把代码库变成可查询的图、查关系的来源**（"把代码变成图 / 建代码知识图谱 / 查图别 grep / 这条关系从哪来的 / 图存哪 / 溯源"）——`/cht-graph`，两段式流水线与衔接契约见 `references/26-code-graph-pipeline.md`（**Graphify 建图 + Semantica 存查溯源；两个引擎都不捆绑，cht 只做桥接**）
 
 ---
 
@@ -105,6 +106,7 @@ Think → Spec → Plan → Build → Review → Test → Ship → Reflect
 | 用户的话 | 进入 | 别做 |
 |---|---|---|
 | **任何任务型输入（先过阶段 -1）** | `/cht-prompt` 闸门 → 该优化的出双版本，禁止优化的原样透传 | 不要把所有输入都优化一遍；本关不追问需求 |
+| "把代码变成图 / 这条关系从哪来的" | `/cht-graph` — 先 `--env` 再 `--plan`，未装引擎只给方法论 | 不要把 `lineage.json` 当成已入库的证据 |
 | "我想做一个……" / "能不能加个……" | `/cht-spec --discover` — 先逼问，别急着答应 | 不要立刻列出技术方案 |
 | "需求是这样的：……（已很具体）" | `/cht-spec` 直接落文档，快速确认后进 Plan | 不要重复追问已知信息 |
 | "出个方案 / 怎么实现 / 用什么技术" | `/cht-plan` | 不要顺手把代码写了 |
@@ -164,6 +166,7 @@ Think → Spec → Plan → Build → Review → Test → Ship → Reflect
 | `references/23-system-doctor.md` | **系统体检与自修复闭环（T0 检测技能组）**：四类问题映射、七步闭环、P0/P1/P2 分级、四层验证门、插件化系统特殊注意点 | 系统做完了大半要体检、查断链/查空壳、上线前 hardening 时 |
 | `references/24-caveman.md` | **会话输出压缩（caveman，Apache-2.0）**：三档、九条规则、7 条破例、与三条铁律的冲突边界、真实实测数据（3%/35%/9%，非 65%） | 用户要"简短点 / caveman 模式 / 别写小作文"时 |
 | `references/25-prompt-architect.md` | **提示词架构师（阶段 -1 前置闸门）**：规格完整度裁决、5 类禁止 + 1 票否决、灰区规则、四步优化与双版本、全 Agent 适配矩阵、10 条无效指令自检、与 cht 各机制的边界、红牌 | 用户说"优化提示词 / 我不会写提示词"、或任何任务型输入进入流水线之前 |
+| `references/26-code-graph-pipeline.md` | **代码图流水线（Graphify → Semantica）**：两段式委托、实测 `graph.json` 结构、三态 → W3C PROV-O 衔接契约、无官方集成的诚实标注、硬门槛与降级、与 cht 各机制边界、红牌 | 用户要"把代码变成图 / 查关系来源 / 溯源"、或接手陌生大代码库、审变更影响面时 |
 
 产出物模板在 `assets/templates/`：`SPEC.md`、`PLAN.md`、`REVIEW.md`、`QA-REPORT.md`、`RETRO.md`、`LEDGER.md`、`ROLE-BRIEF.md`。
 
@@ -390,7 +393,7 @@ Agent  ：/cht-ship                ← PR + 发布说明 + 回滚路径
 
 ## 来源与许可
 
-本仓库由**七套 MIT 项目 + 两套 Apache-2.0 引擎**合成，方法论归属原作者：
+本仓库由**八套 MIT 项目 + 三套 Apache-2.0 引擎**合成，方法论归属原作者：
 
 - [garrytan/gstack](https://github.com/garrytan/gstack) — Garry Tan，YC。角色制工程流水线。
 - [obra/superpowers](https://github.com/obra/superpowers) — Jesse Vincent。可组合 skill 的研发方法论。
@@ -401,9 +404,11 @@ Agent  ：/cht-ship                ← PR + 发布说明 + 回滚路径
 - [cloudflare/security-audit-skill](https://github.com/cloudflare/security-audit-skill) — **Cloudflare, Inc.，MIT**，约 5.7 万★。整包嫁接其对抗式安全审计技能到 `skills/security-audit/`（SKILL.md + 6 阶段文档 + ATTACK-CLASSES + 10 个领域伴侣 + report-schema.json + 2 个零依赖 `.cjs` 校验器 + LICENSE），作为 `/cht-audit` 引擎，见"安全审计"段与 `references/19-security-audit.md`。
 - [DNYoussef/ai-chrome-extension → theater-detection-audit](https://github.com/DNYoussef/ai-chrome-extension/tree/main/.claude/skills/theater-detection-audit) — **MIT**。整包嫁接其"壳检测"引擎到 `skills/theater-detection-audit/`（SKILL.md + 流程图 + LICENSE），作为 `/cht-doctor` 的扫壳引擎，见"系统体检与自修复"段与 `references/23-system-doctor.md`。
 - [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) — **Julius Brussee，Apache-2.0**，约 12 万★。整包嫁接三档纯文本技能到 `skills/caveman/` + `skills/ultracave/` + `skills/megacave/`（含 LICENSE + 上游 NOTICE），作为 `/cht-caveman` 引擎，见"会话输出压缩"段与 `references/24-caveman.md`。
+- [Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify) — **Safi Shamsi and the Graphify contributors，Apache-2.0**，API 实测 148,108★。嫁入 3 份纯文本规范 + `LICENSE` / `NOTICE` / `LICENSE-MIT` 到 `skills/graphify/`（原样未改），作为代码图流水线第 1 段「把代码变成图」；**引擎不捆绑**，见 `references/26-code-graph-pipeline.md`。
+- [semantica-agi/semantica](https://github.com/semantica-agi/semantica) — **MIT**，API 实测 14,616★。嫁入 `SKILL.md` + `skills/semantica/references/glossary.md` + `LICENSE`（原样未改），作为第 3 段「把图存好、搜得到、查得清来源」的 W3C PROV-O 方法论来源；**引擎不捆绑**。两者**无官方集成**，衔接契约由 cht 定义。
 
 > **影响来源（非 MIT，未获再分发授权，仅作方法引用）**：Robert C. Martin 的 [`ub-mode`](https://github.com/unclebob/ub-mode)（★★★★ 6.4k，未声明许可证）。其"三段式工作法 + 量化质量门（CRAP<10 / 重复度<0.8 / 变异测试 0 存活）"启发了 `references/18-engineering-discipline.md` 与 `/cht-ub`；内容为**原创重述并署名**，未复制其 `SKILL.md`。同伴门禁工具 crapper/dryer/mutator（0BSD）仅作外链指针，不在本仓库内分发。
 
-> **原创输入（非第三方开源，不计入许可来源）**：阶段 -1 提示词架构师方法论由本仓库用户提供，经结构化整理、边界划死与可执行化，落为 `references/25-prompt-architect.md`、`/cht-prompt` 与 `scripts/prompt_gate.sh`。未复制任何第三方代码，许可计数仍为七套 MIT + 两套 Apache-2.0。
+> **原创输入（非第三方开源，不计入许可来源）**：阶段 -1 提示词架构师方法论由本仓库用户提供，经结构化整理、边界划死与可执行化，落为 `references/25-prompt-architect.md`、`/cht-prompt` 与 `scripts/prompt_gate.sh`。未复制任何第三方代码，**不计入许可来源**。
 
-本仓库为**七套 MIT 项目 + 两套 Apache-2.0（skill-creator、caveman）**的**方法论合并、嫁接与重写**，外加一处**署名的影响（ub-mode）**；不含上游的 bun 编译工具链、浏览器二进制、医疗/金融/法律/科研/创意等非技术领域的细分技能，也不含 diagram-design 的示例 HTML 与开发期构建脚本、ub-mode 的原文文件；纯 Markdown + POSIX shell（skill-creator 的评测脚本为 Python，与既有 `scripts/archify_lite.py` 同列，不引入额外运行时），任何支持 skill 的 agent 都能用。详见 `NOTICE.md`。
+本仓库为**八套 MIT 项目 + 三套 Apache-2.0（skill-creator、caveman、graphify）**的**方法论合并、嫁接与重写**，外加一处**署名的影响（ub-mode）**；不含上游的 bun 编译工具链、浏览器二进制、医疗/金融/法律/科研/创意等非技术领域的细分技能，也不含 diagram-design 的示例 HTML 与开发期构建脚本、ub-mode 的原文文件；纯 Markdown + POSIX shell（skill-creator 的评测脚本为 Python，`scripts/graph_bridge.py` 亦仅用 Python 标准库，与既有 `scripts/archify_lite.py` 同列，不引入额外运行时），任何支持 skill 的 agent 都能用。Graphify 与 Semantica 两个引擎均为**用户可选安装**，cht 本体不依赖、不 import。详见 `NOTICE.md`。

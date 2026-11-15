@@ -1,6 +1,6 @@
 # NOTICE · 来源与衍生说明
 
-本仓库（`cht-full-skill`）是**七份 MIT + 两份 Apache-2.0** 许可方法论作品的**合并、嫁接与重写**，外加一处**署名影响（ub-mode）**。此处说明来源、
+本仓库（`cht-full-skill`）是**八份 MIT + 三份 Apache-2.0** 许可方法论作品的**合并、嫁接与重写**，外加一处**署名影响（ub-mode）**。此处说明来源、
 保留了什么、去掉了什么，以及为什么。
 
 ## 上游
@@ -234,6 +234,24 @@
 - **商标**：上游 `TRADEMARKS.md` 声明 "Caveman" 及 logo 为 Julius Brussee 的商标，Apache-2.0 **不授予商标权**。本仓库仅作**署名性引用**（"嫁接自 JuliusBrussee/caveman"），不用于命名产品、不暗示背书或赞助。
 - **Apache-2.0 合规**：`LICENSE`（Apache-2.0 全文）与**上游 `NOTICE`**（版权行 + 第三方归因）已随 `skills/caveman/` 一并带入，勿删；再分发须附许可证。凡含 caveman 的部分以 Apache-2.0 为准。
 
+### 11. graphify（嫁接来源 · 代码知识图谱 · Apache-2.0）
+
+上游：[Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify)（**Apache-2.0**，API 实测 148,108★，默认分支 `v8`）。版权：Safi Shamsi and the Graphify contributors，见随附上游 `NOTICE`。
+
+- **嫁入（原样未改）**：`skills/graphify/references/` 下 `extraction-spec.md`（边提取规范与 JSON schema）、`query.md`（query / path / explain）、`how-it-works.md`（三遍扫描、置信档、图格式）；`LICENSE`（Apache-2.0 全文）、`NOTICE`（上游）、`LICENSE-MIT`（历史文本）
+- **未嫁**：Python 引擎、`worked/` 样例、`graphify/skills/` 其余 14 个宿主变体、`tools/skillgen`、Docker / CI
+- 引擎需 `uv tool install graphifyy`（**包名双 y**）+ Python 3.10+ + tree-sitter；**cht 不捆绑、不 import**
+- 真实 `graph.json` 为 NetworkX node-link（`nodes` + `links`），三态标签 `EXTRACTED` / `INFERRED` / `AMBIGUOUS` 由本仓库桥接脚本消费
+
+### 12. semantica（嫁接来源 · 上下文图与溯源 · MIT）
+
+上游：[semantica-agi/semantica](https://github.com/semantica-agi/semantica)（**MIT**，API 实测 14,616★）。版权：Copyright (c) 2026 Semantica。
+
+- **嫁入（原样未改）**：`skills/semantica/SKILL.md`（能力地图）、`references/glossary.md`（Context Graph / Decision / Provenance 等术语）、`LICENSE`（MIT 全文）
+- **未嫁 / 原创重述**：Python 包、`semantica_mcp/`，以及大体量 `docs/guides/provenance.md`(35KB)、`decision-intelligence.md`(32KB)——满是引擎调用代码，只把 W3C PROV-O 溯源、决策一等节点、冲突检测、双时态等**方法论原创重述**进 `references/26-code-graph-pipeline.md` 并在此署名
+- 引擎需 `pip install semantica`；生产另需 Docker/Compose + RDF（Oxigraph / Jena / RDF4J）或 LPG（Neo4j / FalkorDB / AGE / Neptune）图存储；**cht 不捆绑、不 import**
+- ⚠️ 与 graphify **无官方集成**；三态 → PROV-O 的映射是 cht 定义的适配约定，不是任何一方的官方行为
+
 ## 本仓库新增的部分
 
 以下内容不属于任何上游，为本仓库原创整理：
@@ -244,11 +262,12 @@
 - 反模式总表（`SKILL.md` 末尾）
 - 全部 shell 脚本（`scripts/`）与产出物模板（`assets/templates/`）
 - 中文重写与"可执行清单化"改写
-- **阶段 -1 提示词架构师**：规格完整度裁决、禁止优化硬闸门、双版本优化规范、`/cht-prompt` 入口与 `scripts/prompt_gate.sh` 闸门脚本（`references/25-prompt-architect.md`）——由**用户在本项目中提供的原创提示词**整理、结构化与可执行化而成，未复制任何第三方代码，**不属于上游作品、不计入许可来源**，故上方许可计数（七份 MIT + 两份 Apache-2.0）保持不变
+- **阶段 -1 提示词架构师**：规格完整度裁决、禁止优化硬闸门、双版本优化规范、`/cht-prompt` 入口与 `scripts/prompt_gate.sh` 闸门脚本（`references/25-prompt-architect.md`）——由**用户在本项目中提供的原创提示词**整理、结构化与可执行化而成，未复制任何第三方代码，**不属于上游作品、不计入许可来源**，故不计入许可来源
+- **两段式代码图流水线**：`references/26-code-graph-pipeline.md` 的衔接契约（三态 → W3C PROV-O）、`scripts/graph_bridge.py` 桥接脚本、`commands/cht-graph.md` 六态入口——均为本仓库原创；上游原文与许可文件仅放在 `skills/graphify/`、`skills/semantica/`
 
 ## 许可合规
 
-九份上游中**七份为 MIT、两份为 Apache-2.0**（skill-creator、caveman）；ub-mode 为署名影响、非 MIT、未复制其文件，不在此列。MIT 要求保留版权声明与许可声明，本仓库在 `LICENSE` 文件末尾完整保留了原始版权声明；**Apache-2.0 要求保留各组件的 LICENSE 与任何 NOTICE、对原文件的修改须标注、再分发须附许可证**——`skills/skill-creator/LICENSE.txt` 与 `skills/caveman/LICENSE` + `skills/caveman/NOTICE` 均已随目录带入，且两个组件的 SKILL.md 均为原样复制、未作修改。嫁接的 ECC 技能文件内亦保留其 `metadata.origin: ECC` 标注。
+十一份上游中**八份为 MIT、三份为 Apache-2.0**（skill-creator、caveman、graphify）；ub-mode 为署名影响、非 MIT、未复制其文件，不在此列。MIT 要求保留版权声明与许可声明，本仓库在 `LICENSE` 文件末尾完整保留了原始版权声明；**Apache-2.0 要求保留各组件的 LICENSE 与任何 NOTICE、对原文件的修改须标注、再分发须附许可证**——`skills/skill-creator/LICENSE.txt`、`skills/caveman/LICENSE` + `skills/caveman/NOTICE`、`skills/graphify/LICENSE` + `skills/graphify/NOTICE`（另附 `LICENSE-MIT` 历史文本）均已随目录带入；`skills/semantica/LICENSE`（MIT）亦已带入。本次新增的 9 个上游文件与原仓库 sha256 逐一比对一致、**原样未改**。嫁接的 ECC 技能文件内亦保留其 `metadata.origin: ECC` 标注。
 衍生作品主许可以 MIT 发布。
 
 如果上游作者认为此处署名或引用方式需要调整，请开 issue，会立即修改。
@@ -256,6 +275,6 @@
 ## 引用建议
 
 ```
-cht-full-skill (MIT，含 Apache-2.0 组件 skill-creator / caveman) — 方法论合并自 garrytan/gstack、obra/superpowers，并嫁接 affaan-m/ECC 的 234 个代码/IT 技能、cathrynlavery/diagram-design 可视化引擎、mattpocock/skills 的 grill-me / grilling 决策护栏、cloudflare/security-audit-skill 的对抗式安全审计技能（MIT，Cloudflare, Inc.）、DNYoussef/ai-chrome-extension 的 theater-detection-audit 壳检测引擎（MIT）、anthropics/skills 的 skill-creator 造技能引擎（Apache-2.0，Anthropic PBC）、JuliusBrussee/caveman 会话输出压缩技能（Apache-2.0，Julius Brussee）；工程纪律受 unclebob/ub-mode 启发（未获再分发授权，仅作方法引用、原创重述并署名）
+cht-full-skill (MIT，含 Apache-2.0 组件 skill-creator / caveman / graphify) — 方法论合并自 garrytan/gstack、obra/superpowers，并嫁接 affaan-m/ECC 的 234 个代码/IT 技能、cathrynlavery/diagram-design 可视化引擎、mattpocock/skills 的 grill-me / grilling 决策护栏、cloudflare/security-audit-skill 的对抗式安全审计技能（MIT，Cloudflare, Inc.）、DNYoussef/ai-chrome-extension 的 theater-detection-audit 壳检测引擎（MIT）、anthropics/skills 的 skill-creator 造技能引擎（Apache-2.0，Anthropic PBC）、JuliusBrussee/caveman 会话输出压缩技能（Apache-2.0，Julius Brussee）、Graphify-Labs/graphify 代码知识图谱规范（Apache-2.0，Safi Shamsi and the Graphify contributors）、semantica-agi/semantica 上下文图与溯源方法论（MIT，Semantica）——后两者引擎不捆绑，衔接契约由本仓库原创定义；工程纪律受 unclebob/ub-mode 启发（未获再分发授权，仅作方法引用、原创重述并署名）
 https://github.com/cuohuatang/cht-full-skill
 ```

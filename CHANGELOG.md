@@ -2,6 +2,24 @@
 
 本仓库遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## V0.3.0 — 2026-11-15（已推送 GitHub）
+
+把 **Graphify**（把代码变成图）与 **Semantica**（把图存好、搜得到、查得清来源）**合起来**嫁接入 cht，做成两段式代码图流水线。许可计数由「七份 MIT + 两份 Apache-2.0」更新为「**八份 MIT + 三份 Apache-2.0**」（新增 Graphify Apache-2.0、Semantica MIT）。
+
+**先纠一个前提**：两个上游之间**没有官方集成**——核查 `Graphify-Labs/graphify` 仓库内全部 `semantica` 命中，均为 `semantically_similar_to`（语义相似边）的子串，不是项目引用。下面的衔接契约是 **cht 定义的**，不是任何一方官方行为，已全程诚实标注。
+
+- **嫁法定性（沿用 `本周涨星Top项目-嫁接方案.md` 方案 3 的纪律）**：两者都是重运行时引擎——Graphify 需 Python 3.10+ / uv / `graphifyy`（双 y）/ tree-sitter，Semantica 需 Python 包 + RDF/LPG 图存储（生产还要 Docker/K8s）——与「纯 Markdown + 0 第三方依赖」硬冲突，**引擎一律不捆绑**。cht 只嫁纯文本契约、环境检测、格式桥接与命令编排
+- **嫁入 9 个上游文件（原样未改，sha256 逐一比对一致）**：`skills/graphify/`（**Apache-2.0**，`extraction-spec.md` / `query.md` / `how-it-works.md` + `LICENSE` + `NOTICE` + `LICENSE-MIT`）、`skills/semantica/`（**MIT**，`SKILL.md` + `references/glossary.md` + `LICENSE`）
+- **未嫁**：Graphify Python 引擎 / `worked/` 样例 / 其余 14 个宿主 skill 变体；Semantica Python 包、`provenance.md`(35KB) 与 `decision-intelligence.md`(32KB)——满是引擎调用代码，整包塞进纯 Markdown 仓库只会制造无效指令，核心方法论改为本仓库**原创重述并署名**
+- **新增 `references/26-code-graph-pipeline.md`**：两段式流水线、**实测** `graph.json` 结构、三态 → W3C PROV-O 映射契约、硬门槛与降级、与 cht 各机制边界、8 条红牌
+- **新增 `scripts/graph_bridge.py`**（Python **标准库**、0 第三方依赖，不 import 两个引擎）：`--env` 只检测不安装 / `--plan` 四段命令 / `--verify` 结构校验 / `--bridge` 生成 `lineage.json` / `--selftest` **19 例**回归
+- **衔接契约**：`EXTRACTED` → `prov:wasDerivedFrom`（`source_file#source_location`）直接入图；`INFERRED` → `prov:wasGeneratedBy` 入图但保留置信档；`AMBIGUOUS` / 非法标签 → **只进复核队列，绝不混入正式图**（与 security-audit 的 `needs_validation` 纪律同源）
+- **用上游真实数据校准过两次**：① 真实 `graph.json` 是 NetworkX node-link、键名 **`links` 不是 `edges`**（脚本两者兼容）；② `httpx` 样例 330 边中 **156 条 INFERRED 不带 `confidence_score`**——`extraction-spec.md` 的 REQUIRED 只约束 LLM 抽取子 Agent，**AST 代码路径不带**。故 `--verify` 降级为警告而非阻断，桥接保持 `null`、标 `inferred_unscored`，**绝不猜一个 0.5**。两份真实样例 `worked/httpx`(144 节点/330 边) 与 `worked/mixed-corpus`(22/38) 验证均 `ok=true`
+- **新增 `commands/cht-graph.md`**：六态入口（默认 status / pipeline / build / bridge / store / query）；未装引擎时只给方法论与安装指引，不假装已建图
+- 同步主 `SKILL.md`（加载条件、路由、参考索引 26、来源与许可）、README（命令数 21 → **22**、来源表、许可段）、`NOTICE.md`（新增第 11/12 节、许可计数、引用建议）、`VERSION` 及 frontmatter 至 `0.3.0`
+
+> 注：`lineage.json` 是**中间格式**，不是已入库的图；真正落库仍需按映射在 Semantica 摄入侧写适配代码。`--verify` 输出与桥接产物**都不是验证证据**，不得据此宣称「图已入库且查得清」（三条铁律）。
+
 ## V0.2.0 — 2026-11-15（已推送 GitHub）
 
 嫁接**提示词架构师**为**阶段 -1 前置闸门**（方法论由本仓库用户提供，经结构化整理与可执行化；**非第三方开源，不引入新许可**，许可计数仍为七份 MIT + 两份 Apache-2.0）。

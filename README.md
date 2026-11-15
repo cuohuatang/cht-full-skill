@@ -1,9 +1,9 @@
-# cht-full-skill · V0.1.0
+# cht-full-skill · V0.2.0
 
-> 把 gstack 的**角色制工程流水线**、superpowers 的**研发纪律**，以及 archify、ECC（234 个代码/IT 技能）、diagram-design（45 种品牌图型）、Cloudflare security-audit（对抗式安全审计）、theater-detection-audit（壳检测）、caveman（会话输出压缩）**合成一个 skill**。
-> 一个想法进来，一个已验证的 PR 出去；要画图、要查技术栈、要品牌级配图、要审安全、要给系统做体检、要说话简短，一个仓库全包。
+> 把 gstack 的**角色制工程流水线**、superpowers 的**研发纪律**，以及 archify、ECC（234 个代码/IT 技能）、diagram-design（45 种品牌图型）、Cloudflare security-audit（对抗式安全审计）、theater-detection-audit（壳检测）、caveman（会话输出压缩）、**阶段 -1 提示词架构师**（不会写提示词也能开工）**合成一个 skill**。
+> 一个想法进来，一个已验证的 PR 出去；要画图、要查技术栈、要品牌级配图、要审安全、要给系统做体检、要说话简短、要把场景变成能用的提示词，一个仓库全包。
 
-[![version](https://img.shields.io/badge/version-0.1.0-blue.svg)](VERSION)
+[![version](https://img.shields.io/badge/version-0.2.0-blue.svg)](VERSION)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![skill](https://img.shields.io/badge/format-agent--skill-8A2BE2.svg)](SKILL.md)
 
@@ -29,7 +29,7 @@ Think → Spec → Plan → Build → Review → Test → Ship → Reflect
 | 弱项 | 依赖 bun 编译的二进制与浏览器包，重；命令 30+ 个，记不住 | 角色视角弱，容易变成"一个人埋头写" |
 | 本仓库做法 | 取**骨架与角色** | 取**纪律与执行细则** |
 
-结果：**20 个命令 + 234 个代码/IT 技能（ECC）+ 双绘图引擎（archify / diagram-design）+ grill 决策护栏 + ub-mode 工程纪律基线 + skill-creator 造技能引擎 + security-audit 对抗式安全审计 + 系统体检/自修复闭环 + caveman 会话输出压缩，13 道门禁，0 运行时依赖**。纯 Markdown + POSIX shell（skill-creator 的评测脚本为 Python、security-audit 的两个校验器借 Node 内置模块，与既有 archify_lite.py 同列，均零外部依赖）。
+结果：**21 个命令 + 阶段 -1 提示词闸门 + 234 个代码/IT 技能（ECC）+ 双绘图引擎（archify / diagram-design）+ grill 决策护栏 + ub-mode 工程纪律基线 + skill-creator 造技能引擎 + security-audit 对抗式安全审计 + 系统体检/自修复闭环 + caveman 会话输出压缩，13 道门禁，0 运行时依赖**。纯 Markdown + POSIX shell（skill-creator 的评测脚本为 Python、security-audit 的两个校验器借 Node 内置模块，与既有 archify_lite.py 同列，均零外部依赖）。
 
 ## 安装
 
@@ -54,6 +54,7 @@ bash scripts/verify.sh
 
 | 命令 | 阶段 | 你什么时候用它 |
 |---|---|---|
+| `/cht-prompt` | **阶段 -1** | **任何任务型输入先过这道闸门**——"我不会写提示词 / 优化这段 / 写个 prompt"；禁止优化的（寒暄、事实问答、翻译摘要、延续性修改、已点名技能或文件、只判断）**原样透传**；该优化的出**精简通用版 + 高阶顶配版**，自动适配 ChatGPT / Claude Code / 豆包 / DeepSeek / harness / Kimi |
 | `/cht-spec --discover` | Think | "我想做一个……" —— 先被六个问题问一遍 |
 | `/cht-spec` | Spec | 需求比较清楚了，落成可验收的 SPEC |
 | `/cht-plan` | Plan | 出方案、拆任务、定范围（含"砍掉什么"） |
@@ -124,6 +125,8 @@ docs/cht/
 - **包含**四套的方法论结构，重新组织为单一流水线，并改写为中文可执行清单。
 
 如果你想要完整的 gstack（含 `/browse`、`/qa` 真实浏览器驱动、`/cso` 安全审计等工具链），直接装上游；本仓库是"轻量、可移植、方法论优先"的路线。
+
+**原创输入（非第三方开源）**：阶段 -1 提示词架构师由本仓库用户提供的原创提示词整理而成，未复制第三方代码，不计入上表许可来源；详见 [NOTICE.md](NOTICE.md)「本仓库新增的部分」。
 
 ## 许可
 

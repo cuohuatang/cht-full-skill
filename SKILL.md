@@ -1,12 +1,12 @@
 ---
 name: cht-full-skill
 description: 全栈交付方法论（研发全流程技能）。把模糊需求变成已合并、已部署、已验证的生产代码：六问逼出真需求 → 可执行 spec → 计划分解 → TDD 逐任务实现 → 分级代码评审 → 真实环境 QA → 发布门禁。内含 CEO / 产品经理 / 架构师 / 设计师 / 工程师 / 评审 / QA / 发布 八个角色视角，以及并行 worktree 与复盘记忆。Use when 用户要做需求梳理、写规格、出技术方案、拆任务、开发功能、修 bug、做代码评审、QA 测试、发版上线、写 skill，或说"帮我把这个做出来""这个功能怎么做""review 一下""测试一下""上线"。适用于 TDD、子代理开发、调试、重构、多代理并行、遗留代码维护等场景。
-version: "0.1.0"
+version: "0.2.0"
 license: MIT
 homepage: https://github.com/cuohuatang/cht-full-skill
 ---
 
-# cht-full-skill · V0.1.0
+# cht-full-skill · V0.2.0
 
 > 一句话：**它不是工具箱，是一支工程团队的工作流。** 一个想法进来，一个已验证的 PR 出去。
 
@@ -40,6 +40,7 @@ homepage: https://github.com/cuohuatang/cht-full-skill
 - 要**做对抗式安全审计、渗透测试、找漏洞、审一个代码库**（"安全审计 / audit / 找漏洞 / 渗透"）——`/cht-audit`，引擎见 `references/19-security-audit.md`（与 `/cht-make-skill` 的"造技能"形成"造→审→发"闭环）
 - 要**给一个已开发大半、逻辑较乱的系统做全面体检**（"全面检测 / 哪些没连通 / 哪些是壳 / 有没有假数据 / 自动修一下 / 上线前 hardening"）——`/cht-doctor`，闭环见 `references/23-system-doctor.md`
 - 要**压缩会话输出、砍客套废话**（"caveman 模式 / 说话简短点 / 少废话 / 别写小作文 / be brief"）——`/cht-caveman`，三档与边界见 `references/24-caveman.md`（**默认关闭；只压缩旁白，产出物与验证证据永不压缩**）
+- 要**优化提示词、把场景和用途变成可直接用的 prompt**（"我不会写提示词 / 优化这段提示词 / 写个 prompt / 帮我把需求说清楚 / 这段要不要优化"）——`/cht-prompt`，闸门与双版本见 `references/25-prompt-architect.md`（**阶段 -1 前置关卡：先判断该不该优化，禁止优化的一律原样透传**）
 
 ---
 
@@ -55,7 +56,28 @@ homepage: https://github.com/cuohuatang/cht-full-skill
 
 ---
 
+## 前置关卡：提示词优化（阶段 -1 · V0.2.0 新增）
+
+> **每一次任务型输入进来，第一件事是过闸门，不是开工。** 用户只需说出使用场景和用途；本关把它变成可交给任意 Agent 的提示词。但**不是所有输入都优化**。
+
+| 裁决 | 输入 | 动作 |
+|---|---|---|
+| **禁止优化** | 寒暄致谢 / 纯事实问答·翻译·摘要 /「继续·换成蓝色」式延续性修改 / 已点名技能或文件 / 只要判断 / 用户说「别改」 | **原样透传：一个字不改，也不解释** |
+| **该优化** | 下任务、归纳总结、生成、安装、修复、转换、推送、产出文件等重要任务 | 补隐性需求 → **精简通用版 + 高阶顶配版** → 结构化 → 全 Agent 适配 |
+| 拿不准 | 灰区 | 默认透传 |
+
+- **裁决主轴**：输入本身是否已构成「完整可执行规格」。已构成就不缺东西，优化只会塞无效指令。
+- **硬闸门可执行**：`bash scripts/prompt_gate.sh --why "<输入>"`；`--selftest` 跑 26 例回归；0 依赖 POSIX sh，判 `AMBIGUOUS` 一律按透传处理。
+- **只补表达层，不补业务层**：可加角色 / 风格 / 输出格式 / 验收，**绝不擅自加功能或扩范围**（受 `grill-me` 护栏约束）；原话里的数字、路径、报错串、否定词逐字保留。
+- **不追问、不代替阶段 0**：本关只翻译输入；逼问真实需求是 `/cht-spec --discover` 六问的事，在本关之后。
+- **铁律优先**：优化后的提示词不得要求跳过验证；提示词写得再好也不等于任务完成。
+- 完整规则、灰区裁决、全 Agent 适配矩阵、10 条自检与红牌见 `references/25-prompt-architect.md`；入口 `/cht-prompt`。
+
+---
+
 ## 流水线
+
+**进入阶段 0 之前，所有输入先过上面的阶段 -1 闸门**：判为透传的直接按原话执行，判为优化的用优化后的提示词继续。
 
 ```
 Think → Spec → Plan → Build → Review → Test → Ship → Reflect
@@ -82,6 +104,7 @@ Think → Spec → Plan → Build → Review → Test → Ship → Reflect
 
 | 用户的话 | 进入 | 别做 |
 |---|---|---|
+| **任何任务型输入（先过阶段 -1）** | `/cht-prompt` 闸门 → 该优化的出双版本，禁止优化的原样透传 | 不要把所有输入都优化一遍；本关不追问需求 |
 | "我想做一个……" / "能不能加个……" | `/cht-spec --discover` — 先逼问，别急着答应 | 不要立刻列出技术方案 |
 | "需求是这样的：……（已很具体）" | `/cht-spec` 直接落文档，快速确认后进 Plan | 不要重复追问已知信息 |
 | "出个方案 / 怎么实现 / 用什么技术" | `/cht-plan` | 不要顺手把代码写了 |
@@ -140,6 +163,7 @@ Think → Spec → Plan → Build → Review → Test → Ship → Reflect
 | `references/22-skill-creator.md` | **造技能引擎（Anthropic skill-creator，Apache-2.0）**：从零造 skill / 改进 / 评测打分 / 描述调优，文件地图与宿主相关坑 | 用户说"造技能 / 帮我做个 skill / 优化这个 skill"时 |
 | `references/23-system-doctor.md` | **系统体检与自修复闭环（T0 检测技能组）**：四类问题映射、七步闭环、P0/P1/P2 分级、四层验证门、插件化系统特殊注意点 | 系统做完了大半要体检、查断链/查空壳、上线前 hardening 时 |
 | `references/24-caveman.md` | **会话输出压缩（caveman，Apache-2.0）**：三档、九条规则、7 条破例、与三条铁律的冲突边界、真实实测数据（3%/35%/9%，非 65%） | 用户要"简短点 / caveman 模式 / 别写小作文"时 |
+| `references/25-prompt-architect.md` | **提示词架构师（阶段 -1 前置闸门）**：规格完整度裁决、5 类禁止 + 1 票否决、灰区规则、四步优化与双版本、全 Agent 适配矩阵、10 条无效指令自检、与 cht 各机制的边界、红牌 | 用户说"优化提示词 / 我不会写提示词"、或任何任务型输入进入流水线之前 |
 
 产出物模板在 `assets/templates/`：`SPEC.md`、`PLAN.md`、`REVIEW.md`、`QA-REPORT.md`、`RETRO.md`、`LEDGER.md`、`ROLE-BRIEF.md`。
 
@@ -379,5 +403,7 @@ Agent  ：/cht-ship                ← PR + 发布说明 + 回滚路径
 - [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) — **Julius Brussee，Apache-2.0**，约 12 万★。整包嫁接三档纯文本技能到 `skills/caveman/` + `skills/ultracave/` + `skills/megacave/`（含 LICENSE + 上游 NOTICE），作为 `/cht-caveman` 引擎，见"会话输出压缩"段与 `references/24-caveman.md`。
 
 > **影响来源（非 MIT，未获再分发授权，仅作方法引用）**：Robert C. Martin 的 [`ub-mode`](https://github.com/unclebob/ub-mode)（★★★★ 6.4k，未声明许可证）。其"三段式工作法 + 量化质量门（CRAP<10 / 重复度<0.8 / 变异测试 0 存活）"启发了 `references/18-engineering-discipline.md` 与 `/cht-ub`；内容为**原创重述并署名**，未复制其 `SKILL.md`。同伴门禁工具 crapper/dryer/mutator（0BSD）仅作外链指针，不在本仓库内分发。
+
+> **原创输入（非第三方开源，不计入许可来源）**：阶段 -1 提示词架构师方法论由本仓库用户提供，经结构化整理、边界划死与可执行化，落为 `references/25-prompt-architect.md`、`/cht-prompt` 与 `scripts/prompt_gate.sh`。未复制任何第三方代码，许可计数仍为七套 MIT + 两套 Apache-2.0。
 
 本仓库为**七套 MIT 项目 + 两套 Apache-2.0（skill-creator、caveman）**的**方法论合并、嫁接与重写**，外加一处**署名的影响（ub-mode）**；不含上游的 bun 编译工具链、浏览器二进制、医疗/金融/法律/科研/创意等非技术领域的细分技能，也不含 diagram-design 的示例 HTML 与开发期构建脚本、ub-mode 的原文文件；纯 Markdown + POSIX shell（skill-creator 的评测脚本为 Python，与既有 `scripts/archify_lite.py` 同列，不引入额外运行时），任何支持 skill 的 agent 都能用。详见 `NOTICE.md`。

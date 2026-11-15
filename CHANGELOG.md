@@ -2,7 +2,18 @@
 
 本仓库遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
-## V0.0.10 — 2026-11-15（待推送 GitHub）
+## V0.1.0 — 2026-11-15（已推送 GitHub）
+
+**首个稳定里程碑**：`0.0.x` 的密集嫁接期收口，功能集冻结为「20 个命令 + 13 道门禁 + 0 运行时依赖」的完整流水线。**本版不新增功能、不新增技能文件**，只做版本跃迁与文档一致性整理。
+
+- **版本跃迁**：`VERSION`、`SKILL.md`（frontmatter + 标题）、`README.md`（标题 + badge）同步至 `0.1.0`
+- **CHANGELOG 时态统一**：V0.0.7 ~ V0.0.10 四条标题的状态标记统一为「（已推送 GitHub）」，与 V0.0.4 ~ V0.0.6 的历史写法一致——这四个版本当时均已成功推送并打 tag，旧措辞属发布后未回收的残留
+- **历史陈述一律保留**：各命令卡 `version` 仍是其**引入版本**（如 `cht-caveman` 保持 `0.0.10`）、`SKILL.md` 的「V0.0.10 新增」标注、各版本条目里「同步至 0.0.x」的原话，均不改写；`v0.0.10` 及更早的 tag **一律不重建**
+- 许可结构不变：**七份 MIT + 两份 Apache-2.0** + 一处署名影响（ub-mode）；未新增第三方代码，故 `NOTICE.md` 无改动
+
+> 注：语义化版本下 `0.0.x → 0.1.0` 表示从初始开发进入首个可稳定引用的里程碑，但 `0.x` 整体仍不承诺向后兼容；命令名、目录结构在后续版本仍可能调整。
+
+## V0.0.10 — 2026-11-15（已推送 GitHub）
 
 嫁接 **caveman** 会话输出压缩技能（[JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) v4.1.0，**Julius Brussee，Apache-2.0**，约 12 万★）。
 
@@ -18,7 +29,7 @@
 
 > 注：商标 "Caveman" 及 logo 为上游商标，Apache-2.0 不授予商标权；本仓库仅作署名性引用，不暗示背书或赞助。
 
-## V0.0.9 — 2026-11-09（待推送 GitHub）
+## V0.0.9 — 2026-11-09（已推送 GitHub）
 
 嫁接 **T0 系统检测/自修复技能组**，把上一轮给用户推荐的 5 组能力编排成 cht-full-skill 的统一入口，专治"已开发到 90%、逻辑乱、全插件化的系统"——查不合理逻辑 / 没连通 / 空壳 + 分级自修复。
 
@@ -32,7 +43,7 @@
 
 > 注：未嫁 Codebase Health Auditor / Millie Fix / heal-skill 三个外部技能——来自聚合站、仓库级许可未声明，按 ub-mode 一贯纪律只留外链指针、不复制文件；`heal-skill` 修的是 skill 库自身而非业务代码。自动修复只覆盖 P0，P1 逐条给 diff 确认，报价/金额类逻辑不闷头全量自动改。
 
-## V0.0.8 — 2026-11-03（待推送 GitHub）
+## V0.0.8 — 2026-11-03（已推送 GitHub）
 
 嫁接 **security-audit** 对抗式安全审计技能（[cloudflare/security-audit-skill](https://github.com/cloudflare/security-audit-skill)，**Cloudflare, Inc.，MIT**，约 5.7 万★）。**这是补全"本周涨星 Top5"方案里第一优先项，与 V0.0.7 的 skill-creator 形成"造技能 → 审安全 → 才发布"闭环。**
 
@@ -44,7 +55,7 @@
 
 > 注：三个硬门槛已在文档诚实标注——① 多 Agent 编排依赖宿主能否派子 Agent，不支持则降级单 Agent 手动走六阶段；② 要拿 `confirmed` 必须 OS 强制沙箱跑目标代码，无沙箱则证据停在 `needs_validation`，绝不假装能确认漏洞；③ 两个校验器借 Node ≥ 18 运行，不破坏"0 运行时依赖"底盘。
 
-## V0.0.7 — 2026-11-03（待推送 GitHub）
+## V0.0.7 — 2026-11-03（已推送 GitHub）
 
 嫁接 **skill-creator** 造技能引擎（[anthropics/skills → skill-creator](https://github.com/anthropics/skills/tree/main/skills/skill-creator)，**Anthropic PBC，Apache-2.0**，约 18.7 万★）。**这是补全上次"本周涨星 Top5"遗漏的第 3 项**。
 

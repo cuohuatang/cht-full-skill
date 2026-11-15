@@ -1,9 +1,9 @@
-# cht-full-skill · V0.0.10
+# cht-full-skill · V0.1.0
 
 > 把 gstack 的**角色制工程流水线**、superpowers 的**研发纪律**，以及 archify、ECC（234 个代码/IT 技能）、diagram-design（45 种品牌图型）、Cloudflare security-audit（对抗式安全审计）、theater-detection-audit（壳检测）、caveman（会话输出压缩）**合成一个 skill**。
 > 一个想法进来，一个已验证的 PR 出去；要画图、要查技术栈、要品牌级配图、要审安全、要给系统做体检、要说话简短，一个仓库全包。
 
-[![version](https://img.shields.io/badge/version-0.0.10-blue.svg)](VERSION)
+[![version](https://img.shields.io/badge/version-0.1.0-blue.svg)](VERSION)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![skill](https://img.shields.io/badge/format-agent--skill-8A2BE2.svg)](SKILL.md)
 

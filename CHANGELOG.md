@@ -2,6 +2,21 @@
 
 本仓库遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## V0.4.0 — 2026-11-19（已推送 GitHub）
+
+嫁接 **Ponytail** 极简代码纪律（[DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail)，**DietrichGebert，MIT**，API 实测 193,859★，**Ponytail 5**）——专治 AI 写代码的**过度设计**：没人要的抽象层、没人设的配置项、几行功能引一个依赖、为"以后"预留的扩展点。许可计数由「八份 MIT + 三份 Apache-2.0」更新为「**九份 MIT + 三份 Apache-2.0**」（新增 ponytail MIT）。
+
+> 用户口中的「Ponytail5」实为**版本号 5**（上游 `ponytail-gain` 基准卡自称 "the published agentic benchmark of Ponytail 5"），仓库名始终是 `DietrichGebert/ponytail`，已核实。
+
+- **嫁法定性（沿用 `本周涨星Top项目-嫁接方案.md` 方案 2 的"薄嫁"纪律并更新为整包纯文本嫁）**：核心规则是纯文本（`AGENTS.md` 2.7KB + 6 个纯文本 SKILL.md 合计约 21KB），**0 外部依赖，完美契合 cht**；JS hooks 运行时（`hooks/` 14 个文件）、各宿主 plugin 目录、`commands/*.toml`、`benchmarks/`、`__init__.py` 安装器**一律不嫁**
+- **嫁入 7 个上游文件（原样未改，sha256 逐一比对一致）**：`skills/ponytail/`（SKILL.md + LICENSE）、`skills/ponytail-review/`、`skills/ponytail-audit/`、`skills/ponytail-debt/`、`skills/ponytail-gain/`、`skills/ponytail-help/`（各 SKILL.md）
+- **新增 `references/20-lean-code.md`**：6 步决策阶梯中文重述（**纠正旧方案文档的"7 步"错误——上游实际是 6 步**）、三档强度（lite/full/ultra + off）、5 个配套 skill 分工、never-cut 清单、`shortcut:` 债务约定、诚实边界（禁编造本仓库节省数字）、与 `/cht-ub` 的过程/范围分工、冲突裁决与红牌
+- **新增 `commands/cht-lean.md`**：七态入口（默认阶梯 / lite / ultra / off / review / audit / debt / gain / help）
+- **与既有机制的分工，避免平行造轮子**：`/cht-ub` 管**过程纪律**（三段式 + 量化门），`/cht-lean` 管**范围纪律**（一开始就不写多余的）——互补不重叠；`/cht-doctor` 扫"假实现"（壳），`/cht-lean audit` 扫"真实现但多余"（肥肉），方向相反都值得跑
+- **冲突裁决**：**cht 三条铁律 > ponytail 懒规则**——"非平凡逻辑留一个小测试"是下限不是豁免；Never cut（信任边界校验/防数据丢失错误处理/安全/可访问性/用户要求的一切）与三条铁律同源；金额/安全/鉴权改动必须过 `/cht-doctor` 四层验证门
+- **同步**：`SKILL.md`（版本、加载条件、路由、范围纪律段、参考索引 20、来源）、`README.md`（23 个命令、来源表、许可段）、`NOTICE.md`（第 13 节 + 计数 + 引用建议）、`VERSION` → `0.4.0`
+- **命令数**：22 → **23**
+
 ## V0.3.0 — 2026-11-15（已推送 GitHub）
 
 把 **Graphify**（把代码变成图）与 **Semantica**（把图存好、搜得到、查得清来源）**合起来**嫁接入 cht，做成两段式代码图流水线。许可计数由「七份 MIT + 两份 Apache-2.0」更新为「**八份 MIT + 三份 Apache-2.0**」（新增 Graphify Apache-2.0、Semantica MIT）。

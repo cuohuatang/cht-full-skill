@@ -1,12 +1,12 @@
 ---
 name: cht-full-skill
 description: 全栈交付方法论（研发全流程技能）。把模糊需求变成已合并、已部署、已验证的生产代码：六问逼出真需求 → 可执行 spec → 计划分解 → TDD 逐任务实现 → 分级代码评审 → 真实环境 QA → 发布门禁。内含 CEO / 产品经理 / 架构师 / 设计师 / 工程师 / 评审 / QA / 发布 八个角色视角，以及并行 worktree 与复盘记忆。Use when 用户要做需求梳理、写规格、出技术方案、拆任务、开发功能、修 bug、做代码评审、QA 测试、发版上线、写 skill，或说"帮我把这个做出来""这个功能怎么做""review 一下""测试一下""上线"。适用于 TDD、子代理开发、调试、重构、多代理并行、遗留代码维护等场景。
-version: "0.3.0"
+version: "0.4.0"
 license: MIT
 homepage: https://github.com/cuohuatang/cht-full-skill
 ---
 
-# cht-full-skill · V0.3.0
+# cht-full-skill · V0.4.0
 
 > 一句话：**它不是工具箱，是一支工程团队的工作流。** 一个想法进来，一个已验证的 PR 出去。
 
@@ -37,6 +37,7 @@ homepage: https://github.com/cuohuatang/cht-full-skill
 - 要**画出版级、有品牌一致性的图**（架构图 / 流程图 / 时序图 / 甘特图 / 象限图 / 雷达图 / 重画 Mermaid·drawio·Excalidraw / 导出 PNG·SVG）——`/cht-diagram`，引擎见 `references/15-diagram-design.md`
 - 要**在动手前先被盘问、逼出真实需求、防止 agent 擅自做主**（"grill me / 先确认再动手 / 别急着做先问我"）——`/cht-grill`，引擎见 `references/16-grill-me.md`
 - 要**强制工程纪律、量化质量门、攻击前提式排查**（"工程纪律 / 量化门禁 / ub-mode / 先减后加"）——`/cht-ub`，纪律见 `references/18-engineering-discipline.md`
+- 要**治过度设计、把改动砍到最小、审一段代码或整个仓库有没有肥肉**（"别过度设计 / 最简方案 / yagni / 哪些能删 / 是不是写复杂了 / ponytail"）——`/cht-lean`，阶梯与边界见 `references/20-lean-code.md`（Ponytail 六 skill 原样嫁入，**懒 ≠ 少验证，三条铁律永远优先**）
 - 要**做对抗式安全审计、渗透测试、找漏洞、审一个代码库**（"安全审计 / audit / 找漏洞 / 渗透"）——`/cht-audit`，引擎见 `references/19-security-audit.md`（与 `/cht-make-skill` 的"造技能"形成"造→审→发"闭环）
 - 要**给一个已开发大半、逻辑较乱的系统做全面体检**（"全面检测 / 哪些没连通 / 哪些是壳 / 有没有假数据 / 自动修一下 / 上线前 hardening"）——`/cht-doctor`，闭环见 `references/23-system-doctor.md`
 - 要**压缩会话输出、砍客套废话**（"caveman 模式 / 说话简短点 / 少废话 / 别写小作文 / be brief"）——`/cht-caveman`，三档与边界见 `references/24-caveman.md`（**默认关闭；只压缩旁白，产出物与验证证据永不压缩**）
@@ -110,6 +111,7 @@ Think → Spec → Plan → Build → Review → Test → Ship → Reflect
 | "我想做一个……" / "能不能加个……" | `/cht-spec --discover` — 先逼问，别急着答应 | 不要立刻列出技术方案 |
 | "需求是这样的：……（已很具体）" | `/cht-spec` 直接落文档，快速确认后进 Plan | 不要重复追问已知信息 |
 | "出个方案 / 怎么实现 / 用什么技术" | `/cht-plan` | 不要顺手把代码写了 |
+| "别过度设计 / 最简方案 / 哪些能删" | `/cht-lean` — 先爬 6 步阶梯再动手；audit/review 只报告不改码 | 不要以"懒"为借口砍校验或用户要求的功能 |
 | "开始做 / 按计划执行" | `/cht-build` | 不要中途反复问"要继续吗" |
 | "review 一下 / 看看有没有问题" | `/cht-review` | 不要只夸不挑；不要沉默地全改 |
 | "跑不起来 / 报错了 / 测试挂了" | `/cht-debug` — 先定位根因 | **禁止**先猜着改代码 |
@@ -161,6 +163,7 @@ Think → Spec → Plan → Build → Review → Test → Ship → Reflect
 | `references/15-diagram-design.md` | **diagram-design 可视化引擎**：45 种品牌级图型、与 archify 的分工、文件地图、反模式 | 要画"好看+品牌一致"的图、重画/导出时 |
 | `references/16-grill-me.md` | **grill-me / grilling 决策护栏**：防 AI 擅自做主、动手前盘问逼共识，与三条铁律的关系 | 用户说"grill me / 先确认再动手"、需求模糊时 |
 | `references/18-engineering-discipline.md` | **工程纪律（ub-mode 启发）**：三段式工作法、攻击前提、先减后加、三道量化门（CRAP<10 / 重复度<0.8 / 变异 0 存活）作为推荐基线 | 要强制工程纪律、量化验收、根因排查时 |
+| `references/20-lean-code.md` | **极简代码（Ponytail，MIT）**：6 步决策阶梯、三档强度、review/audit/debt 三件套、never-cut 清单、`shortcut:` 债务约定、诚实边界（禁编造本仓库节省数字）、与 `/cht-ub` 分工与冲突裁决 | 用户说"别过度设计 / 最简方案 / 哪些能删"、或 AI 写代码越来越臃肿时 |
 | `references/19-security-audit.md` | **对抗式安全审计（Cloudflare security-audit，MIT）**：六阶段多 Agent 审计、verdict 语义、10 个领域伴侣、两个零依赖 Node 校验器、OS 沙箱门槛、与发布门禁衔接 | 用户说"安全审计 / 找漏洞 / 渗透 / audit"、造完技能要审安全时 |
 | `references/22-skill-creator.md` | **造技能引擎（Anthropic skill-creator，Apache-2.0）**：从零造 skill / 改进 / 评测打分 / 描述调优，文件地图与宿主相关坑 | 用户说"造技能 / 帮我做个 skill / 优化这个 skill"时 |
 | `references/23-system-doctor.md` | **系统体检与自修复闭环（T0 检测技能组）**：四类问题映射、七步闭环、P0/P1/P2 分级、四层验证门、插件化系统特殊注意点 | 系统做完了大半要体检、查断链/查空壳、上线前 hardening 时 |
@@ -252,6 +255,25 @@ Think → Spec → Plan → Build → Review → Test → Ship → Reflect
 
 - 它**不与** gstack/superpowers 的 TDD、根因调试、评审、提交纪律重复——只补"量化门阈值"与"攻击前提"两块真增量。详见 `references/18-engineering-discipline.md` 与命令 `/cht-ub`。
 - 门禁工具支持语言有限（Clojure/Java/Go/TS/Rust/Python）；**项目语言不在表里就只用行为纪律，不为跑门禁引入额外工具链**（守住 0 依赖）。
+
+---
+
+## 范围纪律：lean-code（Ponytail · V0.4.0 新增 · MIT）
+
+> 从 [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail)（**MIT**，API 实测 193,859★，Ponytail 5）**原样嫁入**六个纯文本 skill 到 `skills/ponytail{,-review,-audit,-debt,-gain,-help}/`（含 `skills/ponytail/LICENSE`，sha256 与上游一致）；JS hooks 运行时与各宿主 plugin 目录不嫁。治的是 AI 写代码最常见的病——**过度设计**。
+
+| 组件 | 入口 | 一句话 |
+|---|---|---|
+| `ponytail` | `/cht-lean [lite\|full\|ultra\|off]` | 懒人模式本体：6 步阶梯取最小完整改动，结尾交代跳过项与风险 |
+| `ponytail-review` | `/cht-lean review` | diff 级评审：对→安全→承压→有测→够快→精简，每条发现四要素；只报告不改码 |
+| `ponytail-audit` | `/cht-lean audit` | 全仓级：按代价排序、最多 20 条，结尾 `Lean: -N 行, -M 依赖`；只报告不改码 |
+| `ponytail-debt` | `/cht-lean debt` | 收割 `shortcut:` 注释成台账；**无升级触发器的标 `no-trigger`——那才是会烂的** |
+| `ponytail-gain` | `/cht-lean gain` | 官方基准记分牌（LOC −53% / token −45%）；**禁编造本仓库节省数字** |
+
+- **6 步决策阶梯**（动手前从上往下取第一个能完整解决的）：真需要存在吗 → 代码库已有 → 标准库/平台能力 → 已装依赖 → 一行 → 最少代码。配套铁规：对方案懒、对事情不懒；删除优于新增；修 bug 先 grep 所有调用方修根因；**Never cut**：信任边界校验/防数据丢失错误处理/安全/可访问性/用户要求的一切。
+- **与 `/cht-ub` 分工**：ub-mode 管**过程**（三段式 + 量化门），lean-code 管**范围**（一开始就不写多余的）。互补：`/cht-lean` 砍范围 → 三段式交付 → 量化门收尾。
+- **冲突裁决**：**cht 三条铁律 > ponytail 懒规则**——"一个小测试"是下限不是豁免；金额/安全/鉴权改动必须过 `/cht-doctor` 四层验证门。与 `/cht-doctor` 的扫壳互补：doctor 扫"假实现"，lean-audit 扫"真实现但多余"。
+- 调用与边界见 `references/20-lean-code.md` 与命令 `/cht-lean`。
 
 ---
 
@@ -393,7 +415,7 @@ Agent  ：/cht-ship                ← PR + 发布说明 + 回滚路径
 
 ## 来源与许可
 
-本仓库由**八套 MIT 项目 + 三套 Apache-2.0 引擎**合成，方法论归属原作者：
+本仓库由**九套 MIT 项目 + 三套 Apache-2.0 引擎**合成，方法论归属原作者：
 
 - [garrytan/gstack](https://github.com/garrytan/gstack) — Garry Tan，YC。角色制工程流水线。
 - [obra/superpowers](https://github.com/obra/superpowers) — Jesse Vincent。可组合 skill 的研发方法论。
@@ -406,9 +428,10 @@ Agent  ：/cht-ship                ← PR + 发布说明 + 回滚路径
 - [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) — **Julius Brussee，Apache-2.0**，约 12 万★。整包嫁接三档纯文本技能到 `skills/caveman/` + `skills/ultracave/` + `skills/megacave/`（含 LICENSE + 上游 NOTICE），作为 `/cht-caveman` 引擎，见"会话输出压缩"段与 `references/24-caveman.md`。
 - [Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify) — **Safi Shamsi and the Graphify contributors，Apache-2.0**，API 实测 148,108★。嫁入 3 份纯文本规范 + `LICENSE` / `NOTICE` / `LICENSE-MIT` 到 `skills/graphify/`（原样未改），作为代码图流水线第 1 段「把代码变成图」；**引擎不捆绑**，见 `references/26-code-graph-pipeline.md`。
 - [semantica-agi/semantica](https://github.com/semantica-agi/semantica) — **MIT**，API 实测 14,616★。嫁入 `SKILL.md` + `skills/semantica/references/glossary.md` + `LICENSE`（原样未改），作为第 3 段「把图存好、搜得到、查得清来源」的 W3C PROV-O 方法论来源；**引擎不捆绑**。两者**无官方集成**，衔接契约由 cht 定义。
+- [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) — **MIT**，API 实测 193,859★（Ponytail 5）。原样嫁入六个纯文本技能到 `skills/ponytail{,-review,-audit,-debt,-gain,-help}/`（含 `skills/ponytail/LICENSE`），作为 `/cht-lean` 引擎治过度设计；**JS hooks 运行时不嫁**，见"范围纪律"段与 `references/20-lean-code.md`。
 
 > **影响来源（非 MIT，未获再分发授权，仅作方法引用）**：Robert C. Martin 的 [`ub-mode`](https://github.com/unclebob/ub-mode)（★★★★ 6.4k，未声明许可证）。其"三段式工作法 + 量化质量门（CRAP<10 / 重复度<0.8 / 变异测试 0 存活）"启发了 `references/18-engineering-discipline.md` 与 `/cht-ub`；内容为**原创重述并署名**，未复制其 `SKILL.md`。同伴门禁工具 crapper/dryer/mutator（0BSD）仅作外链指针，不在本仓库内分发。
 
 > **原创输入（非第三方开源，不计入许可来源）**：阶段 -1 提示词架构师方法论由本仓库用户提供，经结构化整理、边界划死与可执行化，落为 `references/25-prompt-architect.md`、`/cht-prompt` 与 `scripts/prompt_gate.sh`。未复制任何第三方代码，**不计入许可来源**。
 
-本仓库为**八套 MIT 项目 + 三套 Apache-2.0（skill-creator、caveman、graphify）**的**方法论合并、嫁接与重写**，外加一处**署名的影响（ub-mode）**；不含上游的 bun 编译工具链、浏览器二进制、医疗/金融/法律/科研/创意等非技术领域的细分技能，也不含 diagram-design 的示例 HTML 与开发期构建脚本、ub-mode 的原文文件；纯 Markdown + POSIX shell（skill-creator 的评测脚本为 Python，`scripts/graph_bridge.py` 亦仅用 Python 标准库，与既有 `scripts/archify_lite.py` 同列，不引入额外运行时），任何支持 skill 的 agent 都能用。Graphify 与 Semantica 两个引擎均为**用户可选安装**，cht 本体不依赖、不 import。详见 `NOTICE.md`。
+本仓库为**九套 MIT 项目 + 三套 Apache-2.0（skill-creator、caveman、graphify）**的**方法论合并、嫁接与重写**，外加一处**署名的影响（ub-mode）**；不含上游的 bun 编译工具链、浏览器二进制、医疗/金融/法律/科研/创意等非技术领域的细分技能，也不含 diagram-design 的示例 HTML 与开发期构建脚本、ub-mode 的原文文件、ponytail 的 JS hooks 运行时与各宿主 plugin 目录；纯 Markdown + POSIX shell（skill-creator 的评测脚本为 Python，`scripts/graph_bridge.py` 亦仅用 Python 标准库，与既有 `scripts/archify_lite.py` 同列，不引入额外运行时），任何支持 skill 的 agent 都能用。Graphify 与 Semantica 两个引擎均为**用户可选安装**，cht 本体不依赖、不 import。详见 `NOTICE.md`。

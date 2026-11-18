@@ -1,6 +1,6 @@
 # NOTICE · 来源与衍生说明
 
-本仓库（`cht-full-skill`）是**八份 MIT + 三份 Apache-2.0** 许可方法论作品的**合并、嫁接与重写**，外加一处**署名影响（ub-mode）**。此处说明来源、
+本仓库（`cht-full-skill`）是**九份 MIT + 三份 Apache-2.0** 许可方法论作品的**合并、嫁接与重写**，外加一处**署名影响（ub-mode）**。此处说明来源、
 保留了什么、去掉了什么，以及为什么。
 
 ## 上游
@@ -252,6 +252,15 @@
 - 引擎需 `pip install semantica`；生产另需 Docker/Compose + RDF（Oxigraph / Jena / RDF4J）或 LPG（Neo4j / FalkorDB / AGE / Neptune）图存储；**cht 不捆绑、不 import**
 - ⚠️ 与 graphify **无官方集成**；三态 → PROV-O 的映射是 cht 定义的适配约定，不是任何一方的官方行为
 
+### 13. ponytail（嫁接来源 · 极简代码 / 治过度设计 · MIT）
+
+上游：[DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail)（**MIT**，API 实测 193,859★，Ponytail 5）。版权：Copyright (c) 2026 DietrichGebert。
+
+- **嫁入（原样未改）**：`skills/ponytail/SKILL.md`（懒人模式本体 + 6 步阶梯 + 三档强度）、`skills/ponytail-review/SKILL.md`（diff 级评审）、`skills/ponytail-audit/SKILL.md`（全仓审计）、`skills/ponytail-debt/SKILL.md`（捷径债台账）、`skills/ponytail-gain/SKILL.md`（官方基准记分牌）、`skills/ponytail-help/SKILL.md`（速查卡）、`skills/ponytail/LICENSE`（MIT 全文）——共 7 个文件，sha256 与上游一致
+- **未嫁**：JS hooks 运行时（`hooks/`）、各宿主 plugin 目录（`.claude-plugin/`、`.codex-plugin/` 等）、`commands/*.toml`、`benchmarks/`、`__init__.py` 安装器——属宿主专属运行时，与 cht「纯 Markdown + 0 依赖」冲突
+- **原创重述**：`references/20-lean-code.md`（6 步阶梯的中文重述与 cht 集成边界、与 `/cht-ub` 的过程/范围分工、冲突裁决）；入口 `commands/cht-lean.md`
+- ⚠️ `ponytail-gain` 的基准数字是**官方基准均值**，非任何具体仓库的实测；禁编造"本仓库节省 X"
+
 ## 本仓库新增的部分
 
 以下内容不属于任何上游，为本仓库原创整理：
@@ -264,10 +273,11 @@
 - 中文重写与"可执行清单化"改写
 - **阶段 -1 提示词架构师**：规格完整度裁决、禁止优化硬闸门、双版本优化规范、`/cht-prompt` 入口与 `scripts/prompt_gate.sh` 闸门脚本（`references/25-prompt-architect.md`）——由**用户在本项目中提供的原创提示词**整理、结构化与可执行化而成，未复制任何第三方代码，**不属于上游作品、不计入许可来源**，故不计入许可来源
 - **两段式代码图流水线**：`references/26-code-graph-pipeline.md` 的衔接契约（三态 → W3C PROV-O）、`scripts/graph_bridge.py` 桥接脚本、`commands/cht-graph.md` 六态入口——均为本仓库原创；上游原文与许可文件仅放在 `skills/graphify/`、`skills/semantica/`
+- **范围纪律集成**：`references/20-lean-code.md` 的中文重述、`/cht-ub`（过程）与 `/cht-lean`（范围）的分工与冲突裁决、`commands/cht-lean.md` 七态入口——上游原文仅放在 `skills/ponytail*/`
 
 ## 许可合规
 
-十一份上游中**八份为 MIT、三份为 Apache-2.0**（skill-creator、caveman、graphify）；ub-mode 为署名影响、非 MIT、未复制其文件，不在此列。MIT 要求保留版权声明与许可声明，本仓库在 `LICENSE` 文件末尾完整保留了原始版权声明；**Apache-2.0 要求保留各组件的 LICENSE 与任何 NOTICE、对原文件的修改须标注、再分发须附许可证**——`skills/skill-creator/LICENSE.txt`、`skills/caveman/LICENSE` + `skills/caveman/NOTICE`、`skills/graphify/LICENSE` + `skills/graphify/NOTICE`（另附 `LICENSE-MIT` 历史文本）均已随目录带入；`skills/semantica/LICENSE`（MIT）亦已带入。本次新增的 9 个上游文件与原仓库 sha256 逐一比对一致、**原样未改**。嫁接的 ECC 技能文件内亦保留其 `metadata.origin: ECC` 标注。
+十二份上游中**九份为 MIT、三份为 Apache-2.0**（skill-creator、caveman、graphify）；ub-mode 为署名影响、非 MIT、未复制其文件，不在此列。MIT 要求保留版权声明与许可声明，本仓库在 `LICENSE` 文件末尾完整保留了原始版权声明；**Apache-2.0 要求保留各组件的 LICENSE 与任何 NOTICE、对原文件的修改须标注、再分发须附许可证**——`skills/skill-creator/LICENSE.txt`、`skills/caveman/LICENSE` + `skills/caveman/NOTICE`、`skills/graphify/LICENSE` + `skills/graphify/NOTICE`（另附 `LICENSE-MIT` 历史文本）均已随目录带入；`skills/semantica/LICENSE` 与 `skills/ponytail/LICENSE`（MIT）亦已带入。本次新增的 ponytail 7 个上游文件与原仓库 sha256 逐一比对一致、**原样未改**。嫁接的 ECC 技能文件内亦保留其 `metadata.origin: ECC` 标注。
 衍生作品主许可以 MIT 发布。
 
 如果上游作者认为此处署名或引用方式需要调整，请开 issue，会立即修改。
@@ -275,6 +285,6 @@
 ## 引用建议
 
 ```
-cht-full-skill (MIT，含 Apache-2.0 组件 skill-creator / caveman / graphify) — 方法论合并自 garrytan/gstack、obra/superpowers，并嫁接 affaan-m/ECC 的 234 个代码/IT 技能、cathrynlavery/diagram-design 可视化引擎、mattpocock/skills 的 grill-me / grilling 决策护栏、cloudflare/security-audit-skill 的对抗式安全审计技能（MIT，Cloudflare, Inc.）、DNYoussef/ai-chrome-extension 的 theater-detection-audit 壳检测引擎（MIT）、anthropics/skills 的 skill-creator 造技能引擎（Apache-2.0，Anthropic PBC）、JuliusBrussee/caveman 会话输出压缩技能（Apache-2.0，Julius Brussee）、Graphify-Labs/graphify 代码知识图谱规范（Apache-2.0，Safi Shamsi and the Graphify contributors）、semantica-agi/semantica 上下文图与溯源方法论（MIT，Semantica）——后两者引擎不捆绑，衔接契约由本仓库原创定义；工程纪律受 unclebob/ub-mode 启发（未获再分发授权，仅作方法引用、原创重述并署名）
+cht-full-skill (MIT，含 Apache-2.0 组件 skill-creator / caveman / graphify) — 方法论合并自 garrytan/gstack、obra/superpowers，并嫁接 affaan-m/ECC 的 234 个代码/IT 技能、cathrynlavery/diagram-design 可视化引擎、mattpocock/skills 的 grill-me / grilling 决策护栏、cloudflare/security-audit-skill 的对抗式安全审计技能（MIT，Cloudflare, Inc.）、DNYoussef/ai-chrome-extension 的 theater-detection-audit 壳检测引擎（MIT）、anthropics/skills 的 skill-creator 造技能引擎（Apache-2.0，Anthropic PBC）、JuliusBrussee/caveman 会话输出压缩技能（Apache-2.0，Julius Brussee）、Graphify-Labs/graphify 代码知识图谱规范（Apache-2.0，Safi Shamsi and the Graphify contributors）、semantica-agi/semantica 上下文图与溯源方法论（MIT，Semantica）、DietrichGebert/ponytail 极简代码技能（MIT，Ponytail 5）——前两者引擎不捆绑，衔接契约由本仓库原创定义；工程纪律受 unclebob/ub-mode 启发（未获再分发授权，仅作方法引用、原创重述并署名）
 https://github.com/cuohuatang/cht-full-skill
 ```

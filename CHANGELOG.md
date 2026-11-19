@@ -2,6 +2,20 @@
 
 本仓库遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## V0.5.0 — 2026-11-19（已推送 GitHub）
+
+**全盘嫁接** [mattpocock/skills](https://github.com/mattpocock/skills)（**Matt Pocock，MIT**，GitHub API 实测 **327,890★**——用户所说 288k+ 是增长中的旧数字，以 API 为准；语言 Shell，默认分支 `main`，当天仍有推送）。这是 cht 里**来源复用最彻底的一次**：V0.0.5 只嫁了 `grill-me` + `grilling` 两个包，本轮把上游 `skills/` 下**全部 39 个技能包 / 120 个文件**原样嫁入。
+
+- **嫁入范围（sha256 与上游逐一比对一致、原样未改）**：`skills/mp/` 下 engineering 20 包（`tdd` / `code-review` / `diagnosing-bugs` / `to-spec` / `to-tickets` / `implement` / `pr` / `retro` / `wayfinder` / `wizard`…）、in-progress 8 包（`chief-of-staff` / `claude-handoff` / `writing-*`…）、misc 4 包（`git-guardrails-claude-code` / `setup-pre-commit`…）、productivity 7 包（`grill-me` / `grilling` / `handoff` / `teach` / `to-questionnaire` / `wait-what` / `writing-for-agents`）、deprecated 空 bucket 说明，加 6 份上游顶层文档（LICENSE / README / GLOSSARY / SCOPE / CLAUDE / AGENTS）与包内参考 md
+- **独立命名空间 `skills/mp/` 的理由**：cht 已有 234 个 ECC 技能，若平铺 39 个上游包必撞名（`code-review` / `research` / `retro` / `pr` / `implement` / `triage` 等），`skills/mp/` 保留上游 5 分类结构，零冲突
+- **已嫁 `grill-me`/`grilling` 的处理**：顶层两包保留作 `/cht-grill` 引擎，其 SKILL.md 与上游最新版 sha256 一致（无需更新）；`skills/mp/productivity/` 下是同源完整副本（含 `agents/openai.yaml`）。**同源双份、不是两个版本**
+- **未嫁**：上游插件安装机制（`package.json` / `package-lock.json` / `.claude-plugin/` / `.changeset/` / `scripts/*.mjs` / `docs/` / `i18n/`）——宿主专属，与 cht「装一次处处可用」无关
+- **4 个包内脚本的诚实标注**：`wizard/template.sh`、`diagnosing-bugs/scripts/hitl-loop.template.sh`（模板）、`git-guardrails-claude-code/scripts/block-dangerous-git.sh`（hook 示例）、`setup-ts-deep-modules/dependency-cruiser.config.cjs`（第三方工具配置）——随包原样保留，cht 本体不执行、不依赖
+- **新增 `references/27-mattpocock-skills.md`**：39 包按分类索引、与 cht 既有机制的互补/冲突裁决表（tdd↔铁律2、code-review↔/cht-review、diagnosing-bugs↔/cht-debug、retro↔/cht-retro、to-spec↔/cht-spec、wayfinder↔并行）、4 脚本标注、红牌
+- **新增 `commands/cht-mp.md`**：统一入口（`list` / `find` / `info` / `<包名>` 四态），**不建 39 个命令卡**以避免命令膨胀；命令数 23 → **24**
+- **冲突裁决**：cht 三条铁律 > 上游任何包的流程建议；`in-progress` 包不当稳定能力；`/cht-mp` 不改变 cht 阶段/门禁
+- **许可计数不变**：mattpocock/skills 早已计为一份 MIT（V0.0.5），本轮只是从 2 包扩到 39 包，仍是**九份 MIT + 三份 Apache-2.0**
+
 ## V0.4.0 — 2026-11-19（已推送 GitHub）
 
 嫁接 **Ponytail** 极简代码纪律（[DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail)，**DietrichGebert，MIT**，API 实测 193,859★，**Ponytail 5**）——专治 AI 写代码的**过度设计**：没人要的抽象层、没人设的配置项、几行功能引一个依赖、为"以后"预留的扩展点。许可计数由「八份 MIT + 三份 Apache-2.0」更新为「**九份 MIT + 三份 Apache-2.0**」（新增 ponytail MIT）。

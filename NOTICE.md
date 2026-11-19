@@ -122,22 +122,24 @@
 
 原因：示例与构建脚本不进入"画一张图"的运行时路径，搬运只会让仓库臃肿；要看效果去上游图库 https://cathrynlavery.github.io/diagram-design/ 。
 
-### 5. grill-me / grilling（嫁接来源 · 决策护栏）
+### 5. mattpocock/skills（嫁接来源 · 决策护栏 + 39 包全盘工具箱）
 
 - 仓库：https://github.com/mattpocock/skills
 - 作者：Matt Pocock
 - 许可：MIT
 - 定位：把"用户触发 → 连续盘问 → 逼出共识 → 才动手"做成一套访谈协议。`grill-me` 是用户触发的**入口**（上游设 `disable-model-invocation: true`，agent 不会自己偷偷调），`grilling` 是真正的**盘问引擎**（设计树 + frontier + 轮次访谈，每轮给推荐答案、等用户拍板）。
-- **本仓库把两者一并嫁接入 `skills/grill-me/` 与 `skills/grilling/`**（各含 SKILL.md + agents/openai.yaml；grill-me 另含 docs.md 上游说明）。新增 `references/16-grill-me.md` 与 `commands/cht-grill.md`，作为 cht-full-skill 的"防 AI 擅自做主"决策护栏。
+- **V0.0.5 部分嫁入**：把两者一并嫁接入 `skills/grill-me/` 与 `skills/grilling/`（各含 SKILL.md + agents/openai.yaml；grill-me 另含 docs.md 上游说明）。新增 `references/16-grill-me.md` 与 `commands/cht-grill.md`，作为 cht-full-skill 的"防 AI 擅自做主"决策护栏。
+- **V0.5.0 全盘嫁入**（同一上游，许可计数不新增）：**39 个技能包 / 120 个文件**原样放入 `skills/mp/`（5 分类：engineering 20 / in-progress 8 / misc 4 / productivity 7 / deprecated 空 bucket 说明 + 6 份顶层文档 + 包内参考 md 与 4 个模板脚本）。**sha256 与上游逐一比对一致、原样未改**。新增 `references/27-mattpocock-skills.md` 与统一入口 `commands/cht-mp.md`。顶层 `skills/grill-me` 与 `skills/grilling` 保留作 `/cht-grill` 引擎，其 SKILL.md 与 `skills/mp/productivity/` 下同源副本 sha256 一致（不是两个版本）。
 
 **嫁接方式**
 
 - 入口与引擎原样放入 `skills/`，`grill-me` 内部 `Call the Skill tool with "grilling"`，二者同装才可用。
 - 与 cht-full-skill 的"三条铁律"第一条（无 spec 不写计划）对齐：动手前先盘问逼共识。
 
-**未采用的部分**
+**未采用的部分（V0.5.0 更新）**
 
-- 其余 grilling 家族技能（`grill-with-docs` / `wayfinder` 等）未搬运，避免与 cht-full-skill 已有流程重叠。
+- 上游宿主插件机制不嫁：`package.json` / `package-lock.json` / `.claude-plugin/` / `.changeset/` / `scripts/*.mjs` / `docs/` / `i18n/`——与 cht「装一次处处可用」无关。
+- 4 个包内脚本（`wizard/template.sh`、`diagnosing-bugs/scripts/hitl-loop.template.sh`、`git-guardrails-claude-code/scripts/block-dangerous-git.sh`、`setup-ts-deep-modules/dependency-cruiser.config.cjs`）是**模板/配置/示例**，随包原样保留但 cht 本体不执行、不依赖。
 
 ### 6. security-audit（嫁接来源 · 对抗式安全审计）
 
@@ -285,6 +287,6 @@
 ## 引用建议
 
 ```
-cht-full-skill (MIT，含 Apache-2.0 组件 skill-creator / caveman / graphify) — 方法论合并自 garrytan/gstack、obra/superpowers，并嫁接 affaan-m/ECC 的 234 个代码/IT 技能、cathrynlavery/diagram-design 可视化引擎、mattpocock/skills 的 grill-me / grilling 决策护栏、cloudflare/security-audit-skill 的对抗式安全审计技能（MIT，Cloudflare, Inc.）、DNYoussef/ai-chrome-extension 的 theater-detection-audit 壳检测引擎（MIT）、anthropics/skills 的 skill-creator 造技能引擎（Apache-2.0，Anthropic PBC）、JuliusBrussee/caveman 会话输出压缩技能（Apache-2.0，Julius Brussee）、Graphify-Labs/graphify 代码知识图谱规范（Apache-2.0，Safi Shamsi and the Graphify contributors）、semantica-agi/semantica 上下文图与溯源方法论（MIT，Semantica）、DietrichGebert/ponytail 极简代码技能（MIT，Ponytail 5）——前两者引擎不捆绑，衔接契约由本仓库原创定义；工程纪律受 unclebob/ub-mode 启发（未获再分发授权，仅作方法引用、原创重述并署名）
+cht-full-skill (MIT，含 Apache-2.0 组件 skill-creator / caveman / graphify) — 方法论合并自 garrytan/gstack、obra/superpowers，并嫁接 affaan-m/ECC 的 234 个代码/IT 技能、cathrynlavery/diagram-design 可视化引擎、mattpocock/skills 工程技能包全集（MIT，Matt Pocock；含 grill-me / grilling 决策护栏与 39 个技能包全盘嫁入）、cloudflare/security-audit-skill 的对抗式安全审计技能（MIT，Cloudflare, Inc.）、DNYoussef/ai-chrome-extension 的 theater-detection-audit 壳检测引擎（MIT）、anthropics/skills 的 skill-creator 造技能引擎（Apache-2.0，Anthropic PBC）、JuliusBrussee/caveman 会话输出压缩技能（Apache-2.0，Julius Brussee）、Graphify-Labs/graphify 代码知识图谱规范（Apache-2.0，Safi Shamsi and the Graphify contributors）、semantica-agi/semantica 上下文图与溯源方法论（MIT，Semantica）、DietrichGebert/ponytail 极简代码技能（MIT，Ponytail 5）——前两者引擎不捆绑，衔接契约由本仓库原创定义；工程纪律受 unclebob/ub-mode 启发（未获再分发授权，仅作方法引用、原创重述并署名）
 https://github.com/cuohuatang/cht-full-skill
 ```

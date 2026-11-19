@@ -1,9 +1,9 @@
-# cht-full-skill · V0.4.0
+# cht-full-skill · V0.5.0
 
-> 把 gstack 的**角色制工程流水线**、superpowers 的**研发纪律**，以及 archify、ECC（234 个代码/IT 技能）、diagram-design（45 种品牌图型）、Cloudflare security-audit（对抗式安全审计）、theater-detection-audit（壳检测）、caveman（会话输出压缩）、**阶段 -1 提示词架构师**、**Graphify → Semantica 代码图流水线**、**Ponytail 极简代码纪律** **合成一个 skill**。
-> 一个想法进来，一个已验证的 PR 出去；要画图、要查技术栈、要品牌级配图、要审安全、要给系统做体检、要说话简短、要把场景变成能用的提示词、要把代码变成可查来源的图、要治过度设计，一个仓库全包。
+> 把 gstack 的**角色制工程流水线**、superpowers 的**研发纪律**，以及 archify、ECC（234 个代码/IT 技能）、diagram-design（45 种品牌图型）、Cloudflare security-audit（对抗式安全审计）、theater-detection-audit（壳检测）、caveman（会话输出压缩）、**阶段 -1 提示词架构师**、**Graphify → Semantica 代码图流水线**、**Ponytail 极简代码纪律**、**Matt Pocock 39 个工程技能包全盘工具箱** **合成一个 skill**。
+> 一个想法进来，一个已验证的 PR 出去；要画图、要查技术栈、要品牌级配图、要审安全、要给系统做体检、要说话简短、要把场景变成能用的提示词、要把代码变成可查来源的图、要治过度设计、要 TDD / 评审 / 诊断疑难 bug，一个仓库全包。
 
-[![version](https://img.shields.io/badge/version-0.4.0-blue.svg)](VERSION)
+[![version](https://img.shields.io/badge/version-0.5.0-blue.svg)](VERSION)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![skill](https://img.shields.io/badge/format-agent--skill-8A2BE2.svg)](SKILL.md)
 
@@ -29,7 +29,7 @@ Think → Spec → Plan → Build → Review → Test → Ship → Reflect
 | 弱项 | 依赖 bun 编译的二进制与浏览器包，重；命令 30+ 个，记不住 | 角色视角弱，容易变成"一个人埋头写" |
 | 本仓库做法 | 取**骨架与角色** | 取**纪律与执行细则** |
 
-结果：**23 个命令 + 阶段 -1 提示词闸门 + 代码图桥接 + 极简代码纪律 + 234 个代码/IT 技能（ECC）+ 双绘图引擎（archify / diagram-design）+ grill 决策护栏 + ub-mode 工程纪律基线 + skill-creator 造技能引擎 + security-audit 对抗式安全审计 + 系统体检/自修复闭环 + caveman 会话输出压缩，13 道门禁，0 运行时依赖**。纯 Markdown + POSIX shell（skill-creator 的评测脚本为 Python、security-audit 的两个校验器借 Node 内置模块，与既有 archify_lite.py 同列，均零外部依赖）。
+结果：**24 个命令 + 阶段 -1 提示词闸门 + 代码图桥接 + 极简代码纪律 + Matt Pocock 39 包工具箱 + 234 个代码/IT 技能（ECC）+ 双绘图引擎（archify / diagram-design）+ grill 决策护栏 + ub-mode 工程纪律基线 + skill-creator 造技能引擎 + security-audit 对抗式安全审计 + 系统体检/自修复闭环 + caveman 会话输出压缩，13 道门禁，0 运行时依赖**。纯 Markdown + POSIX shell（skill-creator 的评测脚本为 Python、security-audit 的两个校验器借 Node 内置模块，与既有 archify_lite.py 同列，均零外部依赖）。
 
 ## 安装
 
@@ -70,6 +70,7 @@ bash scripts/verify.sh
 | `/cht-ecc <技术>` | 检索 | "用 React 怎么做""给 K8s 加个 deployment" —— 在 234 个代码/IT 技能里找 |
 | `/cht-arch` | 画图 | 画**结构正确**的架构/序列/ER/数据流图（archify，先校验再画） |
 | `/cht-diagram` | 画图 | 画**品牌级、好看**的架构/流程/甘特/象限/雷达图（diagram-design，45 种） |
+| `/cht-mp <包名>` | 工程技能包 | Matt Pocock 39 个技能包全盘工具箱：`tdd` / `code-review` / `diagnosing-bugs` / `to-spec` / `pr` / `retro` / `handoff`… 用 `list` / `find` / `info` 检索，按上游 SKILL.md 原样执行；**cht 铁律永远优先**（MIT，上游原文原样嫁入 `skills/mp/`） |
 | `/cht-grill` | 决策护栏 | "grill me / 先确认再动手"——动手前连续盘问、逼出共识，防 AI 擅自做主（grill-me / grilling） |
 | `/cht-ub` | 工程纪律 | "工程纪律 / 量化门禁 / ub-mode"——三段式工作法 + 量化质量门（CRAP<10 / 重复度<0.8 / 变异 0 存活），受 Uncle Bob 的 ub-mode 启发（原创重述） |
 | `/cht-make-skill` | 造技能 | "造技能 / 帮我做个 skill / 优化这个 skill"——从零造 skill、改进、评测打分、描述调优（Anthropic skill-creator，Apache-2.0） |
@@ -115,7 +116,7 @@ docs/cht/
 | [obra/superpowers](https://github.com/obra/superpowers)（MIT） | 研发纪律与执行细则 | 门禁、TDD、调试、完成前验证 |
 | [affaan-m/ECC](https://github.com/affaan-m/ECC)（MIT，29 万★） | 代理工具链增强框架 | 按"代码/IT"筛出 **234 个技能**嫁接入 `skills/`，`/cht-ecc` 检索 |
 | [cathrynlavery/diagram-design](https://github.com/cathrynlavery/diagram-design)（MIT，6.3 万★） | 编辑式品牌可视化 | 完整引擎嫁接入 `diagram-design/`，`/cht-diagram` 入口 |
-| [mattpocock/skills](https://github.com/mattpocock/skills)（MIT） | 决策护栏（grill-me / grilling） | 嫁接入 `skills/grill-me` + `skills/grilling`，`/cht-grill` 入口，防 AI 擅自做主 |
+| [mattpocock/skills](https://github.com/mattpocock/skills)（MIT，32.8 万★） | 决策护栏 + 39 个工程技能包全盘工具箱 | V0.0.5 先嫁 `grill-me` + `grilling` 到顶层 `skills/`（`/cht-grill` 入口）；**V0.5.0 全盘嫁入 39 包 / 120 文件到 `skills/mp/`**（tdd / code-review / diagnosing-bugs / to-spec / pr / retro / handoff…），`/cht-mp` 入口，原样未改 |
 | [cloudflare/security-audit-skill](https://github.com/cloudflare/security-audit-skill)（MIT，5.7 万★） | 对抗式安全审计 | 整包嫁接入 `skills/security-audit/`（含 LICENSE），`/cht-audit` 入口，与 skill-creator 形成"造→审→发"闭环 |
 | [DNYoussef/ai-chrome-extension → theater-detection-audit](https://github.com/DNYoussef/ai-chrome-extension/tree/main/.claude/skills/theater-detection-audit)（MIT） | 壳检测（占位/假数据/stub） | 整包嫁接入 `skills/theater-detection-audit/`，作为 `/cht-doctor` 七步闭环的"扫壳"引擎 |
 | [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman)（**Apache-2.0**，12 万★） | 会话输出压缩 | 三档嫁接入 `skills/caveman` + `skills/ultracave` + `skills/megacave`（含 LICENSE + 上游 NOTICE），`/cht-caveman` 入口，默认关闭 |
@@ -137,4 +138,4 @@ docs/cht/
 
 ## 许可
 
-主许可 **MIT**，见 [LICENSE](LICENSE)。其中 `skills/skill-creator/`（Anthropic PBC）、`skills/caveman/`（Julius Brussee）与 `skills/graphify/`（Safi Shamsi and the Graphify contributors）为 **Apache-2.0**，随目录附带其 `LICENSE.txt` / `LICENSE` 与上游 `NOTICE`；`skills/semantica/`（Semantica）与 `skills/ponytail/`（DietrichGebert）为 MIT，附带其 `LICENSE`——保留这些文件、改动须标注、再分发须附许可证。本次新增的 7 个上游文件与原仓库 sha256 逐一比对一致、**原样未改**。详见 [NOTICE.md](NOTICE.md)。
+主许可 **MIT**，见 [LICENSE](LICENSE)。其中 `skills/skill-creator/`（Anthropic PBC）、`skills/caveman/`（Julius Brussee）与 `skills/graphify/`（Safi Shamsi and the Graphify contributors）为 **Apache-2.0**，随目录附带其 `LICENSE.txt` / `LICENSE` 与上游 `NOTICE`；`skills/semantica/`（Semantica）、`skills/ponytail/`（DietrichGebert）与 `skills/mp/`（Matt Pocock）为 MIT，附带其 `LICENSE`——保留这些文件、改动须标注、再分发须附许可证。本次（V0.4.0 + V0.5.0）新增的 ponytail 7 文件与 mattpocock 120 文件均与原仓库 sha256 逐一比对一致、**原样未改**。详见 [NOTICE.md](NOTICE.md)。

@@ -1,12 +1,12 @@
 ---
 name: cht-full-skill
 description: 全栈交付方法论（研发全流程技能）。把模糊需求变成已合并、已部署、已验证的生产代码：六问逼出真需求 → 可执行 spec → 计划分解 → TDD 逐任务实现 → 分级代码评审 → 真实环境 QA → 发布门禁。内含 CEO / 产品经理 / 架构师 / 设计师 / 工程师 / 评审 / QA / 发布 八个角色视角，以及并行 worktree 与复盘记忆。Use when 用户要做需求梳理、写规格、出技术方案、拆任务、开发功能、修 bug、做代码评审、QA 测试、发版上线、写 skill，或说"帮我把这个做出来""这个功能怎么做""review 一下""测试一下""上线"。适用于 TDD、子代理开发、调试、重构、多代理并行、遗留代码维护等场景。
-version: "0.4.0"
+version: "0.5.0"
 license: MIT
 homepage: https://github.com/cuohuatang/cht-full-skill
 ---
 
-# cht-full-skill · V0.4.0
+# cht-full-skill · V0.5.0
 
 > 一句话：**它不是工具箱，是一支工程团队的工作流。** 一个想法进来，一个已验证的 PR 出去。
 
@@ -36,6 +36,7 @@ homepage: https://github.com/cuohuatang/cht-full-skill
 - 要用到**某种语言 / 框架 / 基础设施 / 测试 / 安全 / AI 智能体**等具体技术——见下方"嫁接技能库"（234 个代码/IT 技能，或 `/cht-ecc <关键词>` 检索）
 - 要**画出版级、有品牌一致性的图**（架构图 / 流程图 / 时序图 / 甘特图 / 象限图 / 雷达图 / 重画 Mermaid·drawio·Excalidraw / 导出 PNG·SVG）——`/cht-diagram`，引擎见 `references/15-diagram-design.md`
 - 要**在动手前先被盘问、逼出真实需求、防止 agent 擅自做主**（"grill me / 先确认再动手 / 别急着做先问我"）——`/cht-grill`，引擎见 `references/16-grill-me.md`
+- 要用**某个具体的工程技能包**（"TDD / red-green / 按固定点评审改动 / 诊断疑难 bug / 对话转 spec / 写 PR / 会话交接"）——`/cht-mp <包名>`，39 个包全盘索引见 `references/27-mattpocock-skills.md`（**上游原文原样嫁入 `skills/mp/`，cht 铁律永远优先**）
 - 要**强制工程纪律、量化质量门、攻击前提式排查**（"工程纪律 / 量化门禁 / ub-mode / 先减后加"）——`/cht-ub`，纪律见 `references/18-engineering-discipline.md`
 - 要**治过度设计、把改动砍到最小、审一段代码或整个仓库有没有肥肉**（"别过度设计 / 最简方案 / yagni / 哪些能删 / 是不是写复杂了 / ponytail"）——`/cht-lean`，阶梯与边界见 `references/20-lean-code.md`（Ponytail 六 skill 原样嫁入，**懒 ≠ 少验证，三条铁律永远优先**）
 - 要**做对抗式安全审计、渗透测试、找漏洞、审一个代码库**（"安全审计 / audit / 找漏洞 / 渗透"）——`/cht-audit`，引擎见 `references/19-security-audit.md`（与 `/cht-make-skill` 的"造技能"形成"造→审→发"闭环）
@@ -111,6 +112,7 @@ Think → Spec → Plan → Build → Review → Test → Ship → Reflect
 | "我想做一个……" / "能不能加个……" | `/cht-spec --discover` — 先逼问，别急着答应 | 不要立刻列出技术方案 |
 | "需求是这样的：……（已很具体）" | `/cht-spec` 直接落文档，快速确认后进 Plan | 不要重复追问已知信息 |
 | "出个方案 / 怎么实现 / 用什么技术" | `/cht-plan` | 不要顺手把代码写了 |
+| "TDD / 按固定点评审 / 诊断 bug / 写 PR / 转 spec / Matt Pocock 技能" | `/cht-mp <包名>` — 检索或调用 39 个上游技能包 | 不要绕过 spec/plan/验证门禁；`in-progress` 包不当稳定能力 |
 | "别过度设计 / 最简方案 / 哪些能删" | `/cht-lean` — 先爬 6 步阶梯再动手；audit/review 只报告不改码 | 不要以"懒"为借口砍校验或用户要求的功能 |
 | "开始做 / 按计划执行" | `/cht-build` | 不要中途反复问"要继续吗" |
 | "review 一下 / 看看有没有问题" | `/cht-review` | 不要只夸不挑；不要沉默地全改 |
@@ -162,6 +164,7 @@ Think → Spec → Plan → Build → Review → Test → Ship → Reflect
 | `references/14-ecc-code-skills.md` | **ECC 代码/IT 技能完整目录**：234 个技能分 8 大类，每条带一句话说明 | 要用某具体技术、检索该读哪个技能时 |
 | `references/15-diagram-design.md` | **diagram-design 可视化引擎**：45 种品牌级图型、与 archify 的分工、文件地图、反模式 | 要画"好看+品牌一致"的图、重画/导出时 |
 | `references/16-grill-me.md` | **grill-me / grilling 决策护栏**：防 AI 擅自做主、动手前盘问逼共识，与三条铁律的关系 | 用户说"grill me / 先确认再动手"、需求模糊时 |
+| `references/27-mattpocock-skills.md` | **Matt Pocock skills 全盘索引（39 包，MIT）**：5 分类清单、4 个模板脚本的诚实标注、与 cht 各机制的互补/冲突裁决、红牌 | 用户说"TDD / 按固定点评审 / 诊断 bug / 转 spec / 写 PR / 会话交接"、或要找某个工程技能包时 |
 | `references/18-engineering-discipline.md` | **工程纪律（ub-mode 启发）**：三段式工作法、攻击前提、先减后加、三道量化门（CRAP<10 / 重复度<0.8 / 变异 0 存活）作为推荐基线 | 要强制工程纪律、量化验收、根因排查时 |
 | `references/20-lean-code.md` | **极简代码（Ponytail，MIT）**：6 步决策阶梯、三档强度、review/audit/debt 三件套、never-cut 清单、`shortcut:` 债务约定、诚实边界（禁编造本仓库节省数字）、与 `/cht-ub` 分工与冲突裁决 | 用户说"别过度设计 / 最简方案 / 哪些能删"、或 AI 写代码越来越臃肿时 |
 | `references/19-security-audit.md` | **对抗式安全审计（Cloudflare security-audit，MIT）**：六阶段多 Agent 审计、verdict 语义、10 个领域伴侣、两个零依赖 Node 校验器、OS 沙箱门槛、与发布门禁衔接 | 用户说"安全审计 / 找漏洞 / 渗透 / audit"、造完技能要审安全时 |
@@ -240,6 +243,8 @@ Think → Spec → Plan → Build → Review → Test → Ship → Reflect
 - `grill-me` 上游设 `disable-model-invocation: true`：**agent 不会自己偷偷调**，必须由你或本流程显式触发——这正好把"擅自做主"关进笼子。
 - 它是"三条铁律"第一条（无 spec 不写计划）在动手前的具象化：与阶段 0 `/cht-spec --discover` 同源，一个偏连续访谈逼共识、一个偏落 SPEC 文档。
 - 调用与协议细节见 `references/16-grill-me.md` 与 `commands/cht-grill.md`。
+
+> **V0.5.0 全盘升级**：同一上游的 **39 个技能包 / 120 个文件**已原样嫁入 `skills/mp/`（`grill-me`/`grilling` 同源副本也在其中；顶层这两个保留作 `/cht-grill` 引擎，sha256 与上游一致）。新增统一入口 `/cht-mp <包名>`（TDD / code-review / diagnosing-bugs / to-spec / pr / retro / handoff…），索引见 `references/27-mattpocock-skills.md`。**许可计数不变**（mattpocock/skills 已计为一份 MIT）。
 
 ---
 
@@ -421,7 +426,7 @@ Agent  ：/cht-ship                ← PR + 发布说明 + 回滚路径
 - [obra/superpowers](https://github.com/obra/superpowers) — Jesse Vincent。可组合 skill 的研发方法论。
 - [affaan-m/ECC](https://github.com/affaan-m/ECC) — 29 万★ 代理工具链增强框架。按"代码/IT"筛出 **234 个技能**嫁接（见"嫁接技能库"与 `references/14-ecc-code-skills.md`）。
 - [cathrynlavery/diagram-design](https://github.com/cathrynlavery/diagram-design) — 6.3 万★ 编辑式品牌可视化技能。完整嫁接其引擎到 `diagram-design/`（45 种图型、品牌入驻、导入/导出），见"可视化引擎库"与 `references/15-diagram-design.md`。
-- [mattpocock/skills](https://github.com/mattpocock/skills) — Matt Pocock。嫁接 `grill-me`（用户触发入口）+ `grilling`（盘问引擎）到 `skills/`，作为"防 AI 擅自做主"的决策护栏，见"决策护栏"段与 `references/16-grill-me.md`。
+- [mattpocock/skills](https://github.com/mattpocock/skills) — **Matt Pocock，MIT**，API 实测 327,890★。V0.0.5 先嫁 `grill-me` + `grilling` 到顶层 `skills/`（决策护栏，见 `references/16-grill-me.md`）；**V0.5.0 全盘嫁入 39 个技能包 / 120 个文件到 `skills/mp/`（原样未改，sha256 逐一一致）**，含 TDD、code-review、diagnosing-bugs、to-spec、pr、retro、handoff 等，统一入口 `/cht-mp`，索引见 `references/27-mattpocock-skills.md`。
 - [anthropics/skills → skill-creator](https://github.com/anthropics/skills/tree/main/skills/skill-creator) — **Anthropic PBC，Apache-2.0**，约 18.7 万★。完整嫁接其"造技能"引擎到 `skills/skill-creator/`（SKILL.md + scripts + agents + eval-viewer + LICENSE.txt），作为 `/cht-make-skill` 引擎，见"造技能引擎"段与 `references/22-skill-creator.md`。
 - [cloudflare/security-audit-skill](https://github.com/cloudflare/security-audit-skill) — **Cloudflare, Inc.，MIT**，约 5.7 万★。整包嫁接其对抗式安全审计技能到 `skills/security-audit/`（SKILL.md + 6 阶段文档 + ATTACK-CLASSES + 10 个领域伴侣 + report-schema.json + 2 个零依赖 `.cjs` 校验器 + LICENSE），作为 `/cht-audit` 引擎，见"安全审计"段与 `references/19-security-audit.md`。
 - [DNYoussef/ai-chrome-extension → theater-detection-audit](https://github.com/DNYoussef/ai-chrome-extension/tree/main/.claude/skills/theater-detection-audit) — **MIT**。整包嫁接其"壳检测"引擎到 `skills/theater-detection-audit/`（SKILL.md + 流程图 + LICENSE），作为 `/cht-doctor` 的扫壳引擎，见"系统体检与自修复"段与 `references/23-system-doctor.md`。
